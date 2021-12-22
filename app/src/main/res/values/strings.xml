@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">To-Do List</string>
+    <string name="add_todos">Add todos</string>
+    <string name="todo_title_textView">What is your Task?</string>
+    <string name="todo_title">Title</string>
+    <string name="multilineText_editText">Note something down…</string>
+    <string name="todo_date">Set Date</string>
+    <string name="date_time_textView">Due date/time:</string>
+    <string name="date_hint">Date not set</string>
+    <string name="time_hint">Time not set</string>
+    <string name="set_calendar_contentDescription">Set Calendar</string>
+    <string name="set_time_contentDescription">Set Time</string>
+    <string name="todo_date_list">Todo Date</string>
+    <string name="todo_title_list">Todo Title</string>
+</resources>

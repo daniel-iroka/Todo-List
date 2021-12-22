@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_margin="30dp">
+
+    <!-- Fragment A -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:text="@string/todo_title_textView"
+            android:labelFor="@+id/todo_title"/>
+        <EditText
+            android:id="@+id/todo_title"
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:autofillHints="Title"
+            android:hint="@string/todo_title"
+            android:textSize="20sp"
+            android:inputType="text"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="?android:listSeparatorTextViewStyle"
+            android:layout_marginTop="30dp"
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:text="@string/date_time_textView"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/date_editText"
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:autofillHints="Date"
+            android:hint="@string/date_hint"
+            android:inputType="date" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_date_custom"
+            android:contentDescription="@string/set_calendar_contentDescription"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/time_editText"
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/time_hint"
+            android:autofillHints="Time"
+            android:inputType="datetime"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_time_custom"
+            android:contentDescription="@string/set_time_contentDescription"/>
+
+    </LinearLayout>
+</LinearLayout>
