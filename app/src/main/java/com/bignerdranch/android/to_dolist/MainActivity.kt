@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.container_view)
 
         if (currentFragment == null) {
-            val fragment = TodoListFragment()
+            val fragment = TodoListFragment.newInstance()
             supportFragmentManager
                 .beginTransaction()
                 .add(R.id.container_view, fragment)
