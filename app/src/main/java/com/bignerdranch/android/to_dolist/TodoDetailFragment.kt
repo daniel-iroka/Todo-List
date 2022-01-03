@@ -6,15 +6,17 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 
 class TodoDetailFragment: Fragment() {
 
-    private lateinit var todoTitle : TextView
+    private lateinit var todo : Todo
+    private lateinit var todoTitle : EditText
     private lateinit var todoDate : EditText
     private lateinit var todoTime : EditText
+    private lateinit var saveButton : Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,9 +25,10 @@ class TodoDetailFragment: Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_todos, container, false)
 
-        todoTitle = view.findViewById(R.id.todo_title) as TextView
+        todoTitle = view.findViewById(R.id.todo_title) as EditText
         todoDate = view.findViewById(R.id.date_editText) as EditText
         todoTime = view.findViewById(R.id.time_editText) as EditText
+        saveButton = view.findViewById(R.id.save_button) as Button
 
         return view
     }
@@ -39,7 +42,8 @@ class TodoDetailFragment: Fragment() {
             }
 
             override fun onTextChanged(sequence: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                todoTitle.text = sequence
+                // TODO Continue from this properly
+                todo.title = sequence.toString()
             }
 
             override fun afterTextChanged(p0: Editable?) {
@@ -47,9 +51,15 @@ class TodoDetailFragment: Fragment() {
             }
 
         }
+        todoTitle.addTextChangedListener(todoTitleWatcher)
 
-        val todoDateWatcher = TODO("FIX LATER")
     }
 
+    companion object {
+
+        fun newInstance(): TodoDetailFragment {
+            return TodoDetailFragment()
+        }
+    }
 
 }

@@ -1,14 +1,15 @@
 package com.bignerdranch.android.to_dolist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
-import android.widget.CheckBox
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
+private const val TAG = "TodoListFragment"
 
 class TodoListFragment : Fragment() {
     private var todo = Todo()
@@ -22,6 +23,7 @@ class TodoListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "We got some todos here: ${todoListViewModel.todos.size}")
         todo = Todo()
         setHasOptionsMenu(true) // telling our fragment manager to respond to a call from onCreateOptionsMenu..
     }
@@ -35,8 +37,20 @@ class TodoListFragment : Fragment() {
 
     // We specify what we want to happen when an action or menu item has been clicked
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
-        TODO("Do this later after setting up database")
+        return when(item.itemId) {
+            R.id.todo_action_item -> {
+
+                val fragment = TodoDetailFragment.newInstance()
+                fragmentManager
+                    ?.beginTransaction()
+                    ?.add(R.id.container_view, fragment)
+                    ?.addToBackStack(null)
+                    ?.commit()
+                true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+
     }
 
     override fun onCreateView(
@@ -61,14 +75,13 @@ class TodoListFragment : Fragment() {
 
         val todoTitleTextView = itemView.findViewById(R.id.todo_title) as TextView
         val todoDate = itemView.findViewById(R.id.date_editText) as TextView
-        var todoCheckBox = itemView.findViewById(R.id.todo_checkBox) as CheckBox
+
     }
 
 
-    private fun checkBoxStatus() {
-        TODO("LATER IMPLEMENT THE STRIKE THROUGH FEATURE")
-        val todo = Todo()
-        if (todo.todoCheckBox == true) {
+    private fun checkBoxStatus(todoTitle: TextView, isCheckBox: Boolean) {
+        // TODO : Continue this later from philipLackner on Youtube....
+        if (isCheckBox) {
         }
     }
 
@@ -84,6 +97,7 @@ class TodoListFragment : Fragment() {
             holder.apply {
                 todoTitleTextView.text = todo.title
                 todoDate.text = todo.date.toString()
+                // TODO : When I come back, move the binder to the ViewHolder to check the issue of the Bug
             }
         }
 
