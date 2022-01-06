@@ -1,5 +1,6 @@
 package com.bignerdranch.android.to_dolist
 
+import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -35,17 +36,22 @@ class TodoListFragment : Fragment() {
         inflater.inflate(R.menu.todo_item_list, menu)
     }
 
+    private fun switchFragments() {
+        val fragment = TodoDetailFragment()
+        fragmentManager
+            ?.beginTransaction()
+            ?.add(R.id.container_view, fragment)
+            ?.addToBackStack(null)
+            ?.commit()
+    }
+
+
     // We specify what we want to happen when an action or menu item has been clicked
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.todo_action_item -> {
-
-                val fragment = TodoDetailFragment.newInstance()
-                fragmentManager
-                    ?.beginTransaction()
-                    ?.add(R.id.container_view, fragment)
-                    ?.addToBackStack(null)
-                    ?.commit()
+                // Todo : Fix this bug........
+                switchFragments()
                 true
             }
             else -> return super.onOptionsItemSelected(item)
@@ -78,10 +84,12 @@ class TodoListFragment : Fragment() {
 
     }
 
-
+    // function to strike through our text when checked
     private fun checkBoxStatus(todoTitle: TextView, isCheckBox: Boolean) {
-        // TODO : Continue this later from philipLackner on Youtube....
         if (isCheckBox) {
+            todoTitle.paintFlags = todoTitle.paintFlags or STRIKE_THRU_TEXT_FLAG
+        } else {
+            todoTitle.paintFlags = todoTitle.paintFlags or STRIKE_THRU_TEXT_FLAG.inv()
         }
     }
 
@@ -97,7 +105,8 @@ class TodoListFragment : Fragment() {
             holder.apply {
                 todoTitleTextView.text = todo.title
                 todoDate.text = todo.date.toString()
-                // TODO : When I come back, move the binder to the ViewHolder to check the issue of the Bug
+                // TODO : Complete strikeThrough functionality later when I get more knowledge on YT
+                checkBoxStatus(todoTitleTextView, todo.todoCheckBox) // TODO crossCheck this later with below.....
             }
         }
 

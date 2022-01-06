@@ -49,17 +49,8 @@ class TodoDetailFragment: Fragment() {
             override fun afterTextChanged(p0: Editable?) {
                 // something
             }
-
         }
         todoTitle.addTextChangedListener(todoTitleWatcher)
 
     }
-
-    companion object {
-
-        fun newInstance(): TodoDetailFragment {
-            return TodoDetailFragment()
-        }
-    }
-
 }

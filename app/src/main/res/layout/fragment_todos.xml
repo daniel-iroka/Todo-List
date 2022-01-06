@@ -59,13 +59,6 @@
             android:hint="@string/date_hint"
             android:inputType="date" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:src="@drawable/ic_date_custom"
-            android:contentDescription="@string/set_calendar_contentDescription"/>
-
     </LinearLayout>
 
     <LinearLayout
@@ -80,13 +73,6 @@
             android:hint="@string/time_hint"
             android:autofillHints="Time"
             android:inputType="datetime"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:src="@drawable/ic_time_custom"
-            android:contentDescription="@string/set_time_contentDescription"/>
 
     </LinearLayout>
 
