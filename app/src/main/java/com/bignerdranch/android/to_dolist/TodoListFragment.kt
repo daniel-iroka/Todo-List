@@ -4,6 +4,7 @@ import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -52,6 +53,7 @@ class TodoListFragment : Fragment() {
             R.id.todo_action_item -> {
                 // Todo : Fix this bug........
                 switchFragments()
+                updateTodoUI()
                 true
             }
             else -> return super.onOptionsItemSelected(item)
@@ -77,21 +79,39 @@ class TodoListFragment : Fragment() {
         return view
     }
 
-    private inner class TodoViewHolder(view : View): RecyclerView.ViewHolder(view) {
-
-        val todoTitleTextView = itemView.findViewById(R.id.todo_title) as TextView
-        val todoDate = itemView.findViewById(R.id.date_editText) as TextView
-
-    }
-
     // function to strike through our text when checked
     private fun checkBoxStatus(todoTitle: TextView, isCheckBox: Boolean) {
         if (isCheckBox) {
             todoTitle.paintFlags = todoTitle.paintFlags or STRIKE_THRU_TEXT_FLAG
         } else {
-            todoTitle.paintFlags = todoTitle.paintFlags or STRIKE_THRU_TEXT_FLAG.inv()
+            todoTitle.paintFlags = todoTitle.paintFlags and STRIKE_THRU_TEXT_FLAG.inv()
         }
     }
+
+    private inner class TodoViewHolder(view : View): RecyclerView.ViewHolder(view) {
+
+        private lateinit var todo : Todo
+        val todoTitleTextView = itemView.findViewById(R.id.todo_title) as TextView
+        val todoDate = itemView.findViewById(R.id.date_editText) as TextView
+        val checkBox = itemView.findViewById(R.id.todo_checkBox) as CheckBox
+        
+
+        // function to bind our views
+        // todo Test this mofoko later....
+        fun bind(todo : Todo) {
+            this.todo = todo
+            todoTitleTextView.text = this.todo.title
+            todoDate.text = this.todo.date.toString()
+            checkBox.isChecked = this.todo.todoCheckBox
+
+            checkBoxStatus(todoTitleTextView, todo.todoCheckBox)
+            checkBox.setOnCheckedChangeListener { _, isChecked ->
+                checkBoxStatus(todoTitleTextView, isChecked)
+                checkBox.isChecked = todo.todoCheckBox
+            }
+        }
+    }
+
 
     // Our TodoAdapter which sets up the data to be displayed in our RecyclerView through its ViewHolder
     private inner class TodoAdapter(val todos: List<Todo>): RecyclerView.Adapter<TodoViewHolder>() {
@@ -102,12 +122,7 @@ class TodoListFragment : Fragment() {
 
         override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
             val todo = todos[position]
-            holder.apply {
-                todoTitleTextView.text = todo.title
-                todoDate.text = todo.date.toString()
-                // TODO : Complete strikeThrough functionality later when I get more knowledge on YT
-                checkBoxStatus(todoTitleTextView, todo.todoCheckBox) // TODO crossCheck this later with below.....
-            }
+            holder.bind(todo)
         }
 
         override fun getItemCount() = todos.size // get size of todos
