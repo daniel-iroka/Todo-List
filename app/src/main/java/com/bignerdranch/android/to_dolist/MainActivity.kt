@@ -8,6 +8,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // TODO : IMPLEMENT NAVIGATION COMPONENT(NAV GRAPH) IN THIS ENTIRE PROJECT...
+        // TODO : When I come back, I will continue with implementing nav graph
+
         // Calling in our fragment manager and telling what layout we want to host our fragment in
         val currentFragment = supportFragmentManager.findFragmentById(R.id.container_view)
 

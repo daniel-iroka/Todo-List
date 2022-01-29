@@ -8,7 +8,7 @@ class TodoViewModel : ViewModel() {
 
     // Created a dummy list to test out our Lists
     init {
-        for (i in 0 until 5) {
+        for (i in 0 until 100) {
             val todo = Todo()
             todo.title = "Todo Test #$i"
         }
