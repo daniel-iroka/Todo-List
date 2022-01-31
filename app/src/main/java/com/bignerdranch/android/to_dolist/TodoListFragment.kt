@@ -37,6 +37,7 @@ class TodoListFragment : Fragment() {
         inflater.inflate(R.menu.todo_item_list, menu)
     }
 
+
     private fun switchFragments() {
         val fragment = TodoDetailFragment()
         fragmentManager
@@ -79,6 +80,7 @@ class TodoListFragment : Fragment() {
         return view
     }
 
+
     // function to strike through our text when checked
     private fun checkBoxStatus(todoTitle: TextView, isCheckBox: Boolean) {
         if (isCheckBox) {
@@ -87,6 +89,7 @@ class TodoListFragment : Fragment() {
             todoTitle.paintFlags = todoTitle.paintFlags and STRIKE_THRU_TEXT_FLAG.inv()
         }
     }
+
 
     private inner class TodoViewHolder(view : View): RecyclerView.ViewHolder(view) {
 
@@ -127,6 +130,7 @@ class TodoListFragment : Fragment() {
 
         override fun getItemCount() = todos.size // get size of todos
     }
+
 
     private fun updateTodoUI() {
         val todo = todoListViewModel.todos

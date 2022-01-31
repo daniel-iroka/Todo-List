@@ -53,4 +53,11 @@ class TodoDetailFragment: Fragment() {
         todoTitle.addTextChangedListener(todoTitleWatcher)
 
     }
+
+    companion object {
+
+        fun newInstance(): TodoListFragment {
+            return TodoListFragment()
+        }
+    }
 }
