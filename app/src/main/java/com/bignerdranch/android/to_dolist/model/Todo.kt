@@ -1,14 +1,17 @@
-package com.bignerdranch.android.to_dolist
+package com.bignerdranch.android.to_dolist.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
-// Our Model class. This class will represent our database table
+/** Our Model class. This class will represent our database table **/
 
-// TODO - TOMORROW, TRY AND FIX THE GRADLE DEPENDENCY ERRORS FOR THIS PROJECT
-// TODO - FIX HERE IS TO UPDATE THE ANDROID STUDIO VERSION I HOPE
-
-@Entity
-data class Todo(@PrimaryKey val id: UUID = UUID.randomUUID(), var title: String = "", var date: Date = Date(), var time: Date = Date(),
-                var todoCheckBox : Boolean = false)
+@Entity(tableName = "todo_table")
+data class Todo(
+    @PrimaryKey (autoGenerate = true) // here "Room" will autoGenerate the id for us instead of assigning a randomUUID value
+    val id : Int,
+    var title : String = "",
+    var date : Date = Date(),
+    var time : Date = Date(),
+    var todoCheckBox : Boolean = false
+)

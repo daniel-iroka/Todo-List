@@ -1,11 +1,19 @@
-package com.bignerdranch.android.to_dolist.database
+package com.bignerdranch.android.to_dolist.data
 
 import androidx.room.Database
-import com.bignerdranch.android.to_dolist.Todo
+import androidx.room.RoomDatabase
+import com.bignerdranch.android.to_dolist.model.Todo
 
-// This file will be our database
+/** This file will be our Database **/
 
 @Database(entities = [Todo::class], version = 1, exportSchema = false)
-abstract class TodoDatabase {
+abstract class TodoDatabase : RoomDatabase() {
 
+    // will return our Dao as well as its objects
+    abstract fun todoDao() : TodoDao
+
+    companion object {
+        val INSTANCE : TodoDatabase? = null
+
+    }
 }

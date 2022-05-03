@@ -1,4 +1,4 @@
-package com.bignerdranch.android.to_dolist.database
+package com.bignerdranch.android.to_dolist.data
 
 class TodoTypeConverters {
 

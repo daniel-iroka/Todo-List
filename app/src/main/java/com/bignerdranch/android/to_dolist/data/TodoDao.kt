@@ -1,19 +1,19 @@
-package com.bignerdranch.android.to_dolist.database
+package com.bignerdranch.android.to_dolist.data
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Update
-import com.bignerdranch.android.to_dolist.Todo
+import androidx.lifecycle.LiveData
+import androidx.room.*
+import com.bignerdranch.android.to_dolist.model.Todo
 
-// This will be our data access objects file where we will be updating, deleting and adding Todos to our database
+/** This will be our DAO file where we will be update, delete and add Todos to our database so it contains the methods used for accessing the database **/
 
 @Dao
 interface TodoDao {
 
+    // onConflict will ignore any known conflicts, in this case will remove duplicate "Todos" with the same name
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addTodo(todo: Todo)
 
-    @Insert
-    fun addTodo(todo: Todo)   // This is the function that will add todos to our database
+    @Query("SELECT * FROM todo_table ORDER BY id ASC")
+    fun readAllData() : List<LiveData<Todo>>
 
-    @Update
-    fun updateTodo(todo: Todo)   // and this will update todos to our database
 }

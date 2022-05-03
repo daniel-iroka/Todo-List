@@ -1,6 +1,7 @@
 package com.bignerdranch.android.to_dolist
 
 import androidx.lifecycle.ViewModel
+import com.bignerdranch.android.to_dolist.model.Todo
 
 class TodoViewModel : ViewModel() {
 

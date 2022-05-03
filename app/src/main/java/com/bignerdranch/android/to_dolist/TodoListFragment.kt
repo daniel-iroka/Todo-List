@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bignerdranch.android.to_dolist.model.Todo
 
 private const val TAG = "TodoListFragment"
 
