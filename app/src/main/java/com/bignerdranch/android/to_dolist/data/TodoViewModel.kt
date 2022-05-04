@@ -12,6 +12,11 @@ import kotlinx.coroutines.launch
 
 class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
+    /**
+     *  NOTE! : "Context" are needed to instantiate a database that is why we are using an AndroidViewModel in this case because it holds reference to an
+     *  Application context. And if I remember correctly, it will start as the "Application" starts.
+     **/
+
     private val readAllData : LiveData<List<Todo>>
     private val repository : TodoRepository
 
@@ -22,11 +27,10 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         readAllData = repository.readAllData
     }
 
-    // This function using coroutines objects will run in a background thread
+    // This function using coroutines objects indicates that whatever is in it should run in a background thread
     fun addTodo(todo : Todo) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addTodo(todo)
         }
     }
-
 }
