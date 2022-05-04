@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bignerdranch.android.to_dolist.R
 
+// TODO - WHEN I COME BACK, CHECK WHY THIS TINT COLOR ISN'T CHANGING
 
 class ListFragment : Fragment() {
 

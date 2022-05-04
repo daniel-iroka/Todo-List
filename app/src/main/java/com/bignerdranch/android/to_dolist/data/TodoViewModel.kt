@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 /** Our AndroidViewModel. This AndroidViewModel holds reference to our Application context. **/
 
-class TodoViewModel(application: Application) : AndroidViewModel(application) {
+/**class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
     /**
      *  NOTE! : "Context" are needed to instantiate a database that is why we are using an AndroidViewModel in this case because it holds reference to an
@@ -33,4 +33,4 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
             repository.addTodo(todo)
         }
     }
-}
+} **/

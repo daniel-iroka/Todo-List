@@ -8,7 +8,7 @@ import com.bignerdranch.android.to_dolist.model.Todo
 
 /** This file will be our Database **/
 
-@Database(entities = [Todo::class], version = 1, exportSchema = false)
+/**@Database(entities = [Todo::class], version = 1, exportSchema = false)
 abstract class TodoDatabase : RoomDatabase() {
 
     abstract fun todoDao() : TodoDao
@@ -37,4 +37,4 @@ abstract class TodoDatabase : RoomDatabase() {
             }
         }
     }
-}
+}**/
