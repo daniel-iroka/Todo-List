@@ -1,17 +1,10 @@
 <resources>
     <string name="app_name">To-Do List</string>
-    <string name="add_todos">Add todos</string>
-    <string name="todo_title_textView">What is your Task?</string>
-    <string name="todo_title">Title</string>
-    <string name="multilineText_editText">Note something down…</string>
-    <string name="todo_date">Set Date</string>
-    <string name="date_time_textView">Due date/time:</string>
-    <string name="date_hint">Date not set</string>
-    <string name="time_hint">Time not set</string>
-    <string name="set_calendar_contentDescription">Set Calendar</string>
-    <string name="set_time_contentDescription">Set Time</string>
-    <string name="todo_date_list">Todo Date</string>
-    <string name="todo_title_list">Todo Title</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tv_what_is_your_task">What is your Task?</string>
+    <string name="ed_your_task">Your Task....</string>
+    <string name="tv_due_date_time">DUE Date/Time:</string>
+    <string name="ed_date_not_set">Date not set…</string>
+    <string name="ed_time_not_set">Time not set…</string>
+    <string name="yes_check_content_description">Click the Checkmark to create your new Task.</string>
 </resources>
