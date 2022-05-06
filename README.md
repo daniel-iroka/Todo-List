@@ -4,8 +4,8 @@ Todo List is an App that lets Users keep records of tasks they wish to accomplis
 
 # Description
 
-Description
+Description - TBD
 
 # Screenshots
 
-Screenshots
+Screenshots - TBD
