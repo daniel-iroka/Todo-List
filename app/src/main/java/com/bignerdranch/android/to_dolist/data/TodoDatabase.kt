@@ -1,14 +1,13 @@
 package com.bignerdranch.android.to_dolist.data
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import com.bignerdranch.android.to_dolist.model.Todo
 
 /** This file will be our Database **/
 
-/**@Database(entities = [Todo::class], version = 1, exportSchema = false)
+@Database(entities = [Todo::class], version = 1, exportSchema = false)
+@TypeConverters(TodoTypeConverters::class)
 abstract class TodoDatabase : RoomDatabase() {
 
     abstract fun todoDao() : TodoDao
@@ -37,4 +36,4 @@ abstract class TodoDatabase : RoomDatabase() {
             }
         }
     }
-}**/
+}

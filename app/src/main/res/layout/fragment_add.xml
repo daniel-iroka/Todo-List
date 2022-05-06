@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="26dp"
+    android:padding="38dp"
     tools:context=".fragments.add.AddFragment">
+
+    <!-- TODO - FIX THE TEXT SIZE AND COLOR AS WELL AS HEIGHT -->
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="28dp"
         android:text="@string/tv_what_is_your_task"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -28,6 +30,7 @@
         android:ems="10"
         android:hint="@string/ed_your_task"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,11 +56,11 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/ed_date_not_set"
-        android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/edTime"
@@ -66,7 +69,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/ed_time_not_set"
-        android:inputType="time"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,15 +79,15 @@
         android:id="@+id/ab_checkYes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:clickable="true"
+        android:contentDescription="@string/yes_check_content_description"
         android:focusable="true"
-        app:tint="@android:color/white"
-        app:backgroundTint="@android:color/holo_blue_light"
         android:src="@drawable/ic_check_yes"
+        app:backgroundTint="@android:color/holo_blue_light"
+        app:tint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/yes_check_content_description" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

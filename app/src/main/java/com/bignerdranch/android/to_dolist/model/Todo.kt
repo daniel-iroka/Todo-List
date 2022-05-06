@@ -9,9 +9,9 @@ import java.util.*
 @Entity(tableName = "todo_table")
 data class Todo(
     @PrimaryKey (autoGenerate = true) // here "Room" will autoGenerate the id for us instead of assigning a randomUUID value
-    val id : Int,
-    var title : String = "",
-    var date : Date = Date(),
+    val id : Int = 0,
+    var title : String = "" ,
+    var date : Date = Date() ,
     var time : Date = Date(),
     var todoCheckBox : Boolean = false
 )
