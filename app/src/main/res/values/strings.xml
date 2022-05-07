@@ -7,4 +7,6 @@
     <string name="ed_date_not_set">Date not set…</string>
     <string name="ed_time_not_set">Time not set…</string>
     <string name="yes_check_content_description">Click the Checkmark to create your new Task.</string>
+    <string name="task_add_toast">Task has been Successfully added!</string>
+    <string name="no_task_add_toast">Please fill out all the fields</string>
 </resources>

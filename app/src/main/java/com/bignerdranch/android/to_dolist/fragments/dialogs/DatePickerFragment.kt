@@ -39,7 +39,7 @@ class DatePickerFragment : DialogFragment() {
             dateListener,
             initialYear,
             initialMonth,
-            initialDay
+            initialDay,
         )
     }
 

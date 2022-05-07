@@ -9,13 +9,16 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.bignerdranch.android.to_dolist.R
 import com.bignerdranch.android.to_dolist.data.TodoViewModel
 import com.bignerdranch.android.to_dolist.databinding.FragmentAddBinding
 import com.bignerdranch.android.to_dolist.fragments.dialogs.DatePickerFragment
+import com.bignerdranch.android.to_dolist.fragments.dialogs.TimePickerFragment
 import com.bignerdranch.android.to_dolist.model.Todo
 import java.util.*
 
 private const val DIALOG_DATE = "DialogDate"
+private const val DIALOG_TIME = "DialogTime"
 
 class AddFragment : Fragment() {
 
@@ -29,7 +32,6 @@ class AddFragment : Fragment() {
         super.onCreate(savedInstanceState)
         todo = Todo()
     }
-    
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,9 +60,16 @@ class AddFragment : Fragment() {
             showDate.show(this@AddFragment.childFragmentManager, DIALOG_DATE)
         }
 
-        //
+        // showing our timePickerDialog
         binding.edTime.setOnClickListener {
-            TODO("Implement the timePicker Dialog when I come back")
+            // TODO - RUN THIS LATER BECAUSE I HAVEN'T TESTED IT.
+            childFragmentManager.setFragmentResultListener("tRequestKey", viewLifecycleOwner) {_, bundle ->
+                val result = bundle.getSerializable("tBundleKey") as Date
+                todo.time = result
+            }
+
+            val showTime = TimePickerFragment()
+            showTime.show(this@AddFragment.childFragmentManager, DIALOG_TIME)
         }
 
         return binding.root
@@ -76,11 +85,10 @@ class AddFragment : Fragment() {
         if (inputCheck(title, date, time)) {
             val todo = Todo(0, title)
             todoViewModel.addTodo(todo)
-
             // This will make a toast saying Successfully added task if we add a task
-            Toast.makeText(requireContext(), "Task has been Successfully added!", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), R.string.task_add_toast, Toast.LENGTH_LONG).show()
         } else {
-            Toast.makeText(requireContext(), "Please fill out all the fields.", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), R.string.no_task_add_toast, Toast.LENGTH_LONG).show()
         }
     }
 
