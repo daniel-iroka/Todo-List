@@ -7,13 +7,11 @@
     android:padding="38dp"
     tools:context=".fragments.add.AddFragment">
 
-    <!-- TODO - FIX THE TEXT SIZE AND COLOR AS WELL AS HEIGHT -->
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="15dp"
         android:text="@string/tv_what_is_your_task"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -56,6 +54,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/ed_date_not_set"
+        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,6 +69,7 @@
         android:ems="10"
         android:hint="@string/ed_time_not_set"
         android:minHeight="48dp"
+        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
