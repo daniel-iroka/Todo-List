@@ -47,29 +47,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edTaskTitle" />
 
-    <EditText
+    <TextView
         android:id="@+id/edDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/ed_date_not_set"
-        android:clickable="true"
+        android:focusable="true"
+        android:textColor="?attr/editTextColor"
+        android:background="?attr/editTextBackground"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <EditText
+    <TextView
         android:id="@+id/edTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/ed_time_not_set"
+        android:focusable="true"
         android:minHeight="48dp"
-        android:clickable="true"
+        android:textColor="?attr/editTextColor"
+        android:background="?attr/editTextBackground"
+        android:textAppearance="?android:attr/textAppearanceMediumInverse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

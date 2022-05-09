@@ -14,7 +14,7 @@ abstract class TodoDatabase : RoomDatabase() {
 
     companion object {
         @Volatile
-        var INSTANCE : TodoDatabase? = null
+        private var INSTANCE : TodoDatabase? = null
 
 
         /** This whole block basically checks if an instance of this database exists and returns that same instance but if not, creates a new one.  **/
@@ -29,7 +29,7 @@ abstract class TodoDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     TodoDatabase::class.java,
-                    "table_todo"
+                    "todo_database"
                 ).build()
                 INSTANCE = instance
                 return instance

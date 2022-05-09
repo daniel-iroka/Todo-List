@@ -15,6 +15,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupActionBarWithNavController(findNavController(R.id.fragmentContainerView2))
+        setupActionBarWithNavController(findNavController(R.id.fragmentContainerView))
+    }
+
+    // This function will enable us to be able to use the Default back arrow button in our nav_graph action bar
+    override fun onSupportNavigateUp(): Boolean {
+        val navigateUp = findNavController(R.id.fragmentContainerView)
+        return navigateUp.navigateUp() || super.onSupportNavigateUp()
     }
 }
