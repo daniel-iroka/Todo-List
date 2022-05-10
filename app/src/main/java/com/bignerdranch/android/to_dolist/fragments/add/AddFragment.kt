@@ -20,8 +20,8 @@ import java.util.*
 
 private const val DIALOG_DATE = "DialogDate"
 private const val DIALOG_TIME = "DialogTime"
-private const val SIMPLE_DATE_FORMAT = "EEE, d MMM yyyy"
-private const val SIMPLE_TIME_FORMAT = "HH:mm"
+const val SIMPLE_DATE_FORMAT = "EEE, d MMM yyyy"
+const val SIMPLE_TIME_FORMAT = "HH:mm"
 
 class AddFragment : Fragment() {
 

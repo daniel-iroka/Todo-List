@@ -7,7 +7,6 @@
     android:layout_height="wrap_content"
     android:padding="24sp">
 
-
     <TextView
         android:id="@+id/tvTaskTitle"
         android:layout_width="0dp"
@@ -49,5 +48,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
