@@ -15,6 +15,7 @@
         android:text="@string/tv_what_is_your_task"
         android:textSize="16sp"
         android:textStyle="bold"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
