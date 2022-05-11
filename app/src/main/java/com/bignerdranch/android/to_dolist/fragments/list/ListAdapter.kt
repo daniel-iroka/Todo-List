@@ -1,7 +1,10 @@
 package com.bignerdranch.android.to_dolist.fragments.list
 
+import android.annotation.SuppressLint
+import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bignerdranch.android.to_dolist.databinding.CustomRowBinding
@@ -11,12 +14,20 @@ import com.bignerdranch.android.to_dolist.model.Todo
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class ListAdapter(): Adapter<ListAdapter.TodoViewHolder>() {
+class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     private var todoList = emptyList<Todo>()
 
-    // TODO - WHEN I COME BACK, I WILL IMPLEMENT THIS COMPLETELY
 
-    inner class TodoViewHolder(val binding : CustomRowBinding) : RecyclerView.ViewHolder(binding.root) { }
+    // will toggle strikeThrough on the Task title
+    private fun toggleStrikeThrough(tvTaskTitle : TextView, cbTask : Boolean) {
+        if (cbTask) {
+            tvTaskTitle.paintFlags = tvTaskTitle.paintFlags  or STRIKE_THRU_TEXT_FLAG
+        } else {
+            tvTaskTitle.paintFlags = tvTaskTitle.paintFlags or STRIKE_THRU_TEXT_FLAG.inv()
+        }
+    }
+
+    inner class TodoViewHolder(val binding : CustomRowBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         // this can be done in an inline variable and I may experiment on it later.
@@ -35,11 +46,26 @@ class ListAdapter(): Adapter<ListAdapter.TodoViewHolder>() {
             binding.tvTaskTitle.text = todo.title
             binding.tvTaskDate.text = dateLocales.format(todo.date)
             binding.tvTaskTime.text = timeLocales.format(todo.time)
-            // TODO - WORK ON THE CHECKBOX BY EITHER FOLLOWING PHILLIP'S EXAMPLE OR LOOKING FOR A BETTER ON
-            binding.cbTask
+            binding.cbTask.isChecked = todo.todoCheckBox
+
+            // TODO - FIX THIS MESS WHEN I COME BACK, CHANGE THE ENTIRE IMPLEMENTATION
+            /** Our strikeThrough Implementation starts. The checkedListener here does the main job **/
+            /**toggleStrikeThrough(binding.tvTaskTitle, todo.todoCheckBox)
+            binding.cbTask.setOnCheckedChangeListener { _, isChecked ->
+                toggleStrikeThrough(binding.tvTaskTitle, isChecked)
+                // This means if the value was false, it is now true and vice versa.
+            }**/
         }
     }
 
     // as usual will return the size of the List
     override fun getItemCount() = todoList.size
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setData(todo : List<Todo>) {
+        this.todoList = todo
+        // todo - This is a suppressed lint warning. Later check it online and see if there is a way to improve it.
+        notifyDataSetChanged()
+    }
+
 }

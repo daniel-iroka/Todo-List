@@ -7,16 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.to_dolist.databinding.FragmentListBinding
 import com.bignerdranch.android.to_dolist.R
 import com.bignerdranch.android.to_dolist.data.TodoViewModel
 
-
 class ListFragment : Fragment() {
     private var _binding : FragmentListBinding? = null
     private val binding get() = _binding!!
-    private val adapter : ListAdapter? = null
+    private lateinit var mTodoViewModel: TodoViewModel
+    private lateinit var recyclerView: RecyclerView
 
+    // TODO - WHEN I COME BACK, I WILL TEST IF THIS WHOLE SHII IS EVEN GONNA WORK AND HOPEFULLY NO BUGS.
+    // TODO - IF IT WORKS, THEN I PUSH THE CHANGES.
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,13 +30,25 @@ class ListFragment : Fragment() {
         // Inflate the layout for this fragment with ViewBinding style
         _binding = FragmentListBinding.inflate(inflater, container, false)
 
-        // TODO - WHEN I COME BACK, AFTER FINISHING THE LIST ADAPTER, I WILL SETUP OUR RECYCLERVIEW WITH ADAPTER HERE.
+        val adapter = ListAdapter() // getting reference to our ListAdapter
+        recyclerView = binding.recyclerViewTodo
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+
+        /**
+         *  updates our recyclerView with the new "observed" changes in our database through our adapter
+         */
+        // TodoViewModel
+        mTodoViewModel = ViewModelProvider(this)[TodoViewModel::class.java]
+        mTodoViewModel.readAllData.observe(viewLifecycleOwner) { todos ->
+            adapter.setData(todos)
+        }
+
+        // Add Task Button
         binding.fbAdd.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
         }
-
-        binding.fbAdd
 
         return binding.root
     }

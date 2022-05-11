@@ -17,7 +17,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
      *  Application context. And if I remember correctly, it will start as the "Application" starts.
      **/
 
-    private val readAllData : LiveData<List<Todo>>
+    val readAllData : LiveData<List<Todo>>
     private val repository : TodoRepository
 
     init {

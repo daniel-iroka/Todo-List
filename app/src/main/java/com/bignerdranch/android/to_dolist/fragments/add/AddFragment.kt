@@ -76,8 +76,8 @@ class AddFragment : Fragment() {
                 if (todo.time.toString().isNotEmpty()) {
                     updateTime()
                 }
-            }
 
+            }
            TimePickerFragment().show(this@AddFragment.childFragmentManager, DIALOG_TIME)
         }
         return binding.root
@@ -93,7 +93,6 @@ class AddFragment : Fragment() {
 
     // function to update Time
     private fun updateTime() {
-        // TODO - WHEN I COME BACK, TRY TO MAKE THIS 'NOT' 24HOUR FORMAT
         val timeLocales = SimpleDateFormat(SIMPLE_TIME_FORMAT, Locale.getDefault())
         binding.edTime.text = timeLocales.format(todo.time)
     }
