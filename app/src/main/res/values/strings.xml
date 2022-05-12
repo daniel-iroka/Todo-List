@@ -9,4 +9,8 @@
     <string name="yes_check_content_description">Click the Checkmark to create your new Task.</string>
     <string name="task_add_toast">Task has been Successfully added!</string>
     <string name="no_task_add_toast">Please fill out all the fields</string>
+    <string name="tvTaskTitle">Task Title</string>
+    <string name="tvTaskDate">Task Date</string>
+    <string name="tvTaskTime">Task Time</string>
+    <string name="am">AM</string>
 </resources>

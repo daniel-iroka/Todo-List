@@ -42,7 +42,7 @@ class TimePickerFragment : DialogFragment() {
             timeListener,
             hour,
             minute,
-            true
+            false
         )
     }
 
