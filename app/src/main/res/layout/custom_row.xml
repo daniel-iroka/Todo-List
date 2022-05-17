@@ -14,7 +14,7 @@
         android:id="@+id/tvTaskTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="8dp"
         android:text="@string/tvTaskTitle"
         android:textSize="18sp"
         android:textStyle="bold"
