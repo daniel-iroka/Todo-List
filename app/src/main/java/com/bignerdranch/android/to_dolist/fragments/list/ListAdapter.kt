@@ -3,22 +3,24 @@ package com.bignerdranch.android.to_dolist.fragments.list
 import android.annotation.SuppressLint
 import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import com.bignerdranch.android.to_dolist.R
 import com.bignerdranch.android.to_dolist.databinding.CustomRowBinding
 import com.bignerdranch.android.to_dolist.fragments.add.SIMPLE_DATE_FORMAT
 import com.bignerdranch.android.to_dolist.fragments.add.SIMPLE_TIME_FORMAT
 import com.bignerdranch.android.to_dolist.model.Todo
 import java.text.SimpleDateFormat
 import java.util.Locale
+import kotlin.coroutines.coroutineContext
 
 
 class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     private var todoList = emptyList<Todo>()
+    private val todo = Todo()
 
 
     // will toggle strikeThrough on the Task title
@@ -30,7 +32,20 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
         }
     }
 
-    inner class TodoViewHolder(val binding : CustomRowBinding) : RecyclerView.ViewHolder(binding.root)
+
+    inner class TodoViewHolder(val binding : CustomRowBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+
+        // I am doing this to call in the StrikeThrough when the user clicks on a Task.
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View) {
+            toggleStrikeThrough(binding.tvTaskTitle, todo.todoCheckBox)
+            // TODO - WORK ON THIS LATER WHEN I COME BACK
+//            Toast.makeText(this@ListAdapter, "Clicked", Toast.LENGTH_LONG).show()
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         // this can be done in an inline variable and I may experiment on it later.
@@ -43,6 +58,7 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
+        // TODO - WHEN I COME BACK HERE, TRY TO CHANGE THE TIME TEXTVIEW TO "NOT 24HR" TIME FORMAT
         val todo = todoList[position]
         val dateLocales = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
         val timeLocales = SimpleDateFormat(SIMPLE_TIME_FORMAT, Locale.getDefault())

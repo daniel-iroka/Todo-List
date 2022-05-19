@@ -19,8 +19,6 @@ class ListFragment : Fragment() {
     private lateinit var mTodoViewModel: TodoViewModel
     private lateinit var recyclerView: RecyclerView
 
-    // TODO - WHEN I COME BACK, I WILL TEST IF THIS WHOLE SHII IS EVEN GONNA WORK AND HOPEFULLY NO BUGS.
-    // TODO - IF IT WORKS, THEN I PUSH THE CHANGES.
 
     override fun onCreateView(
         inflater: LayoutInflater,

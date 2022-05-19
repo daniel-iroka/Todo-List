@@ -1,7 +1,12 @@
 package com.bignerdranch.android.to_dolist.fragments.add
 
+import android.graphics.Color
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.TextPaint
 import android.text.TextUtils
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +25,8 @@ import java.util.*
 
 private const val DIALOG_DATE = "DialogDate"
 private const val DIALOG_TIME = "DialogTime"
-const val SIMPLE_DATE_FORMAT = "EEE, d MMM yyyy"
-const val SIMPLE_TIME_FORMAT = "HH:mm"
+const val SIMPLE_DATE_FORMAT = "MMM, d yyyy"
+const val SIMPLE_TIME_FORMAT = "H:mm"
 
 class AddFragment : Fragment() {
 
@@ -45,6 +50,7 @@ class AddFragment : Fragment() {
 
         todoViewModel = ViewModelProvider(this)[TodoViewModel::class.java]
 
+        remindersTextSpan()
 
         // will insert our database when clicked
         binding.abCheckYes.setOnClickListener {
@@ -95,6 +101,29 @@ class AddFragment : Fragment() {
     private fun updateTime() {
         val timeLocales = SimpleDateFormat(SIMPLE_TIME_FORMAT, Locale.getDefault())
         binding.edTime.text = timeLocales.format(todo.time)
+    }
+
+    // our reminders Text span
+    // Todo - Later check the docs on this.
+    private fun remindersTextSpan() {
+        val spannableString = SpannableString("Set Reminders")
+
+        val clickableSpan = object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                Toast.makeText(context, "Set Reminders!", Toast.LENGTH_LONG).show()
+            }
+
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+
+                ds.color = Color.BLUE
+            }
+        }
+
+        spannableString.setSpan(clickableSpan, 0, 13, SpannableString.SPAN_INCLUSIVE_EXCLUSIVE)
+
+        binding.tvReminders.text = spannableString
+        binding.tvReminders.movementMethod = LinkMovementMethod.getInstance()
     }
 
 

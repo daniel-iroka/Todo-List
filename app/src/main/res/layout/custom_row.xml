@@ -15,9 +15,10 @@
         android:id="@+id/tvTaskTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-light"
         android:text="@string/tvTaskTitle"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/cbTask"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,19 +29,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-thin"
         android:text="@string/tvTaskDate"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle" />
 
-        <TextView
+    <TextView
         android:id="@+id/tvTaskTime"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-thin"
         android:text="@string/tvTaskTime"
-        android:textColor="@android:color/holo_blue_light"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvTaskDate"
         app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle" />
@@ -49,6 +53,7 @@
         android:id="@+id/cbTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         app:buttonTint="@android:color/holo_blue_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +64,9 @@
         android:layout_height="16dp"
         android:layout_marginStart="3dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-thin"
         android:text="@string/am"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvTaskTime"
         app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle" />
