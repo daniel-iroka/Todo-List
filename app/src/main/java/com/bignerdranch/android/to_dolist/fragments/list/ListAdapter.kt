@@ -22,6 +22,8 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     private var todoList = emptyList<Todo>()
     private val todo = Todo()
 
+    // TODO - WHEN I COME BACK, I WILL TRY TO CHANGE THE ACTION BAR COLOR AND THE ACTION BAR TITLE FONT
+
 
     // will toggle strikeThrough on the Task title
     private fun toggleStrikeThrough(tvTaskTitle : TextView, cbTask : Boolean) {
