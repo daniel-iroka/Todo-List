@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.ToDoList" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/purple_500</item>`1
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -13,4 +13,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="toolbar_appearance" parent="@style/TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">sans-serif-light</item>
+
+    </style>
+
 </resources>

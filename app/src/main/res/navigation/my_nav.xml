@@ -9,7 +9,7 @@
         android:id="@+id/listFragment"
         android:name="com.bignerdranch.android.to_dolist.fragments.list.ListFragment"
         android:label="Tasks"
-        tools:layout="@layout/fragment_list" >
+        tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/action_listFragment_to_addFragment"
             app:destination="@id/addFragment" />
