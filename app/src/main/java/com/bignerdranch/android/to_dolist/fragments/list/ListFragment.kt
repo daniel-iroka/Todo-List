@@ -3,6 +3,7 @@ package com.bignerdranch.android.to_dolist.fragments.list
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -62,24 +63,42 @@ class ListFragment : Fragment() {
         return when(item.itemId)  {
             R.id.del_selected_tasks -> {
                 deleteSelectedUsers()
+                 true
             }
 
             R.id.del_all_tasks -> {
                 deleteAllTasks()
+                true
             }
-
             else -> super.onOptionsItemSelected(item)
         }
+    }
 
+    // function to delete all of our Tasks
+    private fun deleteAllTasks() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("Yes") {_,_->
+            mTodoViewModel.deleteAllTasks()
+            Toast.makeText(requireContext(), "All tasks have been successfully deleted!", Toast.LENGTH_LONG).show()
+        }
+        builder.setNegativeButton("No") {_,_-> }
+        builder.setTitle("Confirm Deletion")
+        builder.setMessage("Are you sure you want to delete all Tasks?")
+        builder.create().show()
 
     }
 
-    private fun deleteAllTasks(): Boolean {
+    // function to delete only selected Tasks
+    private fun deleteSelectedUsers() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("Yes") {_,_->
 
-    }
-
-    private fun deleteSelectedUsers(): Boolean {
-
+        }
+        builder.setNegativeButton("No") {_,_->}
+        builder.setTitle("Confirm Deletion")
+        builder.setMessage("Are you sure you want to delete only selected Tasks?")
+        builder.create().show()
+        // TODO - Implement the ability to delete only the selected tasks with the strikeThrough text
     }
 
 

@@ -16,8 +16,7 @@
         android:title="@string/todo_sort"
         app:showAsAction="always"
         android:icon="@drawable/ic_todo_sort"
-        app:iconTint="@android:color/white"/>
-
+        app:iconTint="@android:color/white" />
     <item
         android:id="@+id/del_selected_tasks"
         android:title="@string/delete_all_selected_tasks"
