@@ -19,6 +19,7 @@ class ListFragment : Fragment() {
     private lateinit var mTodoViewModel: TodoViewModel
     private lateinit var recyclerView: RecyclerView
 
+    // TODO - WHEN I COME BACK TOMORROW, I WILL TRY TO CHANGE THE APP BAR'S COLOUR.
 
     override fun onCreateView(
         inflater: LayoutInflater,
