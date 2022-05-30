@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- All our menu/action items -->
+
+    <item
+        android:id="@+id/todo_search"
+        android:title="@string/todo_search"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_todo_search"
+        app:iconTint="@android:color/white"/>
+
+    <item
+        android:id="@+id/todo_sort"
+        android:title="@string/todo_sort"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_todo_sort"
+        app:iconTint="@android:color/white"/>
+
+    <item
+        android:id="@+id/del_selected_tasks"
+        android:title="@string/delete_all_selected_tasks"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/del_all_tasks"
+        android:title="@string/delete_all_tasks"
+        app:showAsAction="never" />
+</menu>

@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.bignerdranch.android.to_dolist.model.Todo
+import com.bignerdranch.android.to_dolist.repository.TodoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -27,10 +28,22 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         readAllData = repository.readAllData
     }
 
-    // This function using coroutines objects indicates that whatever is in it should run in a background thread
+    // All functions using coroutines objects indicates that whatever is in it should run in a background thread
     fun addTodo(todo : Todo) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addTodo(todo)
+        }
+    }
+
+    fun deleteSelectedTasks(todo : Todo) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.delSelectedTasks(todo)
+        }
+    }
+
+    fun deleteAllTasks() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.delAllTasks()
         }
     }
 }

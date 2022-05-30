@@ -1,10 +1,9 @@
 package com.bignerdranch.android.to_dolist.fragments.list
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +27,9 @@ class ListFragment : Fragment() {
         // Inflate the layout for this fragment with ViewBinding style
         _binding = FragmentListBinding.inflate(inflater, container, false)
 
+        // this tells our activity/fragment that we have a menu_item it should respond to.
+        setHasOptionsMenu(true)
+
         val adapter = ListAdapter() // getting reference to our ListAdapter
         recyclerView = binding.recyclerViewTodo
         recyclerView.adapter = adapter
@@ -50,6 +52,36 @@ class ListFragment : Fragment() {
 
         return binding.root
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.fragment_list, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId)  {
+            R.id.del_selected_tasks -> {
+                deleteSelectedUsers()
+            }
+
+            R.id.del_all_tasks -> {
+                deleteAllTasks()
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+
+
+    }
+
+    private fun deleteAllTasks(): Boolean {
+
+    }
+
+    private fun deleteSelectedUsers(): Boolean {
+
+    }
+
 
     // We want to leave no trace of our Binding class Reference to avoid memory leaks
     override fun onDestroy() {

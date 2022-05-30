@@ -23,7 +23,6 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     private val todo = Todo()
 
 
-
     // will toggle strikeThrough on the Task title
     private fun toggleStrikeThrough(tvTaskTitle : TextView, cbTask : Boolean) {
         if (cbTask) {
@@ -43,7 +42,6 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
 
         override fun onClick(v: View) {
             toggleStrikeThrough(binding.tvTaskTitle, todo.todoCheckBox)
-            // TODO - WORK ON THIS LATER WHEN I COME BACK
 //            Toast.makeText(this@ListAdapter, "Clicked", Toast.LENGTH_LONG).show()
         }
     }
@@ -59,7 +57,6 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        // TODO - WHEN I COME BACK HERE, TRY TO CHANGE THE TIME TEXTVIEW TO "NOT 24HR" TIME FORMAT
         val todo = todoList[position]
         val dateLocales = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
         val timeLocales = SimpleDateFormat(SIMPLE_TIME_FORMAT, Locale.getDefault())
@@ -83,7 +80,6 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     @SuppressLint("NotifyDataSetChanged")
     fun setData(todo : List<Todo>) {
         this.todoList = todo
-        // todo - This is a suppressed lint warning. Later check it online and see if there is a way to improve it.
         notifyDataSetChanged()
     }
 }

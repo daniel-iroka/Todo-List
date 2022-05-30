@@ -1,6 +1,7 @@
-package com.bignerdranch.android.to_dolist.data
+package com.bignerdranch.android.to_dolist.repository
 
 import androidx.lifecycle.LiveData
+import com.bignerdranch.android.to_dolist.data.TodoDao
 import com.bignerdranch.android.to_dolist.model.Todo
 
 /**
@@ -13,5 +14,13 @@ class TodoRepository(private val todoDao : TodoDao) {
 
     suspend fun addTodo(todo : Todo) {
         todoDao.addTodo(todo)
+    }
+
+    suspend fun delSelectedTasks(todo : Todo) {
+        todoDao.deleteSelectedTasks(todo)
+    }
+
+    suspend fun delAllTasks() {
+        todoDao.deleteAllTasks()
     }
 }
