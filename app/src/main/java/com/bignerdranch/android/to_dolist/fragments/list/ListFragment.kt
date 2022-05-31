@@ -19,7 +19,7 @@ class ListFragment : Fragment() {
     private lateinit var mTodoViewModel: TodoViewModel
     private lateinit var recyclerView: RecyclerView
 
-    // TODO - WHEN I COME BACK TOMORROW, I WILL TRY TO CHANGE THE APP BAR'S COLOUR.
+    // TODO - WHEN I COME BACK IN THE EVENING, I WILL CORRECTLY ADJUST THE TEXT THAT DISPLAYS THE TEXT IN OUR LIST PART OF THIS PROJECT
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -93,13 +93,12 @@ class ListFragment : Fragment() {
     private fun deleteSelectedUsers() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") {_,_->
-
+            // TODO - Implement the ability to delete only the selected tasks with the strikeThrough text
         }
         builder.setNegativeButton("No") {_,_->}
         builder.setTitle("Confirm Deletion")
         builder.setMessage("Are you sure you want to delete only selected Tasks?")
         builder.create().show()
-        // TODO - Implement the ability to delete only the selected tasks with the strikeThrough text
     }
 
 

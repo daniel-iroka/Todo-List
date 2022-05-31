@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Our custom colors -->
+    <color name="holo_light_blue">#33B5E5</color>
+    <color name="holo_light_blue_dark">#247EA0</color>
 </resources>

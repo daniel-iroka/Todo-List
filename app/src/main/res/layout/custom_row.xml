@@ -33,14 +33,13 @@
         android:text="@string/tvTaskDate"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle" />
 
     <TextView
         android:id="@+id/tvTaskTime"
         android:layout_width="wrap_content"
         android:layout_height="16dp"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="6dp"
         android:fontFamily="sans-serif-thin"
         android:text="@string/tvTaskTime"
@@ -54,6 +53,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
         app:buttonTint="@android:color/holo_blue_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -70,4 +71,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvTaskTime"
         app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Created: "
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif-thin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
