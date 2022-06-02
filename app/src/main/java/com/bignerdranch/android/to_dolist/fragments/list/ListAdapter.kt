@@ -2,11 +2,11 @@ package com.bignerdranch.android.to_dolist.fragments.list
 
 import android.annotation.SuppressLint
 import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bignerdranch.android.to_dolist.databinding.CustomRowBinding
@@ -14,13 +14,13 @@ import com.bignerdranch.android.to_dolist.fragments.add.SIMPLE_DATE_FORMAT
 import com.bignerdranch.android.to_dolist.fragments.add.SIMPLE_TIME_FORMAT
 import com.bignerdranch.android.to_dolist.model.Todo
 import java.text.SimpleDateFormat
-import java.util.Locale
-import kotlin.coroutines.coroutineContext
+import java.util.*
 
+private const val TAG = "ListAdapter"
 
 class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     private var todoList = emptyList<Todo>()
-    private val todo = Todo()
+    private var todo = Todo()
 
 
     // will toggle strikeThrough on the Task title
@@ -33,18 +33,8 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     }
 
 
-    inner class TodoViewHolder(val binding : CustomRowBinding) : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+    inner class TodoViewHolder(val binding : CustomRowBinding) : RecyclerView.ViewHolder(binding.root)
 
-        // I am doing this to call in the StrikeThrough when the user clicks on a Task.
-        init {
-            itemView.setOnClickListener(this)
-        }
-
-        override fun onClick(v: View) {
-            toggleStrikeThrough(binding.tvTaskTitle, todo.todoCheckBox)
-//            Toast.makeText(this@ListAdapter, "Clicked", Toast.LENGTH_LONG).show()
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         // this can be done in an inline variable and I may experiment on it later.
@@ -53,7 +43,6 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
             false
         )
         return TodoViewHolder(binding)
-
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
@@ -70,9 +59,22 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
             binding.cbTask.setOnCheckedChangeListener { _, isChecked ->
                 toggleStrikeThrough(binding.tvTaskTitle, isChecked)
                 todo.todoCheckBox = !todo.todoCheckBox
+
+                taskCheck(todoList as MutableList<Todo>)
             }
         }
     }
+
+    private fun taskCheck(todo : List<Todo>) {
+        val listFragment = ListFragment()
+        val finishedTodos = todo.takeWhile {  it.todoCheckBox }
+
+        // second method
+//        listFragment.selectedTodos = finishedTodos.toTypedArray()
+
+        Log.i(TAG, "Our ${finishedTodos.size}")
+    }
+
 
     // as usual will return the size of the List
     override fun getItemCount() = todoList.size

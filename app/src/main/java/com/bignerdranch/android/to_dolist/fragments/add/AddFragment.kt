@@ -35,7 +35,6 @@ class AddFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var todo : Todo
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         todo = Todo()
@@ -119,7 +118,6 @@ class AddFragment : Fragment() {
                 ds.color = Color.BLUE
             }
         }
-
         spannableString.setSpan(clickableSpan, 0, 13, SpannableString.SPAN_INCLUSIVE_EXCLUSIVE)
 
         binding.tvReminders.text = spannableString
