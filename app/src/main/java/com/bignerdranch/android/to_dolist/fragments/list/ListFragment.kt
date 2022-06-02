@@ -106,13 +106,7 @@ class ListFragment : Fragment() {
         val todo = emptyList<Todo>()
         val finishedTodos = selectedTodos.takeWhile {  it.todoCheckBox }
         builder.setPositiveButton("Yes") {_,_->
-
-            // second method
-//            mTodoViewModel.deleteSelectedTasks(selectedTodos)
-
-//            selectedTodos.forEach { todo ->
-//                mTodoViewModel.deleteSelectedTasks(todo.id)
-//            }
+            mTodoViewModel.deleteSelectedTasks()
         }
         builder.setNegativeButton("No") {_,_->}
         builder.setTitle("Confirm Deletion")

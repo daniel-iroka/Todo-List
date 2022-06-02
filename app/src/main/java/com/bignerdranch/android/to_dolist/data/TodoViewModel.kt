@@ -35,9 +35,9 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun deleteSelectedTasks(todo : Int) {
+    fun deleteSelectedTasks() {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.delSelectedTasks(todo)
+            repository.delSelectedTasks()
         }
     }
 

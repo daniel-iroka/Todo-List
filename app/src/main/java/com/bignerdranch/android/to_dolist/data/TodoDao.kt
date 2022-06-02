@@ -18,8 +18,8 @@ interface TodoDao {
     @Query("SELECT * FROM todo_table ORDER BY id ASC")
     fun readAllData() : LiveData<List<Todo>>
 
-    @Query("DELETE FROM todo_table WHERE id in (:todoList)")
-    suspend fun deleteSelectedTasks(todoList : Int)
+    @Query("DELETE FROM todo_table WHERE todoCheckBox = 1")
+    suspend fun deleteSelectedTasks()
 
     // second method
 //    @Delete
