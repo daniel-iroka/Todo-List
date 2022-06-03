@@ -21,7 +21,7 @@ interface TodoDao {
     @Query("DELETE FROM todo_table WHERE todoCheckBox = 1")
     suspend fun deleteSelectedTasks()
 
-    // second method
+    // second method - This is the second method where I tried passing in an array
 //    @Delete
 //    suspend fun deleteSelectedTasks(todoList : Array<Todo>)
 

@@ -17,4 +17,7 @@
     <string name="delete_all_tasks">Delete all tasks</string>
     <string name="todo_search">Search</string>
     <string name="todo_sort">Sort</string>
+    <string name="sort_by_name">Sort by name</string>
+    <string name="sort_by_date">Sort by date</string>
+    <string name="hide_completed">Hide Completed</string>
 </resources>

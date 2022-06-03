@@ -6,7 +6,6 @@ import java.util.*
 
 /** Our Model class. This class will represent our database table **/
 
-// TODO - WHEN I COME BACK, TRY AND FIND IDEAS TO REDESIGN THIS WHOLE APP.
 
 @Entity(tableName = "todo_table")
 data class Todo(

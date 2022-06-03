@@ -7,16 +7,37 @@
     <item
         android:id="@+id/todo_search"
         android:title="@string/todo_search"
-        app:showAsAction="ifRoom"
         android:icon="@drawable/ic_todo_search"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView"
         app:iconTint="@android:color/white"/>
 
+    <!-- Sub-menu for our Sort menu_item -->
+
     <item
-        android:id="@+id/todo_sort"
         android:title="@string/todo_sort"
         app:showAsAction="always"
         android:icon="@drawable/ic_todo_sort"
-        app:iconTint="@android:color/white" />
+        app:iconTint="@android:color/white">
+
+        <menu>
+            <item
+                android:id="todo_sort_by_name"
+                android:title="@string/sort_by_name" />
+
+            <item
+                android:id="todo_sort_by_date"
+                android:title="@string/sort_by_date"/>
+
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/todo_hide_completed"
+        android:checkable="true"
+        android:title="@string/hide_completed"
+        app:showAsAction="never"/>
+
     <item
         android:id="@+id/del_selected_tasks"
         android:title="@string/delete_all_selected_tasks"

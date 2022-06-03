@@ -1,5 +1,6 @@
 package com.bignerdranch.android.to_dolist.fragments.list
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
@@ -20,7 +21,7 @@ private const val TAG = "ListFragment"
 class ListFragment : Fragment() {
     private var _binding : FragmentListBinding? = null
     private val binding get() = _binding!!
-    private lateinit var mTodoViewModel: TodoViewModel
+    lateinit var mTodoViewModel: TodoViewModel
     private lateinit var recyclerView: RecyclerView
     private val adapter = ListAdapter()  // getting reference to our ListAdapter
     private lateinit var selectedTodos : List<Todo>
@@ -56,7 +57,6 @@ class ListFragment : Fragment() {
         mTodoViewModel.readAllData.observe(viewLifecycleOwner) { todos ->
             adapter.setData(todos)
             selectedTodos = todos
-            // TODO - WHEN I COME BACK, I WILL OBTAIN THE TODO FROM HERE.
         }
 
         // Add Task Button
@@ -101,10 +101,9 @@ class ListFragment : Fragment() {
     }
 
     // function to delete only selected Tasks
+    @SuppressLint("NotifyDataSetChanged")
     private fun deleteSelectedUsers() {
         val builder = AlertDialog.Builder(requireContext())
-        val todo = emptyList<Todo>()
-        val finishedTodos = selectedTodos.takeWhile {  it.todoCheckBox }
         builder.setPositiveButton("Yes") {_,_->
             mTodoViewModel.deleteSelectedTasks()
         }
@@ -112,7 +111,7 @@ class ListFragment : Fragment() {
         builder.setTitle("Confirm Deletion")
         builder.setMessage("Are you sure you want to delete only selected Tasks?")
         builder.create().show()
-        Log.d(TAG, "Our todos $selectedTodos and ${finishedTodos.size}")
+        Log.d(TAG, "Our todos $selectedTodos ")
     }
 
 

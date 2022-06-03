@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -21,8 +20,6 @@ private const val TAG = "ListAdapter"
 class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     private var todoList = emptyList<Todo>()
     private var todo = Todo()
-
-    //  TODO - WHEN I COME BACK, I WILL TRY CALLING THE DELETE FUNCTION FROM THIS ADAPTER
 
 
     // will toggle strikeThrough on the Task title
@@ -70,7 +67,6 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     private fun taskCheck(todo : List<Todo>) {
         val listFragment = ListFragment()
         val finishedTodos = todo.takeWhile {  it.todoCheckBox }
-
         // second method
 //        listFragment.selectedTodos = finishedTodos.toTypedArray()
 
@@ -84,6 +80,13 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     @SuppressLint("NotifyDataSetChanged")
     fun setData(todo : List<Todo>) {
         this.todoList = todo
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun deleteSelectedTasks() {
+        val listFragment = ListFragment()
+        listFragment.mTodoViewModel.deleteSelectedTasks()
         notifyDataSetChanged()
     }
 }
