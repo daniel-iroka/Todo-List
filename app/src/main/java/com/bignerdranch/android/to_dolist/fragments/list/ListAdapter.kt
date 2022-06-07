@@ -54,6 +54,7 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
             binding.tvTaskTime.text = timeLocales.format(todo.time)
             binding.cbTask.isChecked = todo.todoCheckBox
 
+
             toggleStrikeThrough(binding.tvTaskTitle , todo.todoCheckBox)
             binding.cbTask.setOnCheckedChangeListener { _, isChecked ->
                 toggleStrikeThrough(binding.tvTaskTitle, isChecked)
@@ -65,12 +66,11 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     }
 
     private fun taskCheck(todo : List<Todo>) {
-        val listFragment = ListFragment()
-        val finishedTodos = todo.takeWhile {  it.todoCheckBox }
+        val test = todo.filter { it.todoCheckBox }
         // second method
 //        listFragment.selectedTodos = finishedTodos.toTypedArray()
 
-        Log.i(TAG, "Our ${finishedTodos.size}")
+//        Log.i(TAG, "Our ${test.size}")
     }
 
 
@@ -80,13 +80,6 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     @SuppressLint("NotifyDataSetChanged")
     fun setData(todo : List<Todo>) {
         this.todoList = todo
-        notifyDataSetChanged()
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun deleteSelectedTasks() {
-        val listFragment = ListFragment()
-        listFragment.mTodoViewModel.deleteSelectedTasks()
         notifyDataSetChanged()
     }
 }

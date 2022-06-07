@@ -104,14 +104,20 @@ class ListFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun deleteSelectedUsers() {
         val builder = AlertDialog.Builder(requireContext())
+        val todo = listOf<Todo>()
+        val test = todo.filter { it.todoCheckBox }
+        selectedTodos = test
+
         builder.setPositiveButton("Yes") {_,_->
+
             mTodoViewModel.deleteSelectedTasks()
+
         }
-        builder.setNegativeButton("No") {_,_->}
+        builder.setNegativeButton("No") {_,_-> }
         builder.setTitle("Confirm Deletion")
         builder.setMessage("Are you sure you want to delete only selected Tasks?")
         builder.create().show()
-        Log.d(TAG, "Our todos $selectedTodos ")
+        Log.d(TAG, "Our todos ${selectedTodos.size}")
     }
 
 
