@@ -64,6 +64,7 @@ class AddFragment : Fragment() {
 
             childFragmentManager.setFragmentResultListener("requestKey", viewLifecycleOwner) {_, bundle ->
                 val result = bundle.getSerializable("bundleKey") as Date
+                // passing the result of the user selected date directly to the _Todo class instead
                 todo.date = result
                 // will ONLY update the date field when it is not empty so that we don't get a preloaded Date textView
                 if(todo.date.toString().isNotEmpty()) {
@@ -79,6 +80,7 @@ class AddFragment : Fragment() {
 
             childFragmentManager.setFragmentResultListener("tRequestKey", viewLifecycleOwner) {_, bundle ->
                 val result = bundle.getSerializable("tBundleKey") as Date
+                // passing the result of the user selected time directly to the _Todo class instead
                 todo.time = result
                 // will ONLY update the time field when it is not empty so that we don't get a preloaded Time textView
                 if (todo.time.toString().isNotEmpty()) {

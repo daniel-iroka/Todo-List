@@ -24,7 +24,7 @@ class ListFragment : Fragment() {
     lateinit var mTodoViewModel: TodoViewModel
     private lateinit var recyclerView: RecyclerView
     private val adapter = ListAdapter()  // getting reference to our ListAdapter
-    private var todoList = emptyList<Todo>()
+    private var todosList = emptyList<Todo>()
 
 
     override fun onCreateView(
@@ -50,7 +50,7 @@ class ListFragment : Fragment() {
         mTodoViewModel = ViewModelProvider(this)[TodoViewModel::class.java]
         mTodoViewModel.readAllData.observe(viewLifecycleOwner) { todos ->
             adapter.setData(todos)
-            todoList = todos
+            todosList = todos
         }
 
         // Add Task Button
@@ -98,7 +98,7 @@ class ListFragment : Fragment() {
     private fun deleteSelectedUsers() {
         val builder = AlertDialog.Builder(requireContext())
         // Our todos that have been marked completed by the checkBox
-        val finishedTodos = todoList.filter { it.todoCheckBox }
+        val finishedTodos = todosList.filter { it.todoCheckBox }
 
         builder.setPositiveButton("Yes") {_,_->
             finishedTodos.forEach { todos ->
