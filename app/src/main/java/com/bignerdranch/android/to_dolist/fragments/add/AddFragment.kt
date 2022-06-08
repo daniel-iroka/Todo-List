@@ -144,7 +144,7 @@ class AddFragment : Fragment() {
     }
 
     // This function will help us check if the texts are empty and then proceed to add them to the database
-    // so that we don't add empty tasks to our database
+    // so that we do not add empty tasks to our database
     private fun inputCheck(title : String, date: String, time: String) : Boolean {
 
         // will return false if fields in TextUtils are empty and true if not
