@@ -24,13 +24,8 @@ class ListFragment : Fragment() {
     lateinit var mTodoViewModel: TodoViewModel
     private lateinit var recyclerView: RecyclerView
     private val adapter = ListAdapter()  // getting reference to our ListAdapter
-    private lateinit var selectedTodos : List<Todo>
+    private var todoList = emptyList<Todo>()
 
-    // second method
-//    var selectedTodos = arrayOf<Todo>()
-
-
-    // TODO - WHEN I COME BACK, I WILL SEE IF I CAN DO THE IMPLEMENTATION HERE IN THE LIST FRAGMENT
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +43,6 @@ class ListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
 
-
         /**
          *  updates our recyclerView with the new "observed" changes in our database through our adapter
          */
@@ -56,14 +50,13 @@ class ListFragment : Fragment() {
         mTodoViewModel = ViewModelProvider(this)[TodoViewModel::class.java]
         mTodoViewModel.readAllData.observe(viewLifecycleOwner) { todos ->
             adapter.setData(todos)
-            selectedTodos = todos
+            todoList = todos
         }
 
         // Add Task Button
         binding.fbAdd.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
         }
-
         return binding.root
     }
 
@@ -104,20 +97,20 @@ class ListFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun deleteSelectedUsers() {
         val builder = AlertDialog.Builder(requireContext())
-        val todo = listOf<Todo>()
-        val test = todo.filter { it.todoCheckBox }
-        selectedTodos = test
+        // Our todos that have been marked completed by the checkBox
+        val finishedTodos = todoList.filter { it.todoCheckBox }
 
         builder.setPositiveButton("Yes") {_,_->
-
-            mTodoViewModel.deleteSelectedTasks()
-
+            finishedTodos.forEach { todos ->
+                mTodoViewModel.deleteSelectedTasks(todos.id.toLong())
+            }
+            Toast.makeText(requireContext(), "Task successfully deleted!", Toast.LENGTH_LONG).show()
         }
         builder.setNegativeButton("No") {_,_-> }
         builder.setTitle("Confirm Deletion")
         builder.setMessage("Are you sure you want to delete only selected Tasks?")
         builder.create().show()
-        Log.d(TAG, "Our todos ${selectedTodos.size}")
+        Log.i(TAG , "Our todos list size is ${finishedTodos.size}")
     }
 
 

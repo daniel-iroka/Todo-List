@@ -18,12 +18,9 @@ interface TodoDao {
     @Query("SELECT * FROM todo_table ORDER BY id ASC")
     fun readAllData() : LiveData<List<Todo>>
 
-    @Query("DELETE FROM todo_table WHERE todoCheckBox = 1")
-    suspend fun deleteSelectedTasks()
+    @Query("DELETE FROM todo_table WHERE id IN (:idList)")
+    suspend fun deleteSelectedTasks(idList : Long)
 
-    // second method - This is the second method where I tried passing in an array
-//    @Delete
-//    suspend fun deleteSelectedTasks(todoList : Array<Todo>)
 
     @Query("DELETE FROM todo_table")
     suspend fun deleteAllTasks()

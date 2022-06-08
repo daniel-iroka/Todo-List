@@ -16,8 +16,8 @@ class TodoRepository(private val todoDao : TodoDao) {
         todoDao.addTodo(todo)
     }
 
-    suspend fun delSelectedTasks() {
-        todoDao.deleteSelectedTasks()
+    suspend fun delSelectedTasks(idList: Long) {
+        todoDao.deleteSelectedTasks(idList)
     }
 
     suspend fun delAllTasks() {

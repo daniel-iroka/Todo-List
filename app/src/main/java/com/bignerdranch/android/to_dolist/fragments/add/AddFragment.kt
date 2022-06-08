@@ -7,6 +7,7 @@ import android.text.TextPaint
 import android.text.TextUtils
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,8 @@ private const val DIALOG_DATE = "DialogDate"
 private const val DIALOG_TIME = "DialogTime"
 const val SIMPLE_DATE_FORMAT = "MMM, d yyyy"
 const val SIMPLE_TIME_FORMAT = "H:mm"
+
+private const val TAG = "AddFragment"
 
 class AddFragment : Fragment() {
 
@@ -103,7 +106,6 @@ class AddFragment : Fragment() {
     }
 
     // our reminders Text span
-    // Todo - Later check the docs on this.
     private fun remindersTextSpan() {
         val spannableString = SpannableString("Set Reminders")
 
@@ -137,10 +139,14 @@ class AddFragment : Fragment() {
             // This will make a toast saying Successfully added task if we add a task
             Toast.makeText(requireContext(), R.string.task_add_toast, Toast.LENGTH_LONG).show()
 
+            // FIXME: There is a bug here that allows the user to add Todos even when some OR all of the fields are empty.
+            // FIXME: It has to do with updateTime and updateDate functions I think, so I will try to fix it but maybe not now.
+
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
         } else {
             Toast.makeText(requireContext(), R.string.no_task_add_toast, Toast.LENGTH_LONG).show()
         }
+        Log.d(TAG, "Our todo widgets are $title $date and $time")
     }
 
     // This function will help us check if the texts are empty and then proceed to add them to the database

@@ -2,7 +2,6 @@ package com.bignerdranch.android.to_dolist.fragments.list
 
 import android.annotation.SuppressLint
 import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -15,11 +14,9 @@ import com.bignerdranch.android.to_dolist.model.Todo
 import java.text.SimpleDateFormat
 import java.util.*
 
-private const val TAG = "ListAdapter"
 
 class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     private var todoList = emptyList<Todo>()
-    private var todo = Todo()
 
 
     // will toggle strikeThrough on the Task title
@@ -30,7 +27,6 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
             tvTaskTitle.paintFlags = tvTaskTitle.paintFlags and STRIKE_THRU_TEXT_FLAG.inv()
         }
     }
-
 
     inner class TodoViewHolder(val binding : CustomRowBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -59,18 +55,8 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
             binding.cbTask.setOnCheckedChangeListener { _, isChecked ->
                 toggleStrikeThrough(binding.tvTaskTitle, isChecked)
                 todo.todoCheckBox = !todo.todoCheckBox
-
-                taskCheck(todoList as MutableList<Todo>)
             }
         }
-    }
-
-    private fun taskCheck(todo : List<Todo>) {
-        val test = todo.filter { it.todoCheckBox }
-        // second method
-//        listFragment.selectedTodos = finishedTodos.toTypedArray()
-
-//        Log.i(TAG, "Our ${test.size}")
     }
 
 
