@@ -156,7 +156,7 @@ class AddFragment : Fragment() {
     private fun inputCheck(title : String, date: String, time: String) : Boolean {
 
         // will return false if fields in TextUtils are empty and true if not
-        return !(TextUtils.isEmpty(title) && TextUtils.isEmpty(date) && time.isEmpty())
+        return !(TextUtils.isEmpty(title) || TextUtils.isEmpty(date) || time.isEmpty())
     }
 
     override fun onDestroy() {
