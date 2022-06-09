@@ -141,14 +141,10 @@ class AddFragment : Fragment() {
             // This will make a toast saying Successfully added task if we add a task
             Toast.makeText(requireContext(), R.string.task_add_toast, Toast.LENGTH_LONG).show()
 
-            // FIXME: There is a bug here that allows the user to add Todos even when some OR all of the fields are empty.
-            // FIXME: It has to do with updateTime and updateDate functions I think, so I will try to fix it but maybe not now.
-
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
         } else {
             Toast.makeText(requireContext(), R.string.no_task_add_toast, Toast.LENGTH_LONG).show()
         }
-        Log.d(TAG, "Our todo widgets are $title $date and $time")
     }
 
     // This function will help us check if the texts are empty and then proceed to add them to the database

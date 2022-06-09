@@ -18,6 +18,8 @@ import java.util.*
 class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     private var todoList = emptyList<Todo>()
 
+    // TODO - WHEN I COME BACK, I WILL TEST THE WHAT I HAVE DONE SO FAR IN THE DESIGN AND CONTINUE DESIGNING.
+
 
     // will toggle strikeThrough on the Task title
     private fun toggleStrikeThrough(tvTaskTitle : TextView, cbTask : Boolean) {

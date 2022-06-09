@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="6dp"
@@ -10,17 +11,31 @@
     android:paddingBottom="16sp"
     android:paddingEnd="2sp">
 
+    <CheckBox
+        android:id="@+id/cbTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:minWidth="38dp"
+        android:minHeight="48dp"
+        app:buttonTint="@android:color/holo_blue_light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
+
+
     <TextView
         android:id="@+id/tvTaskTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
         android:fontFamily="sans-serif-light"
         android:text="@string/tvTaskTitle"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/cbTask"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cbTask"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -36,6 +51,17 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle" />
 
     <TextView
+        android:id="@+id/date_comma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text=","
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle"
+        tools:layout_editor_absoluteX="16dp"
+        app:layout_constraintStart_toEndOf="@+id/tvTaskDate" />
+
+    <TextView
         android:id="@+id/tvTaskTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,24 +71,14 @@
         android:text="@string/tvTaskTime"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvTaskDate"
-        app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle"
+        app:layout_constraintStart_toEndOf="@+id/date_comma"/>
 
-    <CheckBox
-        android:id="@+id/cbTask"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        app:buttonTint="@android:color/holo_blue_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
-        android:layout_height="16dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
         android:layout_marginTop="6dp"
         android:fontFamily="sans-serif-thin"
@@ -76,11 +92,12 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
         android:layout_marginTop="6dp"
-        android:text="Created: "
-        android:textColor="@color/black"
         android:fontFamily="sans-serif-thin"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle"
+        tools:text="Created: " />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
