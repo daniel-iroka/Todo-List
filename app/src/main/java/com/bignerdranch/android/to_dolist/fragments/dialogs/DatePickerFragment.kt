@@ -33,7 +33,7 @@ class DatePickerFragment : DialogFragment() {
         val initialMonth = calender.get(Calendar.MONTH)
         val initialDay = calender.get(Calendar.DAY_OF_MONTH)
 
-        // The DatePickerDialog prompts the user to select a date or time for each Todo or Task
+        // The DatePickerDialog prompts the user to select a date or time for each _Todo or Task
         return DatePickerDialog(
             requireContext(),
             dateListener,

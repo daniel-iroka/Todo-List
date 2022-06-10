@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.ToDoList" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/holo_light_blue</item>
-        <item name="colorPrimaryVariant">@color/holo_light_blue_dark</item>
+        <item name="colorPrimary">@color/holo_light_blue_dark</item>
+        <item name="colorPrimaryVariant">@color/holo_light_blue_darker</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>

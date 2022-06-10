@@ -11,4 +11,5 @@
     <!-- Our custom colors -->
     <color name="holo_light_blue">#33B5E5</color>
     <color name="holo_light_blue_dark">#247EA0</color>
+    <color name="holo_light_blue_darker">#1B5D77</color>
 </resources>

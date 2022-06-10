@@ -97,7 +97,7 @@
         android:contentDescription="@string/yes_check_content_description"
         android:focusable="true"
         android:src="@drawable/ic_check_yes"
-        app:backgroundTint="@android:color/holo_blue_light"
+        app:backgroundTint="@color/holo_light_blue_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@android:color/white" />

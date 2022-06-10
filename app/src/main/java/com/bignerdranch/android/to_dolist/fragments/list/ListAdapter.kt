@@ -18,7 +18,8 @@ import java.util.*
 class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     private var todoList = emptyList<Todo>()
 
-    // TODO - WHEN I COME BACK, I WILL TEST THE WHAT I HAVE DONE SO FAR IN THE DESIGN AND CONTINUE DESIGNING.
+    // TODO - WHEN I COME BACK, FIRST THING I WILL DO IS ADD BORDER AROUND EACH TASK AND ADD AN EDIT BUTTON
+    // TODO - AFTER I DO ALL THIS, I MAY ALSO CHANGE THE
 
 
     // will toggle strikeThrough on the Task title
