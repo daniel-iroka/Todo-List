@@ -30,14 +30,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
         android:fontFamily="sans-serif-light"
         android:text="@string/tvTaskTitle"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintStart_toEndOf="@+id/cbTask"
         app:layout_constraintTop_toTopOf="parent" />
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
 
     <TextView
         android:id="@+id/tvTaskDate"
@@ -102,5 +103,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle"
         android:text="Created: " />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_edit_custom"
+        app:tint="@color/holo_light_blue_dark" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

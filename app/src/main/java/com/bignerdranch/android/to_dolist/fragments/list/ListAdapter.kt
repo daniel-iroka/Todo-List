@@ -18,8 +18,8 @@ import java.util.*
 class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     private var todoList = emptyList<Todo>()
 
-    // TODO - WHEN I COME BACK, FIRST THING I WILL DO IS ADD BORDER AROUND EACH TASK AND ADD AN EDIT BUTTON
-    // TODO - AFTER I DO ALL THIS, I MAY ALSO CHANGE THE
+    // TODO - WHEN I COME BACK, FIRST THING I WILL DO IS ADD BORDER AROUND EACH TASK
+    // TODO - AFTER I DO ALL THIS, I MAY ALSO CHANGE THE COLOR OF THE ACTIVITY ITSELF AND SO ON... THANK YOU AND SEE YOU LATER...
 
 
     // will toggle strikeThrough on the Task title
