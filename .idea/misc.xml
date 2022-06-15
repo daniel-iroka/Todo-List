@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/background.xml" value="0.188" />
         <entry key="app/src/main/res/font/custom_font.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/font/font.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/font/fonts.xml" value="0.22447916666666667" />

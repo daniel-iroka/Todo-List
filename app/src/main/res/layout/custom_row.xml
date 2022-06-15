@@ -9,7 +9,9 @@
     android:paddingStart="16sp"
     android:paddingTop="16sp"
     android:paddingBottom="16sp"
-    android:paddingEnd="2sp">
+    android:paddingEnd="2sp"
+    android:layout_marginTop="6sp"
+    android:background="@drawable/background">
 
     <CheckBox
         android:id="@+id/cbTask"
@@ -38,7 +40,6 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintStart_toEndOf="@+id/cbTask"
         app:layout_constraintTop_toTopOf="parent" />
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
 
     <TextView
         android:id="@+id/tvTaskDate"
