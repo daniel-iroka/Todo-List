@@ -6,6 +6,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.bignerdranch.android.to_dolist.databinding.ActivityMainBinding
 
+// Our MainActivity
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
 
