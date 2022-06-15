@@ -12,4 +12,6 @@
     <color name="holo_light_blue">#33B5E5</color>
     <color name="holo_light_blue_dark">#247EA0</color>
     <color name="holo_light_blue_darker">#1B5D77</color>
+    <color name="temp_test">#17000000</color>
+
 </resources>

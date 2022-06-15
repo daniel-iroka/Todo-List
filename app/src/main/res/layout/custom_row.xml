@@ -11,13 +11,13 @@
     android:paddingBottom="16sp"
     android:paddingEnd="2sp"
     android:layout_marginTop="6sp"
-    android:background="@drawable/background">
+    android:background="@drawable/background" >
 
     <CheckBox
         android:id="@+id/cbTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:minWidth="38dp"
         android:minHeight="48dp"
         app:buttonTint="@color/holo_light_blue_dark"
@@ -25,13 +25,12 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
 
-
     <TextView
         android:id="@+id/tvTaskTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-light"
         android:text="@string/tvTaskTitle"
         android:textSize="16sp"
@@ -46,6 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
+        android:layout_marginBottom="4dp"
         android:fontFamily="sans-serif-thin"
         android:text="@string/tvTaskDate"
         android:textColor="@color/black"
@@ -72,12 +72,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="6dp"
+        android:layout_marginBottom="4dp"
         android:fontFamily="sans-serif-thin"
         android:text="@string/tvTaskTime"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle"
-        app:layout_constraintStart_toEndOf="@+id/date_comma"/>
+        app:layout_constraintStart_toEndOf="@+id/date_comma"
+        app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle" />
 
 
     <TextView
@@ -86,6 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
         android:layout_marginTop="6dp"
+        android:layout_marginBottom="4dp"
         android:fontFamily="sans-serif-thin"
         android:text="@string/am"
         android:textColor="@color/black"
@@ -99,18 +101,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
         android:layout_marginTop="6dp"
+        android:layout_marginBottom="4dp"
         android:fontFamily="sans-serif-thin"
+        android:text="Created: "
         android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle"
-        android:text="Created: " />
+        app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="37dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="51dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_edit_custom"
