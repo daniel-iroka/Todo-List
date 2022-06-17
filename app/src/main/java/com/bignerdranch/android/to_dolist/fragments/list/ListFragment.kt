@@ -104,7 +104,7 @@ class ListFragment : Fragment() {
             finishedTodos.forEach { todos ->
                 mTodoViewModel.deleteSelectedTasks(todos.id.toLong())
             }
-            Toast.makeText(requireContext(), "Task successfully deleted!", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "Selected tasks successfully deleted!", Toast.LENGTH_LONG).show()
         }
         builder.setNegativeButton("No") {_,_-> }
         builder.setTitle("Confirm Deletion")
