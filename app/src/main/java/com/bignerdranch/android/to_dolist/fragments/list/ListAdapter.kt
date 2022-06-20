@@ -19,6 +19,7 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     private var todoList = emptyList<Todo>()
 
     // TODO - WHEN I COME BACK, I WILL TRY TO SEE IF I CAN IMPROVE THE LOOKS OF THE NOTIFICATION ITEM AFTER RUNNING THE APP AND THEN KNOW WHAT TO DO AFTER THAT.
+    // TODO - AND AFTER THAT I WILL ALSO IMPLEMENT THE SEARCH AND SORT FEATURE AS WELL AS THE HIDE COMPLETED FEATURE
 
 
     // will toggle strikeThrough on the Task title
