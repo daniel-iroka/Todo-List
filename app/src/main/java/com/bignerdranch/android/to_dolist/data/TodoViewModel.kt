@@ -3,10 +3,12 @@ package com.bignerdranch.android.to_dolist.data
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.bignerdranch.android.to_dolist.model.Todo
 import com.bignerdranch.android.to_dolist.repository.TodoRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 /** Our AndroidViewModel. This AndroidViewModel holds reference to our Application context. **/
@@ -46,4 +48,23 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
             repository.delAllTasks()
         }
     }
+
+    fun searchDatabase(queryText : String) : LiveData<List<Todo>> {
+        return repository.searchDatabase(queryText).asLiveData()
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -18,7 +19,7 @@ import com.bignerdranch.android.to_dolist.model.Todo
 
 private const val TAG = "ListFragment"
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     private var _binding : FragmentListBinding? = null
     private val binding get() = _binding!!
     lateinit var mTodoViewModel: TodoViewModel
@@ -63,6 +64,39 @@ class ListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.fragment_list, menu)
+
+        val search = menu.findItem(R.id.todo_search)
+        val searchView = search?.actionView as? SearchView  // pulling the SearchView 'object' from our menu_item which is a searchView
+        searchView?.isSubmitButtonEnabled = true
+
+        searchView?.setOnQueryTextListener(this)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if(query != null) {
+            searchDatabase(query)
+        }
+
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        if(newText != null) {
+            searchDatabase(newText)
+        }
+
+        return true
+    }
+
+    private fun searchDatabase(queryText : String) {
+        // The reason we add this %% here is because that is what our custom Query in our database requires our value to be passed, so that is how we format it
+        val searchQuery = "%$queryText%"
+
+        mTodoViewModel.searchDatabase(searchQuery).observe(this) { List ->
+            List.let { todo ->
+                adapter.setData(todo)
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
