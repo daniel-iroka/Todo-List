@@ -18,7 +18,9 @@ import java.util.*
 class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
     private var todoList = emptyList<Todo>()
 
-    // TODO - WHEN I COME BACK, I WILL IMPLEMENT THE HIDE AND SORT FEATURE AND MAYBE ADD AN ADDITIONAL OVERVIEW ACTION THAT SAYS "About"
+
+    // TODO - FIRSTLY, WHEN I COME BACK I WILL FIX THIS SORT, SEARCH AND HIDE, AT LEAST TRY LMAO
+    // TODO - WHEN I COME BACK, I WILL MAYBE ADD AN ADDITIONAL OVERVIEW ACTION THAT SAYS "About"
 
 
     // will toggle strikeThrough on the Task title

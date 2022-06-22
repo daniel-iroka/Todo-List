@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.to_dolist.databinding.FragmentListBinding
 import com.bignerdranch.android.to_dolist.R
+import com.bignerdranch.android.to_dolist.data.SortOrder
 import com.bignerdranch.android.to_dolist.data.TodoViewModel
 import com.bignerdranch.android.to_dolist.model.Todo
 
@@ -73,9 +74,6 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        if(query != null) {
-            searchDatabase(query)
-        }
 
         return true
     }
@@ -99,6 +97,22 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         }
     }
 
+    private fun sortByName() {
+        mTodoViewModel.readAllDataByName().observe(this) { List ->
+            List.let { todo ->
+                adapter.setData(todo)
+            }
+        }
+    }
+
+    private fun sortByDate() {
+        mTodoViewModel.readAllDataByDateCreated().observe(this) { List ->
+            List.let { todo ->
+                adapter.setData(todo)
+            }
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId)  {
             R.id.del_selected_tasks -> {
@@ -108,6 +122,24 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
             R.id.del_all_tasks -> {
                 deleteAllTasks()
+                true
+            }
+
+            R.id.sort_by_date -> {
+//                mTodoViewModel.readAllDataByDateCreated()
+                sortByDate()
+                true
+            }
+
+            R.id.sort_by_name -> {
+//                mTodoViewModel.sortOrder.value = SortOrder.BY_NAME
+                sortByName()
+                true
+            }
+
+            R.id.todo_hide_completed -> {
+                item.isChecked = !item.isChecked
+                mTodoViewModel.hideCompleted.value = item.isChecked
                 true
             }
             else -> super.onOptionsItemSelected(item)

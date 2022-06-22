@@ -19,6 +19,7 @@ interface TodoDao {
     @Query("SELECT * FROM todo_table ORDER BY id ASC")
     fun readAllData() : LiveData<List<Todo>>
 
+
     @Query("DELETE FROM todo_table WHERE id IN (:idList)")
     suspend fun deleteSelectedTasks(idList : Long)
 
@@ -27,4 +28,22 @@ interface TodoDao {
 
     @Query("SELECT * FROM todo_table WHERE title LIKE :queryText ")
     fun searchDatabase(queryText : String): Flow<List<Todo>>
+
+
+    @Query("SELECT * FROM todo_table ORDER BY title")
+    fun readAllDataByName() : Flow<List<Todo>>
+
+    @Query("SELECT * FROM todo_table ORDER BY time")
+    fun readAllDataByDateCreated() : Flow<List<Todo>>
 }
+
+
+
+
+
+
+
+
+
+
+

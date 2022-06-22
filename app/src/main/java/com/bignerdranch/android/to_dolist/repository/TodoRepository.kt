@@ -28,4 +28,12 @@ class TodoRepository(private val todoDao : TodoDao) {
     fun searchDatabase(queryText : String) : Flow<List<Todo>> {
         return todoDao.searchDatabase(queryText)
     }
+
+    fun readAllDataByDateCreated() : Flow<List<Todo>> {
+        return todoDao.readAllDataByDateCreated()
+    }
+
+    fun readAllDataByName() : Flow<List<Todo>> {
+        return todoDao.readAllDataByName()
+    }
 }
