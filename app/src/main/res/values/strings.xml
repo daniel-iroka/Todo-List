@@ -12,12 +12,11 @@
     <string name="tvTaskTitle">Task Title</string>
     <string name="tvTaskDate">Task Date</string>
     <string name="tvTaskTime">Task Time</string>
-    <string name="am">AM</string>
     <string name="delete_all_selected_tasks">Delete all selected tasks</string>
     <string name="delete_all_tasks">Delete all tasks</string>
     <string name="todo_search">Search</string>
     <string name="todo_sort">Sort</string>
     <string name="sort_by_name_text">Sort by name</string>
-    <string name="sort_by_date_text">Sort by date</string>
+    <string name="sort_by_date_text">Sort by date created</string>
     <string name="hide_completed">Hide Completed</string>
 </resources>

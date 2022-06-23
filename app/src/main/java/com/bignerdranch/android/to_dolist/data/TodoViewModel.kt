@@ -1,13 +1,12 @@
 package com.bignerdranch.android.to_dolist.data
 
 import android.app.Application
-import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.*
 import com.bignerdranch.android.to_dolist.model.Todo
 import com.bignerdranch.android.to_dolist.repository.TodoRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 
@@ -21,11 +20,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
      **/
 
     private val repository : TodoRepository
-
-    val sortOrder = MutableStateFlow(SortOrder.BY_DATE) // we're adding BY_DATE here because we want the tasks to be sorted by date by default
-    val hideCompleted = MutableStateFlow(false)
-
-//    val searchQuery = MutableStateFlow("")
+    private val userDao = TodoDatabase.getDatabase(application).todoDao()
 
     init {
         // having access to our TodoDao from our database
@@ -33,11 +28,29 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         repository = TodoRepository(userDao)
     }
 
-//    private val tasksFlow = searchQuery.flatMapLatest {
-//        repository.searchDatabase(it)
-//    }
 
-//    val tasks = tasksFlow.asLiveData()
+    val searchQuery = MutableStateFlow("")
+    val sortOrder = MutableStateFlow(SortOrder.BY_DATE) // adding BY_DATE to make the lists sorted by date as default
+    val hideCompleted = MutableStateFlow(false)
+
+
+    /**
+     *  The combine function here is a an object in the flow library that is used too combine the most recent values of a flow, so if one value changes it will
+     *  automatically return the latest values of the other flows. This is done so that the three flows will work in harmony.
+     */
+    private val tasksFlow = combine(
+        searchQuery,
+        sortOrder,
+        hideCompleted
+    ) { searchQuery, sortOrder, hideCompleted -> // LAMBDA
+        Triple(searchQuery, sortOrder, hideCompleted)
+        // flatMapLatest gets triggered when any of this flows changes and then passes it to the query to be executed.
+    }.flatMapLatest { (searchQuery, sortOrder, hideCompleted) ->
+        userDao.getAllTasks(searchQuery, sortOrder, hideCompleted)
+
+    }
+
+    val tasks = tasksFlow.asLiveData()
 
 
     // All functions using coroutines objects indicates that whatever is in it should run in a background thread
@@ -57,18 +70,6 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.delAllTasks()
         }
-    }
-
-    fun searchDatabase(queryText : String) : LiveData<List<Todo>> {
-        return repository.searchDatabase(queryText).asLiveData()
-    }
-
-    fun readAllDataByDateCreated() : LiveData<List<Todo>> {
-        return repository.readAllDataByDateCreated().asLiveData()
-    }
-
-    fun readAllDataByName() : LiveData<List<Todo>> {
-        return repository.readAllDataByName().asLiveData()
     }
 }
 

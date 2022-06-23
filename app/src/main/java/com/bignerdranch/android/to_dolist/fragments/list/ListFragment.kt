@@ -14,12 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.to_dolist.databinding.FragmentListBinding
 import com.bignerdranch.android.to_dolist.R
+import com.bignerdranch.android.to_dolist.data.SortOrder
 import com.bignerdranch.android.to_dolist.data.TodoViewModel
 import com.bignerdranch.android.to_dolist.model.Todo
+import com.bignerdranch.android.to_dolist.utils.onQueryTextChanged
 
 private const val TAG = "ListFragment"
 
-class ListFragment : Fragment(), SearchView.OnQueryTextListener {
+class ListFragment : Fragment() {
     private var _binding : FragmentListBinding? = null
     private val binding get() = _binding!!
     lateinit var mTodoViewModel: TodoViewModel
@@ -36,7 +38,7 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         // Inflate the layout for this fragment with ViewBinding style
         _binding = FragmentListBinding.inflate(inflater, container, false)
 
-        // this tells our activity/fragment that we have a menu_item it should respond to.
+        // this tells our activity/fragment that we have a menu_item it should respond to it.
         setHasOptionsMenu(true)
 
         recyclerView = binding.recyclerViewTodo
@@ -49,12 +51,10 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
          */
         // TodoViewModel
         mTodoViewModel = ViewModelProvider(this)[TodoViewModel::class.java]
-        mTodoViewModel.readAllData.observe(viewLifecycleOwner) { todos ->
+        mTodoViewModel.tasks.observe(viewLifecycleOwner) { todos ->
             adapter.setData(todos)
             todosList = todos
         }
-
-
 
         // Add Task Button
         binding.fbAdd.setOnClickListener {
@@ -63,61 +63,38 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         return binding.root
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.fragment_list, menu)
 
         val search = menu.findItem(R.id.todo_search)
         val searchView = search.actionView as SearchView
 
-        searchView.setOnQueryTextListener(this)
-
-    }
-
-
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        return true
-    }
-
-    override fun onQueryTextChange(newText: String?): Boolean {
-        if (newText != null) {
-//            mTodoViewModel.searchQuery.value = newText
-            searchDatabase(newText)
+        searchView.onQueryTextChanged { querySearch ->
+            mTodoViewModel.searchQuery.value = querySearch
         }
-        return true
+
     }
-
-    private fun searchDatabase(queryText : String) {
-        // The reason we add this %% here is because that is what our custom Query in our database requires our value to be passed, so that is how we format it
-        val searchQuery = "%$queryText%"
-
-        mTodoViewModel.searchDatabase(searchQuery).observe(this) { List ->
-            List.let { todo ->
-                adapter.setData(todo)
-            }
-        }
-    }
-
-    private fun sortByName() {
-        mTodoViewModel.readAllDataByName().observe(this) { List ->
-            List.let { todo ->
-                adapter.setData(todo)
-            }
-        }
-    }
-
-    private fun sortByDate() {
-        mTodoViewModel.readAllDataByDateCreated().observe(this) { List ->
-            List.let { todo ->
-                adapter.setData(todo)
-            }
-        }
-    }
-
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId)  {
+            R.id.sort_by_name -> {
+                mTodoViewModel.sortOrder.value = SortOrder.BY_NAME
+                true
+            }
+
+            R.id.sort_by_date -> {
+                mTodoViewModel.sortOrder.value = SortOrder.BY_DATE
+                true
+            }
+
+            R.id.todo_hide_completed -> {
+                item.isChecked = !item.isChecked
+                mTodoViewModel.hideCompleted.value = item.isChecked
+                true
+                // TODO - WHEN I COME BACK, I WILL DEBUG THIS.
+            }
+
             R.id.del_selected_tasks -> {
                 deleteSelectedUsers()
                  true
@@ -128,23 +105,6 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
                 true
             }
 
-            R.id.sort_by_date -> {
-//                mTodoViewModel.readAllDataByDateCreated()
-                sortByDate()
-                true
-            }
-
-            R.id.sort_by_name -> {
-//                mTodoViewModel.sortOrder.value = SortOrder.BY_NAME
-                sortByName()
-                true
-            }
-
-            R.id.todo_hide_completed -> {
-                item.isChecked = !item.isChecked
-                mTodoViewModel.hideCompleted.value = item.isChecked
-                true
-            }
             else -> super.onOptionsItemSelected(item)
         }
     }

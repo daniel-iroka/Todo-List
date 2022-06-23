@@ -9,13 +9,13 @@
         android:title="@string/todo_search"
         android:icon="@drawable/ic_todo_search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView"
+        app:showAsAction="always|collapseActionView"
         app:iconTint="@android:color/white"/>
 
     <!-- Sub-menu for our Sort menu_item -->
 
     <item
-        android:title="@string/todo_sort"
+        android:title= "@string/todo_sort"
         app:showAsAction="always"
         android:icon="@drawable/ic_todo_sort"
         app:iconTint="@android:color/white">
