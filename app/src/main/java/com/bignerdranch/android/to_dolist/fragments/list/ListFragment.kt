@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.to_dolist.databinding.FragmentListBinding
 import com.bignerdranch.android.to_dolist.R
-import com.bignerdranch.android.to_dolist.data.SortOrder
 import com.bignerdranch.android.to_dolist.data.TodoViewModel
 import com.bignerdranch.android.to_dolist.model.Todo
 
@@ -55,6 +54,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
             todosList = todos
         }
 
+
+
         // Add Task Button
         binding.fbAdd.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
@@ -67,22 +68,22 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
         inflater.inflate(R.menu.fragment_list, menu)
 
         val search = menu.findItem(R.id.todo_search)
-        val searchView = search?.actionView as? SearchView  // pulling the SearchView 'object' from our menu_item which is a searchView
-        searchView?.isSubmitButtonEnabled = true
+        val searchView = search.actionView as SearchView
 
-        searchView?.setOnQueryTextListener(this)
+        searchView.setOnQueryTextListener(this)
+
     }
 
-    override fun onQueryTextSubmit(query: String?): Boolean {
 
+    override fun onQueryTextSubmit(query: String?): Boolean {
         return true
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        if(newText != null) {
+        if (newText != null) {
+//            mTodoViewModel.searchQuery.value = newText
             searchDatabase(newText)
         }
-
         return true
     }
 
@@ -112,6 +113,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
             }
         }
     }
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId)  {

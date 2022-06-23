@@ -8,6 +8,7 @@ import com.bignerdranch.android.to_dolist.repository.TodoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 
 /** Our AndroidViewModel. This AndroidViewModel holds reference to our Application context. **/
@@ -19,18 +20,25 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
      *  Application context. And if I remember correctly, it will start as the "Application" starts.
      **/
 
-    val readAllData : LiveData<List<Todo>>
     private val repository : TodoRepository
 
     val sortOrder = MutableStateFlow(SortOrder.BY_DATE) // we're adding BY_DATE here because we want the tasks to be sorted by date by default
     val hideCompleted = MutableStateFlow(false)
 
+//    val searchQuery = MutableStateFlow("")
+
     init {
         // having access to our TodoDao from our database
         val userDao = TodoDatabase.getDatabase(application).todoDao()
         repository = TodoRepository(userDao)
-        readAllData = repository.readAllData
     }
+
+//    private val tasksFlow = searchQuery.flatMapLatest {
+//        repository.searchDatabase(it)
+//    }
+
+//    val tasks = tasksFlow.asLiveData()
+
 
     // All functions using coroutines objects indicates that whatever is in it should run in a background thread
     fun addTodo(todo : Todo) {

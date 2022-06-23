@@ -1,6 +1,5 @@
 package com.bignerdranch.android.to_dolist.repository
 
-import androidx.lifecycle.LiveData
 import com.bignerdranch.android.to_dolist.data.TodoDao
 import com.bignerdranch.android.to_dolist.model.Todo
 import kotlinx.coroutines.flow.Flow
@@ -10,8 +9,6 @@ import kotlinx.coroutines.flow.Flow
  */
 
 class TodoRepository(private val todoDao : TodoDao) {
-
-    val readAllData : LiveData<List<Todo>> = todoDao.readAllData()
 
     suspend fun addTodo(todo : Todo) {
         todoDao.addTodo(todo)

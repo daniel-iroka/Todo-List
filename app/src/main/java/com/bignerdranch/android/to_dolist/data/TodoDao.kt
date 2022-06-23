@@ -16,8 +16,9 @@ interface TodoDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addTodo(todo: Todo)
 
-    @Query("SELECT * FROM todo_table ORDER BY id ASC")
-    fun readAllData() : LiveData<List<Todo>>
+
+    @Query("SELECT * FROM todo_table WHERE title LIKE '%' || :searchQueryText || '%'  ORDER BY id ASC")
+    fun getAllTasks(searchQueryText : String): Flow<List<Todo>>
 
 
     @Query("DELETE FROM todo_table WHERE id IN (:idList)")
@@ -26,8 +27,6 @@ interface TodoDao {
     @Query("DELETE FROM todo_table")
     suspend fun deleteAllTasks()
 
-    @Query("SELECT * FROM todo_table WHERE title LIKE :queryText ")
-    fun searchDatabase(queryText : String): Flow<List<Todo>>
 
 
     @Query("SELECT * FROM todo_table ORDER BY title")
