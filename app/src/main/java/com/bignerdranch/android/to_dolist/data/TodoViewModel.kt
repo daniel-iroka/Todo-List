@@ -42,11 +42,11 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         searchQuery,
         sortOrder,
         hideCompleted
-    ) { searchQuery, sortOrder, hideCompleted -> // LAMBDA
-        Triple(searchQuery, sortOrder, hideCompleted)
+    ) { query, sortOrder, hideCompleted -> // LAMBDA
+        Triple(query, sortOrder, hideCompleted)
         // flatMapLatest gets triggered when any of this flows changes and then passes it to the query to be executed.
-    }.flatMapLatest { (searchQuery, sortOrder, hideCompleted) ->
-        userDao.getAllTasks(searchQuery, sortOrder, hideCompleted)
+    }.flatMapLatest { (query, sortOrder, hideCompleted) ->
+        userDao.getAllTasks(query, sortOrder, hideCompleted)
 
     }
 

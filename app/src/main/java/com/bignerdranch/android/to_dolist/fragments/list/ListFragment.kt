@@ -92,7 +92,6 @@ class ListFragment : Fragment() {
                 item.isChecked = !item.isChecked
                 mTodoViewModel.hideCompleted.value = item.isChecked
                 true
-                // TODO - WHEN I COME BACK, I WILL DEBUG THIS.
             }
 
             R.id.del_selected_tasks -> {

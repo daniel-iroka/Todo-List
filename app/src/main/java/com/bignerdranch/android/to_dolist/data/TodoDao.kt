@@ -18,10 +18,12 @@ interface TodoDao {
             SortOrder.BY_NAME -> getTasksSortedByName(query, hideCompleted)
         }
 
-    @Query("SELECT * FROM todo_table WHERE (todoCheckBox != :hideCompleted ) AND title LIKE '%' || :searchQueryText || '%'  ORDER BY title COLLATE NOCASE")
+    // TODO - WHEN I COME BACK I WILL TRY TO FIX THE BUG THAT DOSEN'T ALLOW ME TO HIDE THE TASKS IN MY DATABASE
+
+    @Query("SELECT * FROM todo_table WHERE (todoCheckBox != :hideCompleted OR todoCheckBox = 0) AND title LIKE '%' || :searchQueryText || '%'  ORDER BY title COLLATE NOCASE")
     fun getTasksSortedByName(searchQueryText : String, hideCompleted : Boolean): Flow<List<Todo>>
 
-    @Query("SELECT * FROM todo_table WHERE (todoCheckBox != :hideCompleted  ) AND title LIKE '%' || :searchQueryText || '%'  ORDER BY time ASC")
+    @Query("SELECT * FROM todo_table WHERE (todoCheckBox != :hideCompleted OR todoCheckBox = 0) AND title LIKE '%' || :searchQueryText || '%'  ORDER BY time ASC")
     fun getTasksSortedByDateCreated(searchQueryText : String, hideCompleted : Boolean): Flow<List<Todo>>
 
     // onConflict will ignore any known conflicts, in this case will remove duplicate "Todos" with the same name
