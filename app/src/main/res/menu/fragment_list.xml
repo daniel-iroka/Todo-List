@@ -33,7 +33,7 @@
     </item>
 
     <item
-        android:id="@+id/todo_hide_completed"
+        android:id="@+id/action_hide_completed_tasks"
         android:checkable="true"
         android:title="@string/hide_completed"
         app:showAsAction="never"/>

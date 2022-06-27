@@ -63,6 +63,7 @@ class ListFragment : Fragment() {
         return binding.root
     }
 
+    // TODO - WHEN I COME BACK, I WILL CONTINUE FIXING THIS BUG THAT IS MAKING MY LIFE MISERABLE
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.fragment_list, menu)
 
@@ -72,7 +73,6 @@ class ListFragment : Fragment() {
         searchView.onQueryTextChanged { querySearch ->
             mTodoViewModel.searchQuery.value = querySearch
         }
-
     }
 
 
@@ -88,9 +88,10 @@ class ListFragment : Fragment() {
                 true
             }
 
-            R.id.todo_hide_completed -> {
+            R.id.action_hide_completed_tasks -> {
                 item.isChecked = !item.isChecked
                 mTodoViewModel.hideCompleted.value = item.isChecked
+                Log.i(TAG, "Our current isChecked status is ${item.isChecked}")
                 true
             }
 

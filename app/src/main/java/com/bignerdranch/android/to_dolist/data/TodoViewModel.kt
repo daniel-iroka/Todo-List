@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.bignerdranch.android.to_dolist.model.Todo
 import com.bignerdranch.android.to_dolist.repository.TodoRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
@@ -30,7 +31,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
 
     val searchQuery = MutableStateFlow("")
-    val sortOrder = MutableStateFlow(SortOrder.BY_DATE) // adding BY_DATE to make the lists sorted by date as default
+    val sortOrder = MutableStateFlow(SortOrder.BY_DATE)   // adding BY_DATE to make the lists sorted by date as default
     val hideCompleted = MutableStateFlow(false)
 
 
@@ -38,6 +39,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
      *  The combine function here is a an object in the flow library that is used too combine the most recent values of a flow, so if one value changes it will
      *  automatically return the latest values of the other flows. This is done so that the three flows will work in harmony.
      */
+    @OptIn(ExperimentalCoroutinesApi::class)
     private val tasksFlow = combine(
         searchQuery,
         sortOrder,
@@ -47,7 +49,6 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         // flatMapLatest gets triggered when any of this flows changes and then passes it to the query to be executed.
     }.flatMapLatest { (query, sortOrder, hideCompleted) ->
         userDao.getAllTasks(query, sortOrder, hideCompleted)
-
     }
 
     val tasks = tasksFlow.asLiveData()
