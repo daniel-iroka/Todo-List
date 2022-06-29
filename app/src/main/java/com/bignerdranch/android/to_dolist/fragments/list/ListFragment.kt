@@ -26,8 +26,9 @@ class ListFragment : Fragment() {
     private val binding get() = _binding!!
     lateinit var mTodoViewModel: TodoViewModel
     private lateinit var recyclerView: RecyclerView
-    private val adapter = ListAdapter()  // getting reference to our ListAdapter
+    private val adapter = TodoAdapter()  // getting reference to our TodoAdapter
     private var todosList = emptyList<Todo>()
+    private var todo = Todo()
 
 
     override fun onCreateView(
@@ -56,6 +57,7 @@ class ListFragment : Fragment() {
             todosList = todos
         }
 
+
         // Add Task Button
         binding.fbAdd.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
@@ -63,7 +65,6 @@ class ListFragment : Fragment() {
         return binding.root
     }
 
-    // TODO - WHEN I COME BACK, I WILL CONTINUE FIXING THIS BUG THAT IS MAKING MY LIFE MISERABLE
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.fragment_list, menu)
 
@@ -92,6 +93,7 @@ class ListFragment : Fragment() {
                 item.isChecked = !item.isChecked
                 mTodoViewModel.hideCompleted.value = item.isChecked
                 Log.i(TAG, "Our current isChecked status is ${item.isChecked}")
+                Log.i(TAG, "Our todoCheckBox is ${todo.todoCheckBox}")
                 true
             }
 

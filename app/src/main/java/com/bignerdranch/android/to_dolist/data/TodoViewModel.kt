@@ -72,6 +72,12 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
             repository.delAllTasks()
         }
     }
+
+    fun updateTask(todo : Todo) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateTask(todo)
+        }
+    }
 }
 
 enum class SortOrder { BY_DATE, BY_NAME }

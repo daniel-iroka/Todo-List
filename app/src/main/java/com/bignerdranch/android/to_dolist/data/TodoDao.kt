@@ -36,4 +36,7 @@ interface TodoDao {
     @Query("DELETE FROM todo_table")
     suspend fun deleteAllTasks()
 
+    @Update
+    suspend fun updateTask(todo : Todo)
+
 }

@@ -5,8 +5,9 @@ import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
+import androidx.recyclerview.widget.ListAdapter
 import com.bignerdranch.android.to_dolist.databinding.CustomRowBinding
 import com.bignerdranch.android.to_dolist.fragments.add.SIMPLE_DATE_FORMAT
 import com.bignerdranch.android.to_dolist.fragments.add.SIMPLE_TIME_FORMAT
@@ -15,12 +16,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
+class TodoAdapter: ListAdapter<Todo, TodoAdapter.TodoViewHolder>(DiffCallBack) {
     private var todoList = emptyList<Todo>()
-
-
-    // TODO - FIRSTLY, WHEN I COME BACK I WILL FIX THIS SORT, SEARCH AND HIDE, AT LEAST TRY LMAO
-    // TODO - WHEN I COME BACK, I WILL MAYBE ADD AN ADDITIONAL OVERVIEW ACTION THAT SAYS "About"
 
 
     // will toggle strikeThrough on the Task title
@@ -32,7 +29,18 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
         }
     }
 
-    inner class TodoViewHolder(val binding : CustomRowBinding) : RecyclerView.ViewHolder(binding.root)
+    // TODO - WHEN I COME BACK, I WILL TRY THE POTENTIAL SOLUTION.
+
+    inner class TodoViewHolder(val binding : CustomRowBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        // Todo - Maybe tomorrow, I will move the binding variables to the ViewHolder
+    }
+
+    interface OnItemClickListener {
+        // Todo - finish this tomorrow
+        fun onItemClick(todo : Todo)
+        fun onCheckBoxClick(todo: Todo, isChecked: Boolean)
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
@@ -63,6 +71,14 @@ class ListAdapter: Adapter<ListAdapter.TodoViewHolder>() {
         }
     }
 
+    // TODO - WHEN I COME BACK TOMORROW, I WILL TEST THIS TO SEE IF IT WORKS
+    object DiffCallBack : DiffUtil.ItemCallback<Todo>() {
+        override fun areItemsTheSame(oldItem: Todo, newItem: Todo) =
+            oldItem.id == newItem.id
+
+        override fun areContentsTheSame(oldItem: Todo, newItem: Todo) =
+            oldItem == newItem
+    }
 
     // as usual will return the size of the List
     override fun getItemCount() = todoList.size

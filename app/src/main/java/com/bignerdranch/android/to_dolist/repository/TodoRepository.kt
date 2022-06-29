@@ -21,4 +21,7 @@ class TodoRepository(private val todoDao : TodoDao) {
         todoDao.deleteAllTasks()
     }
 
+    suspend fun updateTask(todo : Todo) {
+        todoDao.updateTask(todo)
+    }
 }
