@@ -21,14 +21,13 @@ import com.bignerdranch.android.to_dolist.utils.onQueryTextChanged
 
 private const val TAG = "ListFragment"
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
     private var _binding : FragmentListBinding? = null
     private val binding get() = _binding!!
-    lateinit var mTodoViewModel: TodoViewModel
+    private lateinit var mTodoViewModel: TodoViewModel
     private lateinit var recyclerView: RecyclerView
-    private val adapter = TodoAdapter()  // getting reference to our TodoAdapter
+    private val adapter = TodoAdapter(this)
     private var todosList = emptyList<Todo>()
-    private var todo = Todo()
 
 
     override fun onCreateView(
@@ -45,7 +44,7 @@ class ListFragment : Fragment() {
         recyclerView = binding.recyclerViewTodo
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
+        recyclerView.setHasFixedSize(true)
 
         /**
          *  updates our recyclerView with the new "observed" changes in our database through our adapter
@@ -53,16 +52,23 @@ class ListFragment : Fragment() {
         // TodoViewModel
         mTodoViewModel = ViewModelProvider(this)[TodoViewModel::class.java]
         mTodoViewModel.tasks.observe(viewLifecycleOwner) { todos ->
-            adapter.setData(todos)
+            adapter.submitList(todos)
             todosList = todos
         }
-
 
         // Add Task Button
         binding.fbAdd.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_addFragment)
         }
         return binding.root
+    }
+
+    override fun onItemClick(todo: Todo) {
+        mTodoViewModel.onTaskSelected(todo)
+    }
+
+    override fun onCheckBoxClick(todo: Todo, isChecked: Boolean) {
+        mTodoViewModel.onTaskCheckedChanged(todo, isChecked)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -83,30 +89,23 @@ class ListFragment : Fragment() {
                 mTodoViewModel.sortOrder.value = SortOrder.BY_NAME
                 true
             }
-
             R.id.sort_by_date -> {
                 mTodoViewModel.sortOrder.value = SortOrder.BY_DATE
                 true
             }
-
             R.id.action_hide_completed_tasks -> {
                 item.isChecked = !item.isChecked
                 mTodoViewModel.hideCompleted.value = item.isChecked
-                Log.i(TAG, "Our current isChecked status is ${item.isChecked}")
-                Log.i(TAG, "Our todoCheckBox is ${todo.todoCheckBox}")
                 true
             }
-
             R.id.del_selected_tasks -> {
                 deleteSelectedUsers()
                  true
             }
-
             R.id.del_all_tasks -> {
                 deleteAllTasks()
                 true
             }
-
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -129,7 +128,7 @@ class ListFragment : Fragment() {
     private fun deleteSelectedUsers() {
         val builder = AlertDialog.Builder(requireContext())
         // Our todos that have been marked completed by the checkBox
-        val finishedTodos = todosList.filter { it.todoCheckBox }
+        val finishedTodos = todosList.filter { it.completed }
 
         builder.setPositiveButton("Yes") {_,_->
             finishedTodos.forEach { todos ->

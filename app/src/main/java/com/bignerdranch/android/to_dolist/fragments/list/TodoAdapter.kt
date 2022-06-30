@@ -1,10 +1,7 @@
 package com.bignerdranch.android.to_dolist.fragments.list
 
-import android.annotation.SuppressLint
-import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ListAdapter
@@ -16,32 +13,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class TodoAdapter: ListAdapter<Todo, TodoAdapter.TodoViewHolder>(DiffCallBack) {
-    private var todoList = emptyList<Todo>()
-
-
-    // will toggle strikeThrough on the Task title
-    private fun toggleStrikeThrough(tvTaskTitle : TextView, cbTask : Boolean) {
-        if (cbTask) {
-            tvTaskTitle.paintFlags = tvTaskTitle.paintFlags  or STRIKE_THRU_TEXT_FLAG
-        } else {
-            tvTaskTitle.paintFlags = tvTaskTitle.paintFlags and STRIKE_THRU_TEXT_FLAG.inv()
-        }
-    }
-
-    // TODO - WHEN I COME BACK, I WILL TRY THE POTENTIAL SOLUTION.
-
-    inner class TodoViewHolder(val binding : CustomRowBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        // Todo - Maybe tomorrow, I will move the binding variables to the ViewHolder
-    }
-
-    interface OnItemClickListener {
-        // Todo - finish this tomorrow
-        fun onItemClick(todo : Todo)
-        fun onCheckBoxClick(todo: Todo, isChecked: Boolean)
-    }
-
+class TodoAdapter(private val listener : OnItemClickListener): ListAdapter<Todo, TodoAdapter.TodoViewHolder>(DiffCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         // this can be done in an inline variable and I may experiment on it later.
@@ -53,39 +25,61 @@ class TodoAdapter: ListAdapter<Todo, TodoAdapter.TodoViewHolder>(DiffCallBack) {
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        val todo = todoList[position]
-        val dateLocales = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
-        val timeLocales = SimpleDateFormat(SIMPLE_TIME_FORMAT, Locale.getDefault())
-        holder.apply {
-            binding.tvTaskTitle.text = todo.title
-            binding.tvTaskDate.text = dateLocales.format(todo.date)
-            binding.tvTaskTime.text = timeLocales.format(todo.time)
-            binding.cbTask.isChecked = todo.todoCheckBox
+        val currentItem = getItem(position)
+        holder.bind(currentItem)
+    }
+
+    inner class TodoViewHolder(private val binding : CustomRowBinding) : RecyclerView.ViewHolder(binding.root) {
 
 
-            toggleStrikeThrough(binding.tvTaskTitle , todo.todoCheckBox)
-            binding.cbTask.setOnCheckedChangeListener { _, isChecked ->
-                toggleStrikeThrough(binding.tvTaskTitle, isChecked)
-                todo.todoCheckBox = !todo.todoCheckBox
+        /** Calling onClickListeners for each _Todo and the associated checkBox. **/
+
+        init {
+            binding.apply {
+                root.setOnClickListener {
+                    val position = adapterPosition // this represents the position of any item in the root layout
+                    // NO_POSITION means that an item is invalid and out of this list, so this is a safe check because-
+                    // we don't want to call a listener on an invalid item
+                    if (position != RecyclerView.NO_POSITION) {
+                        val todo = getItem(position)
+                        listener.onItemClick(todo)
+                    }
+                }
+                cbTask.setOnClickListener {
+                    val position = adapterPosition
+                    if (position != RecyclerView.NO_POSITION) {
+                        val todo = getItem(position)
+                        listener.onCheckBoxClick(todo, cbTask.isChecked)
+                    }
+                }
+            }
+        }
+
+        fun bind(todo : Todo) {
+            val dateLocales = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
+            val timeLocales = SimpleDateFormat(SIMPLE_TIME_FORMAT, Locale.getDefault())
+            binding.apply {
+                tvTaskTitle.text = todo.title
+                tvTaskDate.text = dateLocales.format(todo.date)
+                tvTaskTime.text = timeLocales.format(todo.time)
+                cbTask.isChecked = todo.completed
+                tvTaskTitle.paint.isStrikeThruText = todo.completed
             }
         }
     }
 
-    // TODO - WHEN I COME BACK TOMORROW, I WILL TEST THIS TO SEE IF IT WORKS
+    interface OnItemClickListener {
+        fun onItemClick(todo : Todo)
+        fun onCheckBoxClick(todo: Todo, isChecked: Boolean)
+    }
+
+    // This piece of code checks between our old and changed and lists and updates the recyclerView with the latest list.
+    // This also stops the recyclerView from redrawing itself after the position of an item has been changed. It even provides a nice animation.
     object DiffCallBack : DiffUtil.ItemCallback<Todo>() {
         override fun areItemsTheSame(oldItem: Todo, newItem: Todo) =
             oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: Todo, newItem: Todo) =
             oldItem == newItem
-    }
-
-    // as usual will return the size of the List
-    override fun getItemCount() = todoList.size
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun setData(todo : List<Todo>) {
-        this.todoList = todo
-        notifyDataSetChanged()
     }
 }

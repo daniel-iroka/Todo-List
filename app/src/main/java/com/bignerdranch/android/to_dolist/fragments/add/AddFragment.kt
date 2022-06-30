@@ -7,7 +7,6 @@ import android.text.TextPaint
 import android.text.TextUtils
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +28,6 @@ private const val DIALOG_TIME = "DialogTime"
 const val SIMPLE_DATE_FORMAT = "MMM, d yyyy"
 const val SIMPLE_TIME_FORMAT = "H:mm"
 
-private const val TAG = "AddFragment"
 
 class AddFragment : Fragment() {
 
@@ -59,14 +57,15 @@ class AddFragment : Fragment() {
             insertTodoInDatabase()
         }
 
+
         // showing our datePickerDialog
         binding.edDate.setOnClickListener {
 
             childFragmentManager.setFragmentResultListener("requestKey", viewLifecycleOwner) {_, bundle ->
                 val result = bundle.getSerializable("bundleKey") as Date
-                // passing the result of the user selected date directly to the _Todo class instead
+                // passing the result of the user selected date directly to the _Todo class instead. Will do the same for also the time.
                 todo.date = result
-                // will ONLY update the date field when it is not empty so that we don't get a preloaded Date textView
+                // will ONLY update the date field when it is not empty so that we don't get a preloaded Date textView. Will do the same for also the time.
                 if(todo.date.toString().isNotEmpty()) {
                     updateDate()
                 }
@@ -80,9 +79,7 @@ class AddFragment : Fragment() {
 
             childFragmentManager.setFragmentResultListener("tRequestKey", viewLifecycleOwner) {_, bundle ->
                 val result = bundle.getSerializable("tBundleKey") as Date
-                // passing the result of the user selected time directly to the _Todo class instead
                 todo.time = result
-                // will ONLY update the time field when it is not empty so that we don't get a preloaded Time textView
                 if (todo.time.toString().isNotEmpty()) {
                     updateTime()
                 }
@@ -98,7 +95,6 @@ class AddFragment : Fragment() {
     private fun updateDate() {
         val dateLocales = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
         binding.edDate.text = dateLocales.format(todo.date)
-
     }
 
     // function to update Time

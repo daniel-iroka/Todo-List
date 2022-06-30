@@ -21,7 +21,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
      **/
 
     private val repository : TodoRepository
-    private val userDao = TodoDatabase.getDatabase(application).todoDao()
+    private val todoDao = TodoDatabase.getDatabase(application).todoDao()
 
     init {
         // having access to our TodoDao from our database
@@ -48,7 +48,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         Triple(query, sortOrder, hideCompleted)
         // flatMapLatest gets triggered when any of this flows changes and then passes it to the query to be executed.
     }.flatMapLatest { (query, sortOrder, hideCompleted) ->
-        userDao.getAllTasks(query, sortOrder, hideCompleted)
+        todoDao.getAllTasks(query, sortOrder, hideCompleted)
     }
 
     val tasks = tasksFlow.asLiveData()
@@ -73,9 +73,14 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun updateTask(todo : Todo) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.updateTask(todo)
+
+    fun onTaskSelected(task : Todo) {
+        TODO()
+    }
+
+    fun onTaskCheckedChanged(todo : Todo, isChecked : Boolean) {
+        viewModelScope.launch {
+            repository.updateTask(todo.copy(completed = false))
         }
     }
 }
