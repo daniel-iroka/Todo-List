@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.to_dolist.databinding.FragmentListBinding
 import com.bignerdranch.android.to_dolist.R
-import com.bignerdranch.android.to_dolist.data.SortOrder
-import com.bignerdranch.android.to_dolist.data.TodoViewModel
+import com.bignerdranch.android.to_dolist.viewmodel.SortOrder
+import com.bignerdranch.android.to_dolist.viewmodel.TodoViewModel
 import com.bignerdranch.android.to_dolist.model.Todo
 import com.bignerdranch.android.to_dolist.utils.onQueryTextChanged
 
@@ -128,7 +128,7 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
     private fun deleteSelectedUsers() {
         val builder = AlertDialog.Builder(requireContext())
         // Our todos that have been marked completed by the checkBox
-        val finishedTodos = todosList.filter { it.completed }
+        val finishedTodos = todosList.filter { it.todoCheckBox }
 
         builder.setPositiveButton("Yes") {_,_->
             finishedTodos.forEach { todos ->

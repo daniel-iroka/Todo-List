@@ -1,5 +1,6 @@
 package com.bignerdranch.android.to_dolist.repository
 
+import com.bignerdranch.android.to_dolist.viewmodel.SortOrder
 import com.bignerdranch.android.to_dolist.data.TodoDao
 import com.bignerdranch.android.to_dolist.model.Todo
 
@@ -9,19 +10,22 @@ import com.bignerdranch.android.to_dolist.model.Todo
 
 class TodoRepository(private val todoDao : TodoDao) {
 
-    suspend fun addTodo(todo : Todo) {
+    suspend fun addTodo(todo : Todo) =
         todoDao.addTodo(todo)
-    }
 
-    suspend fun delSelectedTasks(idList: Long) {
+
+    suspend fun delSelectedTasks(idList: Long) =
         todoDao.deleteSelectedTasks(idList)
-    }
 
-    suspend fun delAllTasks() {
+
+    suspend fun delAllTasks() =
         todoDao.deleteAllTasks()
-    }
 
-    suspend fun updateTask(todo : Todo) {
+
+    suspend fun updateTask(todo : Todo) =
         todoDao.updateTask(todo)
-    }
+
+
+    fun getAllTasks(query : String, sortOrder : SortOrder, hideCompleted : Boolean)  =
+        todoDao.getAllTasks(query, sortOrder, hideCompleted)
 }

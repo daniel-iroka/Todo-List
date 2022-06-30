@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
+    android:padding="3dp"
     android:elevation="8dp"
     android:layout_marginTop="10dp"
     android:layout_marginStart="8dp"
@@ -77,7 +77,6 @@
         app:layout_constraintStart_toEndOf="@+id/date_comma"
         app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle" />
 
-
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
@@ -93,21 +92,20 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="55dp"
+        android:id="@+id/task_important"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"
         app:srcCompat="@drawable/ic_custom_notification_important"
         app:tint="@color/holo_light_blue_dark" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -15,7 +15,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bignerdranch.android.to_dolist.R
-import com.bignerdranch.android.to_dolist.data.TodoViewModel
+import com.bignerdranch.android.to_dolist.viewmodel.TodoViewModel
 import com.bignerdranch.android.to_dolist.databinding.FragmentAddBinding
 import com.bignerdranch.android.to_dolist.fragments.dialogs.DatePickerFragment
 import com.bignerdranch.android.to_dolist.fragments.dialogs.TimePickerFragment

@@ -1,7 +1,8 @@
-package com.bignerdranch.android.to_dolist.data
+package com.bignerdranch.android.to_dolist.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.bignerdranch.android.to_dolist.data.TodoDatabase
 import com.bignerdranch.android.to_dolist.model.Todo
 import com.bignerdranch.android.to_dolist.repository.TodoRepository
 import kotlinx.coroutines.Dispatchers
@@ -48,7 +49,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         Triple(query, sortOrder, hideCompleted)
         // flatMapLatest gets triggered when any of this flows changes and then passes it to the query to be executed.
     }.flatMapLatest { (query, sortOrder, hideCompleted) ->
-        todoDao.getAllTasks(query, sortOrder, hideCompleted)
+        repository.getAllTasks(query, sortOrder, hideCompleted)
     }
 
     val tasks = tasksFlow.asLiveData()
@@ -80,7 +81,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
     fun onTaskCheckedChanged(todo : Todo, isChecked : Boolean) {
         viewModelScope.launch {
-            repository.updateTask(todo.copy(completed = false))
+            repository.updateTask(todo.copy(todoCheckBox = isChecked))
         }
     }
 }

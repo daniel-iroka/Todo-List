@@ -16,6 +16,7 @@ abstract class TodoDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE : TodoDatabase? = null
 
+        // TODO - WHEN I COME BACK, I WILL TRY TO CHANGE THE COLUMN NAME OF THIS TABLE, AND I KNOW THAT I WILL HAVE TO MIGRATE THE DATABASE.
 
         /** This whole block basically checks if an instance of this database exists and returns that same instance but if not, creates a new one.  **/
 
