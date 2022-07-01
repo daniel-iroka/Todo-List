@@ -2,11 +2,13 @@ package com.bignerdranch.android.to_dolist.data
 
 import android.content.Context
 import androidx.room.*
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.bignerdranch.android.to_dolist.model.Todo
 
 /** This file will be our Database **/
 
-@Database(entities = [Todo::class], version = 1, exportSchema = false)
+@Database(entities = [Todo::class], version = 2, exportSchema = false)
 @TypeConverters(TodoTypeConverters::class)
 abstract class TodoDatabase : RoomDatabase() {
 
@@ -16,7 +18,6 @@ abstract class TodoDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE : TodoDatabase? = null
 
-        // TODO - WHEN I COME BACK, I WILL TRY TO CHANGE THE COLUMN NAME OF THIS TABLE, AND I KNOW THAT I WILL HAVE TO MIGRATE THE DATABASE.
 
         /** This whole block basically checks if an instance of this database exists and returns that same instance but if not, creates a new one.  **/
 
@@ -31,10 +32,20 @@ abstract class TodoDatabase : RoomDatabase() {
                     context.applicationContext,
                     TodoDatabase::class.java,
                     "todo_database"
-                ).build()
+                )
+                    .addMigrations(migration_1_2)
+                    .build()
                 INSTANCE = instance
                 return instance
             }
         }
+    }
+}
+
+// TODO - WHEN I COME BACK, I WILL TRY AND FIX THIS BUG THAT CRASHES MY APP WHEN I TRY TO CHANGE THE COLUMN NAME.
+
+val migration_1_2 = object : Migration(1,2) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("ALTER TABLE todo_table ADD COLUMN important INTEGER NOT NULL DEFAULT 0 ")
     }
 }

@@ -14,5 +14,6 @@ data class Todo(
     val title : String = "",
     var date : Date = Date(),
     var time : Date = Date(),
-    val todoCheckBox : Boolean = false
+    var todoCheckBox : Boolean = false,
+    val important : Boolean = false
 )
