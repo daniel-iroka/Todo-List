@@ -62,8 +62,8 @@ class TodoAdapter(private val listener : OnItemClickListener): ListAdapter<Todo,
                 tvTaskTitle.text = todo.title
                 tvTaskDate.text = dateLocales.format(todo.date)
                 tvTaskTime.text = timeLocales.format(todo.time)
-                cbTask.isChecked = todo.todoCheckBox
-                tvTaskTitle.paint.isStrikeThruText = todo.todoCheckBox
+                cbTask.isChecked = todo.completed
+                tvTaskTitle.paint.isStrikeThruText = todo.completed
             }
         }
     }

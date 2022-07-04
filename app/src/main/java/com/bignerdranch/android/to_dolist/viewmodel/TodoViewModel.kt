@@ -81,7 +81,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
     fun onTaskCheckedChanged(todo : Todo, isChecked : Boolean) {
         viewModelScope.launch {
-            repository.updateTask(todo.copy(todoCheckBox = isChecked))
+            repository.updateTask(todo.copy(completed = isChecked))
         }
     }
 }

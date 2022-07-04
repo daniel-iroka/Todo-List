@@ -128,7 +128,7 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
     private fun deleteSelectedUsers() {
         val builder = AlertDialog.Builder(requireContext())
         // Our todos that have been marked completed by the checkBox
-        val finishedTodos = todosList.filter { it.todoCheckBox }
+        val finishedTodos = todosList.filter { it.completed }
 
         builder.setPositiveButton("Yes") {_,_->
             finishedTodos.forEach { todos ->

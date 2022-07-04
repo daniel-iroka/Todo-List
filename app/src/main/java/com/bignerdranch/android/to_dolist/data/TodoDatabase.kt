@@ -42,7 +42,6 @@ abstract class TodoDatabase : RoomDatabase() {
     }
 }
 
-// TODO - WHEN I COME BACK, I WILL TRY AND FIX THIS BUG THAT CRASHES MY APP WHEN I TRY TO CHANGE THE COLUMN NAME.
 
 val migration_1_2 = object : Migration(1,2) {
     override fun migrate(database: SupportSQLiteDatabase) {
