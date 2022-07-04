@@ -15,6 +15,8 @@ import java.util.*
 
 class TodoAdapter(private val listener : OnItemClickListener): ListAdapter<Todo, TodoAdapter.TodoViewHolder>(DiffCallBack) {
 
+    // TODO - WHEN I COME BACK, FIRSTLY, I WILL TRY TO IMPLEMENT THE "IC_MORE" ICON TO BE ABLE TO EDIT AND DELETE A TASK AND HOPEFULLY I DON'T CRY.
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         // this can be done in an inline variable and I may experiment on it later.
         val binding = CustomRowBinding.inflate(LayoutInflater.from(parent.context),

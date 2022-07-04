@@ -110,9 +110,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
         android:layout_marginTop="16dp"
-        android:text="Set Reminders"
+        android:text="Notifications"
         android:textAppearance="@style/TextAppearance.Compat.Notification.Time.Media"
-        android:textStyle="italic"
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edTime" />
@@ -122,10 +121,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
-        android:layout_marginTop="8dp"
-        android:textStyle="bold"
+        android:text="Set Alarms and Priority for your Tasks."
         android:textSize="13sp"
-        android:text="Set Reminders for your Tasks."
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_Reminders" />
 </androidx.constraintlayout.widget.ConstraintLayout>

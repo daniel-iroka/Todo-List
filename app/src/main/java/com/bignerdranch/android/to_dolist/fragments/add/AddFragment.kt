@@ -105,7 +105,7 @@ class AddFragment : Fragment() {
 
     // our reminders Text span
     private fun remindersTextSpan() {
-        val spannableString = SpannableString("Set Reminders")
+        val spannableString = SpannableString("Notifications")
 
         val clickableSpan = object : ClickableSpan() {
             override fun onClick(widget: View) {
