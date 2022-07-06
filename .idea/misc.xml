@@ -4,11 +4,23 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/background.xml" value="0.5" />
+        <entry key="app/src/main/res/drawable/ic_add.xml" value="0.1895" />
+        <entry key="app/src/main/res/drawable/ic_alarm_icon.xml" value="0.1895" />
+        <entry key="app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.1895" />
+        <entry key="app/src/main/res/drawable/ic_check_yes.xml" value="0.1895" />
+        <entry key="app/src/main/res/drawable/ic_custom_notification_important.xml" value="0.1895" />
+        <entry key="app/src/main/res/drawable/ic_edit.xml" value="0.1895" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1895" />
+        <entry key="app/src/main/res/drawable/ic_more.xml" value="0.1895" />
+        <entry key="app/src/main/res/drawable/ic_todo_search.xml" value="0.1895" />
+        <entry key="app/src/main/res/drawable/ic_todo_sort.xml" value="0.1895" />
+        <entry key="app/src/main/res/drawable/ic_warning.xml" value="0.202" />
+        <entry key="app/src/main/res/drawable/popup_background.xml" value="0.1895" />
         <entry key="app/src/main/res/font/custom_font.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/font/font.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/font/fonts.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1953125" />
-        <entry key="app/src/main/res/layout/custom_row.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/custom_row.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_list.xml" value="0.2" />
         <entry key="app/src/main/res/menu/fragment_list.xml" value="0.33" />

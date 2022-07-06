@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
         android:id="@+id/itEditTask"
         android:title="Edit Task "
         android:icon="@drawable/ic_edit"
-        android:iconTint="@color/holo_light_blue_dark"/>
+        android:iconTint="@color/textView_default_color" />
 
     <item
         android:id="@+id/itDeleteTask"
         android:title="Delete Task "
-        android:icon="@drawable/ic_delete"/>
-
+        android:icon="@drawable/ic_delete"
+        android:iconTint="@color/red"/>
 </menu>

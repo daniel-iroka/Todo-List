@@ -31,7 +31,10 @@ interface TodoDao {
     suspend fun addTodo(todo: Todo)
 
     @Query("DELETE FROM todo_table WHERE id IN (:idList)")
-    suspend fun deleteSelectedTasks(idList : Long)
+    suspend fun deleteCompletedTasks(idList : Long)
+
+    @Delete
+    suspend fun deleteTask(todo : Todo)
 
     @Query("DELETE FROM todo_table")
     suspend fun deleteAllTasks()

@@ -14,12 +14,15 @@ class TodoRepository(private val todoDao : TodoDao) {
         todoDao.addTodo(todo)
 
 
-    suspend fun delSelectedTasks(idList: Long) =
-        todoDao.deleteSelectedTasks(idList)
+    suspend fun delCompletedTasks(idList: Long) =
+        todoDao.deleteCompletedTasks(idList)
 
 
     suspend fun delAllTasks() =
         todoDao.deleteAllTasks()
+
+    suspend fun delTask(todo : Todo) =
+        todoDao.deleteTask(todo)
 
 
     suspend fun updateTask(todo : Todo) =

@@ -62,9 +62,9 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun deleteSelectedTasks(idList: Long) {
+    fun deleteCompletedTasks(idList: Long) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.delSelectedTasks(idList)
+            repository.delCompletedTasks(idList)
         }
     }
 
@@ -74,6 +74,11 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun deleteTask(todo : Todo) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.delTask(todo)
+        }
+    }
 
     fun onTaskSelected(task : Todo) {
         TODO()

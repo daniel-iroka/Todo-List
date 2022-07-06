@@ -1,5 +1,6 @@
 package com.bignerdranch.android.to_dolist.fragments.list
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -19,6 +20,8 @@ import java.util.*
 
 class TodoAdapter(private val _context : Context, private val listener : OnItemClickListener): ListAdapter<Todo, TodoAdapter.TodoViewHolder>(DiffCallBack) {
 
+    // TODO - WHEN I COME BACK, I WILL GO FURTHER AND THE NEXT THING I WILL ADD IS THE ABILITY TO EDIT THE TASKS FROM FLORIAN. NOICE
+    // TODO - IT WAS A SUCCESSFUL DAY AND BUILD AND I THANK JEHOVAH GOD. YES
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         // this can be done in an inline variable and I may experiment on it later.
@@ -49,6 +52,7 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
             }
         }
 
+        @SuppressLint("DiscouragedPrivateApi")
         fun bind(todo : Todo) {
             val dateLocales = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
             val timeLocales = SimpleDateFormat(SIMPLE_TIME_FORMAT, Locale.getDefault())
@@ -59,6 +63,7 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                 cbTask.isChecked = todo.completed
                 tvTaskTitle.paint.isStrikeThruText = todo.completed
 
+                // Implementing our PopupMenus to Edit and Delete a Task
                 iMenus.setOnClickListener { view ->
 
                     val popupMenus = PopupMenu(_context, view)
@@ -77,8 +82,15 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                                 Toast.makeText(_context, "Edit Task Button is clicked!", Toast.LENGTH_LONG).show()
                                 true
                             }
+
                             R.id.itDeleteTask -> {
-                                Toast.makeText(_context, "Delete Task Button is clicked!", Toast.LENGTH_LONG).show()
+                                val position = adapterPosition
+                                if (position != RecyclerView.NO_POSITION) {
+                                    val todo = getItem(position)
+                                    listener.onItemDelete(todo)
+                                }
+
+                                Toast.makeText(_context, "Task has been deleted.", Toast.LENGTH_LONG).show()
                                 true
                             }
                             else -> true
@@ -99,6 +111,7 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
     interface OnItemClickListener {
         fun onItemClick(todo : Todo)
         fun onCheckBoxClick(todo: Todo, isChecked: Boolean)
+        fun onItemDelete(todo : Todo)
     }
 
     // This piece of code checks between our old and changed and lists and updates the recyclerView with the latest list.

@@ -14,4 +14,7 @@
     <color name="holo_light_blue_darker">#1B5D77</color>
     <color name="blue">#304FFE</color>
     <color name="dark_white">#304FFE</color>
+    <color name="textView_default_color">#808080</color>
+    <color name="red">#FF0000</color>
+    <color name="orange">#FFC107</color>
 </resources>

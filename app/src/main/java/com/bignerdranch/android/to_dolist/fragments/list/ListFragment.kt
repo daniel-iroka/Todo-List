@@ -73,6 +73,10 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
         mTodoViewModel.onTaskCheckedChanged(todo, isChecked)
     }
 
+    override fun onItemDelete(todo: Todo) {
+        mTodoViewModel.deleteTask(todo)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.fragment_list, menu)
 
@@ -134,14 +138,14 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
 
         builder.setPositiveButton("Yes") {_,_->
             finishedTodos.forEach { todos ->
-                mTodoViewModel.deleteSelectedTasks(todos.id.toLong())
+                mTodoViewModel.deleteCompletedTasks(todos.id.toLong())
             }
-            Toast.makeText(requireContext(), "Selected tasks successfully deleted!", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "Completed tasks successfully deleted!", Toast.LENGTH_LONG).show()
         }
         builder.setNegativeButton("No") {_,_-> }
         builder.setTitle("Confirm Deletion")
         builder.setIcon(R.drawable.ic_warning)
-        builder.setMessage("Are you sure you want to delete only selected Tasks?")
+        builder.setMessage("Are you sure you want to delete all completed Tasks?")
         builder.create().show()
         Log.i(TAG , "Our todos list size is ${finishedTodos.size}")
     }
