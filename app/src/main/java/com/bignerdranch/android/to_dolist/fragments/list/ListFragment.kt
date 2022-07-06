@@ -29,7 +29,6 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
     private lateinit var adapter : TodoAdapter
     private var todosList = emptyList<Todo>()
 
-    // TODO - WHEN I COME BACK, I MAY CHANGE THE COLOR OF THE DELETE ICON TO THE WHOLE APP'S COLOR
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -141,6 +140,7 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
         }
         builder.setNegativeButton("No") {_,_-> }
         builder.setTitle("Confirm Deletion")
+        builder.setIcon(R.drawable.ic_warning)
         builder.setMessage("Are you sure you want to delete only selected Tasks?")
         builder.create().show()
         Log.i(TAG , "Our todos list size is ${finishedTodos.size}")

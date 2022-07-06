@@ -1,9 +1,7 @@
 package com.bignerdranch.android.to_dolist.fragments.list
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -19,9 +17,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class TodoAdapter(val _context : Context, private val listener : OnItemClickListener): ListAdapter<Todo, TodoAdapter.TodoViewHolder>(DiffCallBack) {
+class TodoAdapter(private val _context : Context, private val listener : OnItemClickListener): ListAdapter<Todo, TodoAdapter.TodoViewHolder>(DiffCallBack) {
 
-    // TODO - WHEN I COME BACK, I WILL CONTINUE TRYING TO IMPLEMENTING THE POPUP FEATURE I ADDED TO BE ABLE TO DELETE AND ADD EDIT THE TASKS. HEHEHE
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         // this can be done in an inline variable and I may experiment on it later.
@@ -39,20 +36,9 @@ class TodoAdapter(val _context : Context, private val listener : OnItemClickList
 
     inner class TodoViewHolder(private val binding : CustomRowBinding) : RecyclerView.ViewHolder(binding.root) {
 
-
-        /** Calling onClickListeners for each _Todo and the associated checkBox. **/
-
         init {
             binding.apply {
-                root.setOnClickListener {
-                    val position = adapterPosition // this represents the position of any item in the root layout
-                    // NO_POSITION means that an item is invalid and out of this list, so this is a safe check because-
-                    // we don't want to call a listener on an invalid item
-                    if (position != RecyclerView.NO_POSITION) {
-                        val todo = getItem(position)
-                        listener.onItemClick(todo)
-                    }
-                }
+                // For checking the Tasks
                 cbTask.setOnClickListener {
                     val position = adapterPosition
                     if (position != RecyclerView.NO_POSITION) {
@@ -73,36 +59,42 @@ class TodoAdapter(val _context : Context, private val listener : OnItemClickList
                 cbTask.isChecked = todo.completed
                 tvTaskTitle.paint.isStrikeThruText = todo.completed
 
-                iMenus.setOnClickListener { taskPopupMenu(it) }
+                iMenus.setOnClickListener { view ->
+
+                    val popupMenus = PopupMenu(_context, view)
+                    popupMenus.inflate(R.menu.show_menu)
+                    popupMenus.setOnMenuItemClickListener {
+                        when(it.itemId) {
+                            R.id.itEditTask -> {
+                                val position = adapterPosition // this represents the position of any item in the root layout
+                                // NO_POSITION means that an item is invalid and out of this list, so this is a safe check because-
+                                // we don't want to call a listener on an invalid item
+                                if (position != RecyclerView.NO_POSITION) {
+                                    val todo = getItem(position)
+                                    listener.onItemClick(todo)
+                                }
+
+                                Toast.makeText(_context, "Edit Task Button is clicked!", Toast.LENGTH_LONG).show()
+                                true
+                            }
+                            R.id.itDeleteTask -> {
+                                Toast.makeText(_context, "Delete Task Button is clicked!", Toast.LENGTH_LONG).show()
+                                true
+                            }
+                            else -> true
+                        }
+                    }
+                    popupMenus.show()
+                    val popup = PopupMenu::class.java.getDeclaredField("mPopup")
+                    popup.isAccessible = true
+                    val menu = popup.get(popupMenus)
+                    menu.javaClass.getDeclaredMethod("setForceShowIcon", Boolean::class.java)
+                        .invoke(menu, true)
+                }
             }
         }
     }
 
-    @SuppressLint("DiscouragedPrivateApi")
-    private fun taskPopupMenu(view : View) {
-        val popupMenus = PopupMenu(_context, view)
-        popupMenus.inflate(R.menu.show_menu)
-        popupMenus.setOnMenuItemClickListener {
-            when(it.itemId) {
-                R.id.itEditTask -> {
-                    Toast.makeText(_context, "Edit Task Button is clicked!", Toast.LENGTH_LONG).show()
-                    true
-                }
-                R.id.itDeleteTask -> {
-                    Toast.makeText(_context, "Delete Task Button is clicked!", Toast.LENGTH_LONG).show()
-                    true
-                }
-                else -> true
-                // Todo - When I come back, I will continue Implementing this.
-            }
-        }
-        popupMenus.show()
-        val popup = PopupMenu::class.java.getDeclaredField("mPopup")
-        popup.isAccessible = true
-        val menu = popup.get(popupMenus)
-        menu.javaClass.getDeclaredMethod("setForceShowIcon", Boolean::class.java)
-            .invoke(menu, true)
-    }
 
     interface OnItemClickListener {
         fun onItemClick(todo : Todo)
