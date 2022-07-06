@@ -8,7 +8,7 @@
     android:padding="15dp"
     android:elevation="8dp"
     android:layout_marginTop="10dp"
-    android:layout_marginStart="8dp"
+    android:layout_marginStart="6dp"
     android:layout_marginEnd="8dp"
     android:background="@drawable/background">
 
@@ -85,10 +85,10 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTaskTitle" />
 
     <ImageView
-        android:id="@+id/more"
+        android:id="@+id/iMenus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="7dp"
         android:src="@drawable/ic_more"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

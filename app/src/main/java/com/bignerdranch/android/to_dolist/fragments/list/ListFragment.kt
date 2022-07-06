@@ -26,9 +26,10 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
     private val binding get() = _binding!!
     private lateinit var mTodoViewModel: TodoViewModel
     private lateinit var recyclerView: RecyclerView
-    private val adapter = TodoAdapter(this)
+    private lateinit var adapter : TodoAdapter
     private var todosList = emptyList<Todo>()
 
+    // TODO - WHEN I COME BACK, I MAY CHANGE THE COLOR OF THE DELETE ICON TO THE WHOLE APP'S COLOR
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +41,8 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
 
         // this tells our activity/fragment that we have a menu_item it should respond to it.
         setHasOptionsMenu(true)
+
+        adapter = TodoAdapter(requireContext(), this)
 
         recyclerView = binding.recyclerViewTodo
         recyclerView.adapter = adapter

@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_list.xml" value="0.2" />
         <entry key="app/src/main/res/menu/fragment_list.xml" value="0.33" />
+        <entry key="app/src/main/res/menu/show_menu.xml" value="0.1953125" />
       </map>
     </option>
   </component>

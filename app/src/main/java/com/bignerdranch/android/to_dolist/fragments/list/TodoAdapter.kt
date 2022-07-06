@@ -1,10 +1,16 @@
 package com.bignerdranch.android.to_dolist.fragments.list
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ListAdapter
+import com.bignerdranch.android.to_dolist.R
 import com.bignerdranch.android.to_dolist.databinding.CustomRowBinding
 import com.bignerdranch.android.to_dolist.fragments.add.SIMPLE_DATE_FORMAT
 import com.bignerdranch.android.to_dolist.fragments.add.SIMPLE_TIME_FORMAT
@@ -13,9 +19,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class TodoAdapter(private val listener : OnItemClickListener): ListAdapter<Todo, TodoAdapter.TodoViewHolder>(DiffCallBack) {
+class TodoAdapter(val _context : Context, private val listener : OnItemClickListener): ListAdapter<Todo, TodoAdapter.TodoViewHolder>(DiffCallBack) {
 
-    // TODO - WHEN I COME BACK, FIRSTLY, I WILL TRY TO IMPLEMENT THE "IC_MORE" ICON TO BE ABLE TO EDIT AND DELETE A TASK AND HOPEFULLY I DON'T CRY.
+    // TODO - WHEN I COME BACK, I WILL CONTINUE TRYING TO IMPLEMENTING THE POPUP FEATURE I ADDED TO BE ABLE TO DELETE AND ADD EDIT THE TASKS. HEHEHE
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         // this can be done in an inline variable and I may experiment on it later.
@@ -66,8 +72,36 @@ class TodoAdapter(private val listener : OnItemClickListener): ListAdapter<Todo,
                 tvTaskTime.text = timeLocales.format(todo.time)
                 cbTask.isChecked = todo.completed
                 tvTaskTitle.paint.isStrikeThruText = todo.completed
+
+                iMenus.setOnClickListener { taskPopupMenu(it) }
             }
         }
+    }
+
+    @SuppressLint("DiscouragedPrivateApi")
+    private fun taskPopupMenu(view : View) {
+        val popupMenus = PopupMenu(_context, view)
+        popupMenus.inflate(R.menu.show_menu)
+        popupMenus.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.itEditTask -> {
+                    Toast.makeText(_context, "Edit Task Button is clicked!", Toast.LENGTH_LONG).show()
+                    true
+                }
+                R.id.itDeleteTask -> {
+                    Toast.makeText(_context, "Delete Task Button is clicked!", Toast.LENGTH_LONG).show()
+                    true
+                }
+                else -> true
+                // Todo - When I come back, I will continue Implementing this.
+            }
+        }
+        popupMenus.show()
+        val popup = PopupMenu::class.java.getDeclaredField("mPopup")
+        popup.isAccessible = true
+        val menu = popup.get(popupMenus)
+        menu.javaClass.getDeclaredMethod("setForceShowIcon", Boolean::class.java)
+            .invoke(menu, true)
     }
 
     interface OnItemClickListener {
