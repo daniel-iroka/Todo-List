@@ -20,8 +20,6 @@ import java.util.*
 
 class TodoAdapter(private val _context : Context, private val listener : OnItemClickListener): ListAdapter<Todo, TodoAdapter.TodoViewHolder>(DiffCallBack) {
 
-    // TODO - WHEN I COME BACK, I WILL GO FURTHER AND THE NEXT THING I WILL ADD IS THE ABILITY TO EDIT THE TASKS FROM FLORIAN. NOICE
-    // TODO - IT WAS A SUCCESSFUL DAY AND BUILD AND I THANK JEHOVAH GOD. YES
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         // this can be done in an inline variable and I may experiment on it later.
