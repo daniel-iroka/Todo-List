@@ -34,5 +34,8 @@
         <action
             android:id="@+id/action_updateFragment_to_listFragment"
             app:destination="@id/listFragment" />
+        <argument
+            android:name="currentTask"
+            app:argType="com.bignerdranch.android.to_dolist.model.Todo" />
     </fragment>
 </navigation>

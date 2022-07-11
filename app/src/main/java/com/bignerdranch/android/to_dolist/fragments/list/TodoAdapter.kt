@@ -2,6 +2,7 @@ package com.bignerdranch.android.to_dolist.fragments.list
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.LayoutDirection
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
@@ -70,20 +71,16 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                     popupMenus.setOnMenuItemClickListener {
                         when(it.itemId) {
                             R.id.itEditTask -> {
-                                val position = adapterPosition // this represents the position of any item in the root layout
-                                // NO_POSITION means that an item is invalid and out of this list, so this is a safe check because-
-                                // we don't want to call a listener on an invalid item
-                                if (position != RecyclerView.NO_POSITION) {
-                                    val todo = getItem(position)
-                                    listener.onItemClick(todo)
-                                }
+                                val action = ListFragmentDirections.actionListFragmentToUpdateFragment(todo)
+                                // TODO - WHEN I COME BACK, I WILL FINISH THIS LATE, I HOPE IT WORKS LOL
 
-                                Toast.makeText(_context, "Edit Task Button is clicked!", Toast.LENGTH_LONG).show()
                                 true
                             }
 
                             R.id.itDeleteTask -> {
-                                val position = adapterPosition
+                                val position = adapterPosition// this represents the position of any item in the root layout
+                                // NO_POSITION means that an item is invalid and out of this list, so this is a safe check because-
+                                // we don't want to call a listener on an invalid item
                                 if (position != RecyclerView.NO_POSITION) {
                                     val todo = getItem(position)
                                     listener.onItemDelete(todo)

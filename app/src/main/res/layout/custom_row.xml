@@ -24,7 +24,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <!--        android:textColor="@color/black"-->
 
     <TextView
         android:id="@+id/tvTaskTitle"
