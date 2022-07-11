@@ -125,6 +125,7 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
         }
         builder.setNegativeButton("No") {_,_-> }
         builder.setTitle("Confirm Deletion")
+        builder.setIcon(R.drawable.ic_warning)
         builder.setMessage("Are you sure you want to delete all Tasks?")
         builder.create().show()
     }
@@ -144,7 +145,6 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
         }
         builder.setNegativeButton("No") {_,_-> }
         builder.setTitle("Confirm Deletion")
-        builder.setIcon(R.drawable.ic_warning)
         builder.setMessage("Are you sure you want to delete all completed Tasks?")
         builder.create().show()
         Log.i(TAG , "Our todos list size is ${finishedTodos.size}")
