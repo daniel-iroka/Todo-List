@@ -50,6 +50,7 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
             }
         }
 
+
         @SuppressLint("DiscouragedPrivateApi")
         fun bind(todo : Todo) {
             val dateLocales = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
