@@ -65,10 +65,6 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
         return binding.root
     }
 
-    override fun onItemClick(todo: Todo) {
-        mTodoViewModel.onTaskSelected(todo)
-    }
-
     override fun onCheckBoxClick(todo: Todo, isChecked: Boolean) {
         mTodoViewModel.onTaskCheckedChanged(todo, isChecked)
     }

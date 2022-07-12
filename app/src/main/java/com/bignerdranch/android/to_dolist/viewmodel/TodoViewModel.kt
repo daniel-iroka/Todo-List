@@ -80,9 +80,6 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun onTaskSelected(task : Todo) {
-        TODO()
-    }
 
     fun onTaskCheckedChanged(todo : Todo, isChecked : Boolean) {
         viewModelScope.launch {

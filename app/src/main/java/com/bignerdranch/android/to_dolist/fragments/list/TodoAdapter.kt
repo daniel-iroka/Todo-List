@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ListAdapter
@@ -72,7 +73,7 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                         when(it.itemId) {
                             R.id.itEditTask -> {
                                 val action = ListFragmentDirections.actionListFragmentToUpdateFragment(todo)
-                                // TODO - WHEN I COME BACK, I WILL FINISH THIS LATE, I HOPE IT WORKS LOL
+                                itemView.findNavController().navigate(action)
 
                                 true
                             }
@@ -103,9 +104,10 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
         }
     }
 
+    /** IMPORTANT NOTE! - onItemClick andonCheckBox click both do the same thing but the first is called when the task is clicked and
+     **                   and the second is called when the checkBox itself is clicked. This might be considered redundant but I separated them to avoid confusion.**/
 
     interface OnItemClickListener {
-        fun onItemClick(todo : Todo)
         fun onCheckBoxClick(todo: Todo, isChecked: Boolean)
         fun onItemDelete(todo : Todo)
     }
