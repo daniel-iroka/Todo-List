@@ -3,11 +3,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tv_what_is_your_task">What is your Task?</string>
     <string name="ed_your_task">Your Task....</string>
-    <string name="tv_due_date_time">Due Date/Time:</string>
+    <string name="tv_due_date_time">Date/Time Created:</string>
     <string name="ed_date_not_set">Date not set…</string>
     <string name="ed_time_not_set">Time not set…</string>
     <string name="yes_check_content_description">Click the Checkmark to create your new Task.</string>
     <string name="task_add_toast">Task has been Successfully added!</string>
+    <string name="task_update_toast">Task has been Successfully updated!</string>
     <string name="no_task_add_toast">Please fill out all the fields</string>
     <string name="tvTaskTitle">Task Title</string>
     <string name="tvTaskDate">Task Date</string>

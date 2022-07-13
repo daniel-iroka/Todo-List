@@ -19,3 +19,5 @@ data class Todo(
     var completed : Boolean = false,
     val important : Boolean = false
 ) : Parcelable
+
+// TODO - WHEN I COME BACK NEXT TIME, I WILL ADD ANOTHER COLUMN TO BE ABLE TO GROUP THE TASKS BY THE "TIME" OF CREATION, PROPERLY JUST LIKE FLORIAN'S METHOD.

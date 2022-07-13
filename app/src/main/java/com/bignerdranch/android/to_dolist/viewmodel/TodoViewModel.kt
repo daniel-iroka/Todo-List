@@ -80,6 +80,11 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun updateTask(todo : Todo) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateTask(todo)
+        }
+    }
 
     fun onTaskCheckedChanged(todo : Todo, isChecked : Boolean) {
         viewModelScope.launch {

@@ -23,8 +23,8 @@ import com.bignerdranch.android.to_dolist.model.Todo
 import java.text.SimpleDateFormat
 import java.util.*
 
-private const val DIALOG_DATE = "DialogDate"
-private const val DIALOG_TIME = "DialogTime"
+const val DIALOG_DATE = "DialogDate"
+const val DIALOG_TIME = "DialogTime"
 const val SIMPLE_DATE_FORMAT = "MMM, d yyyy"
 const val SIMPLE_TIME_FORMAT = "H:mm"
 
@@ -132,7 +132,7 @@ class AddFragment : Fragment() {
         val time = binding.edTime.text.toString()
 
         if (inputCheck(title, date, time)) {
-            val todo = Todo(0, title)
+            val todo = Todo(0, title, todo.date, todo.time)
             todoViewModel.addTodo(todo)
             // This will make a toast saying Successfully added task if we add a task
             Toast.makeText(requireContext(), R.string.task_add_toast, Toast.LENGTH_LONG).show()
