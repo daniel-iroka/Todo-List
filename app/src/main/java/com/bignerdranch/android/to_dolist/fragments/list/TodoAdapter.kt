@@ -30,6 +30,8 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
         return TodoViewHolder(binding)
     }
 
+    // TODO - WHEN I COME BACK, I WILL SEE TO ADDING NOTIFICATIONS CLASS HERE TO ALLOW THE USER TO BE ABLE TO SELECT AN ALARM FOR EACH TASK.
+
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val currentItem = getItem(position)
