@@ -40,7 +40,6 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
      *  The combine function here is a an object in the flow library that is used too combine the most recent values of a flow, so if one value changes it will
      *  automatically return the latest values of the other flows. This is done so that the three flows will work in harmony.
      */
-    @OptIn(ExperimentalCoroutinesApi::class)
     private val tasksFlow = combine(
         searchQuery,
         sortOrder,

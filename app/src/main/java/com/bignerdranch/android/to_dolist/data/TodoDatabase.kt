@@ -42,8 +42,6 @@ abstract class TodoDatabase : RoomDatabase() {
     }
 }
 
-// TODO - DON'T ALSO FORGET TO MIGRATE MY DATABASE AFTER I HAVE ADDED A NEW COLUMN AND ALSO CHANGE THE QUERY IN MY DAO TO THE PROPER ONE.
-
 val migration_1_2 = object : Migration(1,2) {
     override fun migrate(database: SupportSQLiteDatabase) {
         database.execSQL("ALTER TABLE todo_table ADD COLUMN important INTEGER NOT NULL DEFAULT 0 ")

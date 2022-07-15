@@ -23,7 +23,7 @@ interface TodoDao {
     @Query("SELECT * FROM todo_table WHERE (completed != :hideCompleted OR completed = 0) AND title LIKE '%' || :searchQuery || '%' ORDER BY title COLLATE NOCASE")
     fun getTasksSortedByName(searchQuery: String, hideCompleted: Boolean): Flow<List<Todo>>
 
-    @Query("SELECT * FROM todo_table WHERE (completed != :hideCompleted OR completed = 0) AND title LIKE '%' || :searchQuery || '%' ORDER BY time ASC")
+    @Query("SELECT * FROM todo_table WHERE (completed != :hideCompleted OR completed = 0) AND title LIKE '%' || :searchQuery || '%' ORDER BY created ASC")
     fun getTasksSortedByDateCreated(searchQuery: String, hideCompleted: Boolean): Flow<List<Todo>>
 
     // onConflict will ignore any known conflicts, in this case will remove duplicate "Todos" with the same name

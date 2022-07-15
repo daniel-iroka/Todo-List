@@ -146,7 +146,6 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
         Log.i(TAG , "Our todos list size is ${finishedTodos.size}")
     }
 
-
     // We want to leave no trace of our Binding class Reference to avoid memory leaks
     override fun onDestroy() {
         super.onDestroy()

@@ -3,7 +3,7 @@ package com.bignerdranch.android.to_dolist.model
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
 /** Our Model class. This class will represent our database table **/
@@ -17,7 +17,6 @@ data class Todo(
     var date : Date = Date(),
     var time : Date = Date(),
     var completed : Boolean = false,
-    val important : Boolean = false
+    val important : Boolean = false,
+    val created : Long = System.currentTimeMillis()
 ) : Parcelable
-
-// TODO - WHEN I COME BACK NEXT TIME, I WILL ADD ANOTHER COLUMN TO BE ABLE TO GROUP THE TASKS BY THE "TIME" OF CREATION, PROPERLY JUST LIKE FLORIAN'S METHOD.

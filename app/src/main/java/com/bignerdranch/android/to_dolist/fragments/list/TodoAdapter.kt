@@ -2,7 +2,6 @@ package com.bignerdranch.android.to_dolist.fragments.list
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.LayoutDirection
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
@@ -22,7 +21,6 @@ import java.util.*
 
 class TodoAdapter(private val _context : Context, private val listener : OnItemClickListener): ListAdapter<Todo, TodoAdapter.TodoViewHolder>(DiffCallBack) {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         // this can be done in an inline variable and I may experiment on it later.
         val binding = CustomRowBinding.inflate(LayoutInflater.from(parent.context),
@@ -31,6 +29,7 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
         )
         return TodoViewHolder(binding)
     }
+
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val currentItem = getItem(position)
@@ -83,8 +82,8 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                                 // NO_POSITION means that an item is invalid and out of this list, so this is a safe check because-
                                 // we don't want to call a listener on an invalid item
                                 if (position != RecyclerView.NO_POSITION) {
-                                    val todo = getItem(position)
-                                    listener.onItemDelete(todo)
+                                    val curTodo = getItem(position)
+                                    listener.onItemDelete(curTodo)
                                 }
 
                                 Toast.makeText(_context, "Task has been deleted.", Toast.LENGTH_LONG).show()
