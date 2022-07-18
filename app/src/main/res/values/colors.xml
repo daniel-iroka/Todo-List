@@ -17,4 +17,5 @@
     <color name="textView_default_color">#808080</color>
     <color name="red">#FF0000</color>
     <color name="orange">#FFC107</color>
+    <color name="default_color">#D8D8D8</color>
 </resources>

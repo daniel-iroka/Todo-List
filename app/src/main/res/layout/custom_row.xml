@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="15dp"
+    android:padding="13dp"
     android:elevation="8dp"
     android:layout_marginTop="10dp"
     android:layout_marginStart="6dp"
@@ -24,18 +24,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
 
-
     <TextView
         android:id="@+id/tvTaskTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="9dp"
         android:fontFamily="sans-serif-thin"
         android:text="@string/tvTaskTitle"
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/cbTask"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -101,14 +100,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="43dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="4dp"
+        android:drawablePadding="2dp"
         android:text="Today at 12:00"
-        android:textSize="11sp"
         android:textColor="@color/red"
+        android:textSize="11sp"
         android:textStyle="italic"
+        android:visibility="invisible"
+        app:drawableLeftCompat="@drawable/ic_alarm_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:drawableLeftCompat="@drawable/ic_alarm_icon"
-        android:drawablePadding="2dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

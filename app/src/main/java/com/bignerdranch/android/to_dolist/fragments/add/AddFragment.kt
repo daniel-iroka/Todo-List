@@ -36,6 +36,8 @@ class AddFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var todo : Todo
 
+    // TODO - WHEN I COME BACK, I WILL CONTINUE REDESIGNING THIS APP
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         todo = Todo()
@@ -49,8 +51,6 @@ class AddFragment : Fragment() {
         _binding = FragmentAddBinding.inflate(inflater, container, false)
 
         todoViewModel = ViewModelProvider(this)[TodoViewModel::class.java]
-
-        remindersTextSpan()
 
         // will insert our database when clicked
         binding.abCheckYes.setOnClickListener {
@@ -104,7 +104,7 @@ class AddFragment : Fragment() {
     }
 
     // our reminders Text span
-    private fun remindersTextSpan() {
+    /**private fun remindersTextSpan() {
         val spannableString = SpannableString("Notifications")
 
         val clickableSpan = object : ClickableSpan() {
@@ -122,7 +122,7 @@ class AddFragment : Fragment() {
 
         binding.tvReminders.text = spannableString
         binding.tvReminders.movementMethod = LinkMovementMethod.getInstance()
-    }
+    } **/
 
 
     // This function's job will be to insert Tasks in our database
