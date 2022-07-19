@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">To-Do List</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="tv_what_is_your_task">What is your Task?</string>
+    <string name="tv_what_is_your_task">What Task do you want to perform?</string>
     <string name="ed_your_task">Your Task....</string>
     <string name="tv_due_date_time">Date/Time Created:</string>
     <string name="ed_date_not_set">Date not set…</string>

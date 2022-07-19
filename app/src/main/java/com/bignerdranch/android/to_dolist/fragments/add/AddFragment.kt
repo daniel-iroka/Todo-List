@@ -1,12 +1,7 @@
 package com.bignerdranch.android.to_dolist.fragments.add
 
-import android.graphics.Color
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.TextPaint
 import android.text.TextUtils
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -36,7 +31,8 @@ class AddFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var todo : Todo
 
-    // TODO - WHEN I COME BACK, I WILL CONTINUE REDESIGNING THIS APP
+    // TODO - WHEN I COME BACK, I WILL ALSO CHECK IF TO SEE IF THERE IS A WAY I CAN CLEAR THE RESULT OF AN EDITTEXT AND IF IT WORKS THEN I'LL MOVE ON TO THE REMINDER IMPLEMENTATION
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,26 +99,7 @@ class AddFragment : Fragment() {
         binding.edTime.text = timeLocales.format(todo.time)
     }
 
-    // our reminders Text span
-    /**private fun remindersTextSpan() {
-        val spannableString = SpannableString("Notifications")
-
-        val clickableSpan = object : ClickableSpan() {
-            override fun onClick(widget: View) {
-                Toast.makeText(context, "Set Reminders!", Toast.LENGTH_LONG).show()
-            }
-
-            override fun updateDrawState(ds: TextPaint) {
-                super.updateDrawState(ds)
-
-                ds.color = Color.BLUE
-            }
-        }
-        spannableString.setSpan(clickableSpan, 0, 13, SpannableString.SPAN_INCLUSIVE_EXCLUSIVE)
-
-        binding.tvReminders.text = spannableString
-        binding.tvReminders.movementMethod = LinkMovementMethod.getInstance()
-    } **/
+    // TODO - THIS IS A LATER TIME TODO BUT I MAY EXPERIMENT WITH "GONE" INSTEAD OF INVISIBLE TO SHOW THE SET ALARM FOR EACH TASK IN THE RECYCLERVIEW
 
 
     // This function's job will be to insert Tasks in our database

@@ -22,7 +22,7 @@
         <entry key="app/src/main/res/font/font.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/font/fonts.xml" value="0.22447916666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1953125" />
-        <entry key="app/src/main/res/layout/custom_row.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/custom_row.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_list.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_update.xml" value="0.1953125" />
