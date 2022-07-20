@@ -10,7 +10,7 @@
 
     <!-- Our custom colors -->
     <color name="holo_light_blue">#33B5E5</color>
-    <color name="holo_light_blue_dark">#247EA0</color>
+    <color name="holo_light_blue_dark">#7EC8E3</color>
     <color name="holo_light_blue_darker">#1B5D77</color>
     <color name="blue">#304FFE</color>
     <color name="dark_white">#304FFE</color>

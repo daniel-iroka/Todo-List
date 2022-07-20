@@ -15,6 +15,13 @@
         <!-- Customize your theme here. -->
         <item name="android:itemTextAppearance">@style/customMenuItemsText</item>
         <item name="actionOverflowMenuStyle">@style/customPopupOverflowBackground</item>
+        <item name="android:dialogTheme">@style/AppTheme.DialogTheme</item>
+    </style>
+
+    <!-- Custom style for our Dialogs. Date dialog to be specific. -->
+    <style name="AppTheme.DialogTheme" parent="Theme.AppCompat.Light.Dialog" >
+        <item name="colorAccent">@color/holo_light_blue_dark</item>
+        <item name="android:colorAccent">@color/holo_light_blue_dark</item>
     </style>
 
 
