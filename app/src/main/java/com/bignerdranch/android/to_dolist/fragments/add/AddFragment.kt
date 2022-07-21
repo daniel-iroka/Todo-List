@@ -31,10 +31,8 @@ class AddFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var todo : Todo
 
-
-    // TODO - WHEN I COME BACK, FIRSTLY, I WILL TRY TO FIX AND CHECK THE REASON WHY THE DIALOG BOX COLOR ISN'T CHANGING
-    // TODO - WHEN I COME BACK, I MAY ALSO TRY TO INCREASE THE SIZE OF THE EDITTEXTS TO SEE IF IT WILL LOOK BETTER.
-    // TODO - ALSO WHEN I COME BACK, I WILL CONTINUE EXPERIMENTING WITH MORE COLOURS
+    // TODO - WHEN I COME BACK, I WILL PROCEED WITH THE IMPLEMENTATION OF THE ALARM MANAGER AND NOTIFICATIONS. ALSO DON'T FORGET TO CHANGE THE COLOR OF THE ICON ON THE OVERFLOW MENU.
+    // TODO - ALSO IF I SEE OR HAVE MORE DESIGN IDEAS AS IMPROVEMENTS, I WILL IMPLEMENT THEM.
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,20 +84,11 @@ class AddFragment : Fragment() {
            TimePickerFragment().show(this@AddFragment.childFragmentManager, DIALOG_TIME)
         }
 
-        // todo - ALso fix this thing.
-        if (binding.edDate.text.toString().isNotEmpty()) {
-            binding.iClearSearch.visibility = View.VISIBLE
-        }
-
-        binding.iClearSearch.setOnClickListener {
+        binding.iClearSearch2.setOnClickListener {
             binding.edDate.text = ""
         }
 
-        if (binding.edTime.text.toString().isNotEmpty()) {
-            binding.iClearSearch2.visibility = View.VISIBLE
-        }
-
-        binding.iClearSearch2.setOnClickListener {
+        binding.iClearSearch.setOnClickListener {
             binding.edTime.text = ""
         }
         return binding.root

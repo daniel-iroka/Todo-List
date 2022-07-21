@@ -9,13 +9,13 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Our custom colors -->
-    <color name="holo_light_blue">#33B5E5</color>
-    <color name="holo_light_blue_dark">#7EC8E3</color>
-    <color name="holo_light_blue_darker">#1B5D77</color>
     <color name="blue">#304FFE</color>
-    <color name="dark_white">#304FFE</color>
-    <color name="textView_default_color">#808080</color>
+    <color name="holo_light_blue">#33B5E5</color>
+    <color name="holo_light_blue_dark">#1B5D77</color>
+    <color name="holo_light_blue_darker">#154558</color>
+    <color name="light_blue">#F5F5FF</color>
     <color name="red">#FF0000</color>
     <color name="orange">#FFC107</color>
-    <color name="default_color">#D8D8D8</color>
+    <color name="android_default_color">#808080</color>
+    <color name="lighter_default_color">#D8D8D8</color>
 </resources>

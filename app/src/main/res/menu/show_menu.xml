@@ -5,11 +5,11 @@
         android:id="@+id/itEditTask"
         android:title="Edit Task "
         android:icon="@drawable/ic_edit"
-        android:iconTint="@color/textView_default_color" />
+        android:iconTint="@color/android_default_color" />
 
     <item
         android:id="@+id/itDeleteTask"
         android:title="Delete Task "
         android:icon="@drawable/ic_delete"
-        android:iconTint="@color/red"/>
+        android:iconTint="@color/android_default_color"/>
 </menu>
