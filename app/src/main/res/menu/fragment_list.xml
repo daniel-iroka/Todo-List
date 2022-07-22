@@ -36,7 +36,8 @@
         android:id="@+id/action_hide_completed_tasks"
         android:checkable="true"
         android:title="@string/hide_completed"
-        app:showAsAction="never"/>
+        app:showAsAction="never"
+        app:iconTint="@color/holo_light_blue_dark"/>
 
     <item
         android:id="@+id/del_selected_tasks"

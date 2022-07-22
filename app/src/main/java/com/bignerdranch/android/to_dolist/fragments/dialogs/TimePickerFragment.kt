@@ -47,10 +47,4 @@ class TimePickerFragment : DialogFragment() {
     }
 
 
-    companion object {
-        // NOTE : I HAVE NO USE FOR THIS NOW SO I MAY COMPLETE LATER.
-        fun newInstance() : TimePickerFragment {
-            return TimePickerFragment()
-        }
-    }
 }

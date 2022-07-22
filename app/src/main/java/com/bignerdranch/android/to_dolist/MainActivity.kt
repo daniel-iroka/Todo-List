@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupActionBarWithNavController(findNavController(R.id.fragmentContainerView))
+
     }
 
     // This function will enable us to be able to use the Default back arrow button in our nav_graph action bar
