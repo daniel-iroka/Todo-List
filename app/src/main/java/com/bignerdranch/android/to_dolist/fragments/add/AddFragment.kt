@@ -67,7 +67,6 @@ class AddFragment : Fragment() {
             scheduleNotification()
         }
 
-
         // Our clear search buttons
         binding.iClearSearch2.setOnClickListener {
             binding.edDate.text = ""
@@ -102,7 +101,6 @@ class AddFragment : Fragment() {
                 if (todo.time.toString().isNotEmpty()) {
                     updateTime()
                 }
-
             }
             TimePickerFragment().show(this@AddFragment.childFragmentManager, DIALOG_TIME)
         }
@@ -153,7 +151,6 @@ class AddFragment : Fragment() {
 //            ).setPositiveButton("Okay"){_,_->}
 //            .show()
 //    }
-
 
     private fun pickDateAndTime() {
         val currentDateTime = Calendar.getInstance()
