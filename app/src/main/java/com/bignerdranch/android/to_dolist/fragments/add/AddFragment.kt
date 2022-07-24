@@ -37,6 +37,7 @@ const val SIMPLE_TIME_FORMAT = "H:mm a"
 class AddFragment : Fragment() {
 
     // TODO - WHEN I COME BACK, I WILL CONTINUE IN THE IMPLEMENTING OF THIS ALARM REMINDER AND SEE HOW TO IMPLEMENT IT PROPERLY TO FIT MY APP.
+    // TODO - WHEN I COME BACK, I WILL FIND A WAY TO ADD BOTH THE DATE AND TIME FORMAT TOGETHER
 
     private lateinit var todoViewModel : TodoViewModel
     private var _binding : FragmentAddBinding? = null
@@ -105,7 +106,10 @@ class AddFragment : Fragment() {
             TimePickerFragment().show(this@AddFragment.childFragmentManager, DIALOG_TIME)
         }
 
+        // Our reminder button. I will run this later when I start my App
         binding.btnReminder.setOnClickListener {
+            val dateFormat = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
+            binding.btnReminder.text = dateFormat.format(setTime)
             pickDateAndTime()
         }
         return binding.root
@@ -151,6 +155,8 @@ class AddFragment : Fragment() {
 //            ).setPositiveButton("Okay"){_,_->}
 //            .show()
 //    }
+
+
 
     private fun pickDateAndTime() {
         val currentDateTime = Calendar.getInstance()
