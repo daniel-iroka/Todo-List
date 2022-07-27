@@ -22,7 +22,8 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
      **/
 
     private val repository : TodoRepository
-    private val todoDao = TodoDatabase.getDatabase(application).todoDao()
+    // TODO - WHEN I COME BACK TOMORROW, I WILL ALSO MAKE USE OF THIS TOOD FROM THE VIEW MODEL TO PERSIST MY VIEWS INSTEAD OF THE NORMAL TODO.
+    val todo = Todo()
 
     init {
         // having access to our TodoDao from our database
@@ -30,11 +31,9 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         repository = TodoRepository(userDao)
     }
 
-
     val searchQuery = MutableStateFlow("")
     val sortOrder = MutableStateFlow(SortOrder.BY_DATE)   // adding BY_DATE to make the lists sorted by date as default
     val hideCompleted = MutableStateFlow(false)
-
 
     /**
      *  The combine function here is a an object in the flow library that is used too combine the most recent values of a flow, so if one value changes it will
@@ -52,7 +51,6 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     val tasks = tasksFlow.asLiveData()
-
 
     // All functions using coroutines objects indicates that whatever is in it should run in a background thread
     fun addTodo(todo : Todo) {
@@ -93,18 +91,3 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
 }
 
 enum class SortOrder { BY_DATE, BY_NAME }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

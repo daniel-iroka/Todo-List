@@ -30,7 +30,6 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
         return TodoViewHolder(binding)
     }
 
-
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val currentItem = getItem(position)
         holder.bind(currentItem)
@@ -50,7 +49,6 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                 }
             }
         }
-
 
         @SuppressLint("DiscouragedPrivateApi")
         fun bind(todo : Todo) {

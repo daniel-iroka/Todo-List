@@ -119,13 +119,14 @@
         android:text="Set reminder"
         android:textColor="@color/black"
         android:textSize="12sp"
+        android:textStyle="bold"
         app:drawableStartCompat="@drawable/ic_alarm_icon"
         app:drawableTint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edTime" />
 
     <ImageView
-        android:id="@+id/iClearSearch"
+        android:id="@+id/iClearTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -136,7 +137,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edDate" />
 
     <ImageView
-        android:id="@+id/iClearSearch2"
+        android:id="@+id/iClearDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -145,5 +146,16 @@
         app:backgroundTint="@color/lighter_default_color"
         app:layout_constraintStart_toEndOf="@+id/edDate"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <ImageView
+        android:id="@+id/iClearReminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="23dp"
+        android:src="@drawable/ic_clear"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/btnReminder"
+        app:layout_constraintTop_toBottomOf="@+id/edTime" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

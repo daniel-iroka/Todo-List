@@ -29,7 +29,6 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
     private lateinit var adapter : TodoAdapter
     private var todosList = emptyList<Todo>()
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -20,4 +20,5 @@
     <string name="sort_by_name_text">Sort by name</string>
     <string name="sort_by_date_text">Sort by date created</string>
     <string name="hide_completed">Hide Completed</string>
+    <string name="set_reminder">Set reminder</string>
 </resources>

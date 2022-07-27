@@ -1,7 +1,6 @@
 package com.bignerdranch.android.to_dolist.fragments.add
 
 import android.app.AlarmManager
-import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -12,6 +11,7 @@ import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.text.format.DateUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +27,7 @@ import com.bignerdranch.android.to_dolist.fragments.dialogs.TimePickerFragment
 import com.bignerdranch.android.to_dolist.model.Todo
 import com.bignerdranch.android.to_dolist.utils.*
 import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 const val DIALOG_DATE = "DialogDate"
@@ -36,14 +37,14 @@ const val SIMPLE_TIME_FORMAT = "H:mm a"
 
 class AddFragment : Fragment() {
 
-    // TODO - WHEN I COME BACK, I WILL CONTINUE IN THE IMPLEMENTING OF THIS ALARM REMINDER AND SEE HOW TO IMPLEMENT IT PROPERLY TO FIT MY APP.
-    // TODO - WHEN I COME BACK, I WILL FIND A WAY TO ADD BOTH THE DATE AND TIME FORMAT TOGETHER
+    // TODO - WHEN I COME BACK, I WILL CONTINUE IN THE ADDING AND IMPROVING OF THIS REMINDER FUNCTION AND I WILL ALSO PASS IT AND IMPLEMENT IT IN OUR OTHER LIST FRAGMENT.
+    // TODO - WHEN I COME BACK, THE NEXT THING I WILL ALSO DO IS IMPLEMENT THE USER SET-REMINDER IN OUR LIST FRAGMENT AND DATABASE
 
     private lateinit var todoViewModel : TodoViewModel
     private var _binding : FragmentAddBinding? = null
     private val binding get() = _binding!!
     private lateinit var todo : Todo
-    private var setTime : Long = 0
+    private var setDateTime : Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,14 +70,13 @@ class AddFragment : Fragment() {
         }
 
         // Our clear search buttons
-        binding.iClearSearch2.setOnClickListener {
+        binding.iClearDate.setOnClickListener {
             binding.edDate.text = ""
         }
 
-        binding.iClearSearch.setOnClickListener {
+        binding.iClearTime.setOnClickListener {
             binding.edTime.text = ""
         }
-
 
         // showing our datePickerDialog
         binding.edDate.setOnClickListener {
@@ -85,10 +85,8 @@ class AddFragment : Fragment() {
                 val result = bundle.getSerializable("bundleKey") as Date
                 // passing the result of the user selected date directly to the _Todo class instead. Will do the same for also the time.
                 todo.date = result
-                // will ONLY update the date field when it is not empty so that we don't get a preloaded Date textView. Will do the same for also the time.
-                if(todo.date.toString().isNotEmpty()) {
-                    updateDate()
-                }
+                updateDate()
+
             }
             DatePickerFragment().show(this@AddFragment.childFragmentManager, DIALOG_DATE)
         }
@@ -99,18 +97,41 @@ class AddFragment : Fragment() {
             childFragmentManager.setFragmentResultListener("tRequestKey", viewLifecycleOwner) {_, bundle ->
                 val result = bundle.getSerializable("tBundleKey") as Date
                 todo.time = result
-                if (todo.time.toString().isNotEmpty()) {
-                    updateTime()
-                }
+                updateTime()
+
             }
             TimePickerFragment().show(this@AddFragment.childFragmentManager, DIALOG_TIME)
         }
 
         // Our reminder button. I will run this later when I start my App
         binding.btnReminder.setOnClickListener {
-            val dateFormat = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
-            binding.btnReminder.text = dateFormat.format(setTime)
-            pickDateAndTime()
+
+            val currentDateTime = Calendar.getInstance()
+            val startYear = currentDateTime.get(Calendar.YEAR)
+            val startMonth = currentDateTime.get(Calendar.MONTH)
+            val startDay = currentDateTime.get(Calendar.DAY_OF_MONTH)
+            val startHour = currentDateTime.get(Calendar.HOUR_OF_DAY)
+            val startMinute = currentDateTime.get(Calendar.MINUTE)
+
+            DatePickerDialog(requireContext(), { _, year, month, day ->
+                TimePickerDialog(requireContext(), { _, hour, minute ->
+                    val pickedDateTime = Calendar.getInstance()
+                    pickedDateTime.set(year, month, day, hour, minute)
+                    // This 'time' will be solely for being displayed in our Set Reminder textView
+                    val setDateTimeForTextView = pickedDateTime.timeInMillis
+                    setDateTime = pickedDateTime.timeInMillis
+                    todo.reminder = Date(setDateTimeForTextView)
+                    updateDateTime()
+
+                }, startHour, startMinute, false).show()
+            }, startYear, startMonth, startDay).show()
+        }
+
+        binding.iClearReminder.apply {
+            setOnClickListener {
+                binding.btnReminder.setText(R.string.set_reminder)
+                visibility = View.INVISIBLE
+            }
         }
         return binding.root
     }
@@ -133,48 +154,11 @@ class AddFragment : Fragment() {
         val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.setAndAllowWhileIdle(
             AlarmManager.RTC_WAKEUP,
-            setTime,
+            setDateTime,
             pendingIntent
         )
-
-//        showAlert(setTime, title, message)
     }
 
-    // todo - IMPORTANT NOTE! : I WILL REMOVE THIS WHEN I COME BACK. THERE IS NO NEED FOR THIS.
-//    private fun showAlert(time: Long, title: String, message: String) {
-//        val date = Date(time)
-//        val dateFormat = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
-//        val timeFormat = SimpleDateFormat(SIMPLE_TIME_FORMAT, Locale.getDefault())
-//
-//        AlertDialog.Builder(requireContext())
-//            .setTitle("Notification Scheduled")
-//            .setMessage(
-//                "Title:" + title +
-//                "\nMessage: " + message +
-//                "\nAt:" + dateFormat.format(date) + "  " + timeFormat.format(date)
-//            ).setPositiveButton("Okay"){_,_->}
-//            .show()
-//    }
-
-
-
-    private fun pickDateAndTime() {
-        val currentDateTime = Calendar.getInstance()
-        val startYear = currentDateTime.get(Calendar.YEAR)
-        val startMonth = currentDateTime.get(Calendar.MONTH)
-        val startDay = currentDateTime.get(Calendar.DAY_OF_MONTH)
-        val startHour = currentDateTime.get(Calendar.HOUR_OF_DAY)
-        val startMinute = currentDateTime.get(Calendar.MINUTE)
-
-        DatePickerDialog(requireContext(), { _, year, month, day ->
-            TimePickerDialog(requireContext(), { _, hour, minute ->
-                val pickedDateTime = Calendar.getInstance()
-                pickedDateTime.set(year, month, day, hour, minute)
-                setTime = pickedDateTime.timeInMillis
-
-            }, startHour, startMinute, false).show()
-        }, startYear, startMonth, startDay).show()
-    }
 
     // We create a Notifications channel and register it to our system. We must do this before post our Notifications.
     private fun createNotificationsChannel() {
@@ -189,11 +173,16 @@ class AddFragment : Fragment() {
         notificationManger.createNotificationChannel(channel)
     }
 
+    // function to update DateTime
+    private fun updateDateTime() {
+        binding.iClearReminder.visibility = View.VISIBLE
+        binding.btnReminder.text = DateUtils.getRelativeDateTimeString(context, todo.reminder.time, DateUtils.DAY_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0)
+    }
 
     // function to update Date
     private fun updateDate() {
         val dateLocales = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
-        binding.edDate.text = todo.date.toString()
+        binding.edDate.text = dateLocales.format(todo.date)
     }
 
     // function to update Time
@@ -202,7 +191,6 @@ class AddFragment : Fragment() {
         binding.edTime.text = timeLocales.format(todo.time)
     }
 
-
     // This function's job will be to insert Tasks in our database
     private fun insertTodoInDatabase() {
         val title = binding.edTaskTitle.text.toString()
@@ -210,7 +198,7 @@ class AddFragment : Fragment() {
         val time = binding.edTime.text.toString()
 
         if (inputCheck(title, date, time)) {
-            val todo = Todo(0, title, todo.date, todo.time)
+            val todo = Todo(0, title, todo.date, todo.time, todo.reminder)
             todoViewModel.addTodo(todo)
             // This will make a toast saying Successfully added task if we add a task
             Toast.makeText(requireContext(), R.string.task_add_toast, Toast.LENGTH_LONG).show()
