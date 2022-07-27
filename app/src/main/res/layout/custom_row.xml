@@ -96,7 +96,7 @@
         app:tint="@color/holo_light_blue_dark" />
 
     <TextView
-        android:id="@+id/tvReminders"
+        android:id="@+id/tvResultsReminder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="43dp"
@@ -104,7 +104,7 @@
         android:drawablePadding="2dp"
         android:text="Today at 12:00"
         android:textColor="@color/red"
-        android:textSize="10sp"
+        android:textSize="11sp"
         android:textStyle="italic"
         android:visibility="invisible"
         app:drawableLeftCompat="@drawable/ic_alarm_icon"

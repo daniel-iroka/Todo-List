@@ -89,5 +89,4 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 }
-
 enum class SortOrder { BY_DATE, BY_NAME }

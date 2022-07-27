@@ -33,7 +33,7 @@
         android:hint="@string/ed_your_task"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:textColor="@color/holo_light_blue_dark"
+        android:textColor="@color/android_default_color"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -157,5 +157,4 @@
         android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/btnReminder"
         app:layout_constraintTop_toBottomOf="@+id/edTime" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

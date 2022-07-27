@@ -2,7 +2,9 @@ package com.bignerdranch.android.to_dolist.fragments.list
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.text.format.DateUtils
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -61,6 +63,12 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                 cbTask.isChecked = todo.completed
                 tvTaskTitle.paint.isStrikeThruText = todo.completed
 
+                // Will only show the resultsReminder if important is true
+                if (todo.important) {
+                    tvResultsReminder.text = DateUtils.getRelativeDateTimeString(_context, todo.reminder.time, DateUtils.DAY_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0)
+                    tvResultsReminder.visibility = View.VISIBLE
+                }
+
                 // Implementing our PopupMenus to Edit and Delete a Task
                 iMenus.setOnClickListener { view ->
 
@@ -71,7 +79,6 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                             R.id.itEditTask -> {
                                 val action = ListFragmentDirections.actionListFragmentToUpdateFragment(todo)
                                 itemView.findNavController().navigate(action)
-
                                 true
                             }
 
@@ -83,7 +90,6 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                                     val curTodo = getItem(position)
                                     listener.onItemDelete(curTodo)
                                 }
-
                                 Toast.makeText(_context, "Task has been deleted.", Toast.LENGTH_LONG).show()
                                 true
                             }

@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoList">
         <receiver
-            android:name=".Notifications"
+            android:name=".utils.Notifications"
             android:enabled="true" />
         <activity
             android:name=".MainActivity"

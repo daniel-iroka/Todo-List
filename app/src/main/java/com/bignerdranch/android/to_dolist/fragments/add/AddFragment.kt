@@ -37,8 +37,8 @@ const val SIMPLE_TIME_FORMAT = "H:mm a"
 
 class AddFragment : Fragment() {
 
-    // TODO - WHEN I COME BACK, I WILL CONTINUE IN THE ADDING AND IMPROVING OF THIS REMINDER FUNCTION AND I WILL ALSO PASS IT AND IMPLEMENT IT IN OUR OTHER LIST FRAGMENT.
-    // TODO - WHEN I COME BACK, THE NEXT THING I WILL ALSO DO IS IMPLEMENT THE USER SET-REMINDER IN OUR LIST FRAGMENT AND DATABASE
+    // TODO - WHEN I COME BACK, THE FIRST THING I WILL DO IS TRY TO FIX THE SCROLLING BUG THAT DISALLOWS ME FROM SCROLLING THROUGH MY ADD_FRAGMENT AND ALSO POSSIBLY ADD-
+    // TODO   AN ORIENTATION RESOURCE FOR ADD_FRAGMENT IN LANDSCAPE MODE AND THEN CONTINUE FIXING THE ISSUE OF PERSISTING FIELDS WITH VIEW MODEL.
 
     private lateinit var todoViewModel : TodoViewModel
     private var _binding : FragmentAddBinding? = null
@@ -86,7 +86,6 @@ class AddFragment : Fragment() {
                 // passing the result of the user selected date directly to the _Todo class instead. Will do the same for also the time.
                 todo.date = result
                 updateDate()
-
             }
             DatePickerFragment().show(this@AddFragment.childFragmentManager, DIALOG_DATE)
         }
@@ -98,7 +97,6 @@ class AddFragment : Fragment() {
                 val result = bundle.getSerializable("tBundleKey") as Date
                 todo.time = result
                 updateTime()
-
             }
             TimePickerFragment().show(this@AddFragment.childFragmentManager, DIALOG_TIME)
         }
@@ -121,12 +119,14 @@ class AddFragment : Fragment() {
                     val setDateTimeForTextView = pickedDateTime.timeInMillis
                     setDateTime = pickedDateTime.timeInMillis
                     todo.reminder = Date(setDateTimeForTextView)
+                    todo.important = true
                     updateDateTime()
 
                 }, startHour, startMinute, false).show()
             }, startYear, startMonth, startDay).show()
         }
 
+        // this will clear our reminder selection
         binding.iClearReminder.apply {
             setOnClickListener {
                 binding.btnReminder.setText(R.string.set_reminder)
@@ -158,7 +158,6 @@ class AddFragment : Fragment() {
             pendingIntent
         )
     }
-
 
     // We create a Notifications channel and register it to our system. We must do this before post our Notifications.
     private fun createNotificationsChannel() {
@@ -196,9 +195,10 @@ class AddFragment : Fragment() {
         val title = binding.edTaskTitle.text.toString()
         val date  = binding.edDate.text.toString()
         val time = binding.edTime.text.toString()
+        val reminder = binding.btnReminder.text.toString()
 
-        if (inputCheck(title, date, time)) {
-            val todo = Todo(0, title, todo.date, todo.time, todo.reminder)
+        if (inputCheck(title, date, time, reminder)) {
+            val todo = Todo(0, title, todo.date, todo.time, todo.reminder, todo.important)
             todoViewModel.addTodo(todo)
             // This will make a toast saying Successfully added task if we add a task
             Toast.makeText(requireContext(), R.string.task_add_toast, Toast.LENGTH_LONG).show()
@@ -211,10 +211,10 @@ class AddFragment : Fragment() {
 
     // This function will help us check if the texts are empty and then proceed to add them to the database
     // so that we do not add empty tasks to our database
-    private fun inputCheck(title : String, date: String, time: String) : Boolean {
+    private fun inputCheck(title : String, date: String, time: String, reminder : String, important : Boolean = false) : Boolean {
 
         // will return false if fields in TextUtils are empty and true if not
-        return !(TextUtils.isEmpty(title) || TextUtils.isEmpty(date) || time.isEmpty())
+        return !(TextUtils.isEmpty(title) || TextUtils.isEmpty(date) || time.isEmpty() && reminder != "Set reminder" && important)
     }
 
     override fun onDestroy() {

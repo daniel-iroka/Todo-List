@@ -17,7 +17,7 @@ data class Todo(
     var date : Date = Date(),
     var time : Date = Date(),
     var reminder : Date = Date(),
+    var important : Boolean = false,
     var completed : Boolean = false,
-    val important : Boolean = false,
     val created : Long = System.currentTimeMillis()
 ) : Parcelable

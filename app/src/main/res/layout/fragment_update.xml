@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="24dp"
     tools:context=".fragments.update.UpdateFragment">
 
@@ -11,29 +11,31 @@
         android:id="@+id/updateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-light"
         android:text="@string/tv_what_is_your_task"
         android:textColor="@color/black"
+        android:textSize="16sp"
         android:textStyle="bold"
-        android:fontFamily="sans-serif-light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/updateTaskTitle"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="18dp"
+        android:backgroundTint="@color/holo_light_blue_dark"
         android:ems="10"
         android:fontFamily="sans-serif-light"
         android:hint="@string/ed_your_task"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:textColor="@color/android_default_color"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updateTextView" />
 
@@ -41,51 +43,52 @@
         android:id="@+id/updateTextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="sans-serif-light"
         android:text="@string/tv_due_date_time"
         android:textColor="@color/black"
+        android:textSize="14sp"
         android:textStyle="bold"
-        android:fontFamily="sans-serif-light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updateTaskTitle" />
 
     <TextView
         android:id="@+id/updateDate"
-        android:layout_width="match_parent"
+        android:layout_width="265dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="18dp"
         android:background="?attr/editTextBackground"
+        android:backgroundTint="@color/holo_light_blue_dark"
         android:ems="10"
         android:focusable="true"
-        android:fontFamily="sans-serif-light"
+        android:fontFamily="sans-serif-thin"
         android:hint="@string/ed_date_not_set"
         android:textAppearance="?android:attr/textAppearanceMediumInverse"
-        android:textColor="?attr/editTextColor"
+        android:textColor="@color/android_default_color"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updateTextView2"
         tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/updateTime"
-        android:layout_width="match_parent"
+        android:layout_width="265dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="24dp"
         android:background="?attr/editTextBackground"
+        android:backgroundTint="@color/holo_light_blue_dark"
         android:ems="10"
         android:focusable="true"
-        android:fontFamily="sans-serif-light"
+        android:fontFamily="sans-serif-thin"
         android:hint="@string/ed_time_not_set"
-        android:minHeight="48dp"
         android:textAppearance="?android:attr/textAppearanceMediumInverse"
-        android:textColor="?attr/editTextColor"
+        android:textColor="@color/android_default_color"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updateDate" />
 
@@ -105,25 +108,54 @@
         app:tint="@android:color/white" />
 
     <TextView
-        android:id="@+id/updateReminders"
+        android:id="@+id/updateReminder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="16dp"
-        android:text="Notifications"
-        android:textAppearance="@style/TextAppearance.Compat.Notification.Time.Media"
-        android:textSize="13sp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/custom_reminder"
+        android:drawablePadding="3dp"
+        android:padding="8dp"
+        android:text="Set reminder"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_alarm_icon"
+        app:drawableTint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updateTime" />
 
-    <TextView
-        android:id="@+id/updateTextView3"
+    <ImageView
+        android:id="@+id/iClearTime2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:text="Set Alarms and Priority for your Tasks."
-        android:textSize="13sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/updateReminders" />
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/ic_cancel"
+        app:backgroundTint="@color/lighter_default_color"
+        app:layout_constraintStart_toEndOf="@+id/updateTime"
+        app:layout_constraintTop_toBottomOf="@+id/updateDate" />
+
+    <ImageView
+        android:id="@+id/iClearDate2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="27dp"
+        android:src="@drawable/ic_cancel"
+        app:backgroundTint="@color/lighter_default_color"
+        app:layout_constraintStart_toEndOf="@+id/updateDate"
+        app:layout_constraintTop_toBottomOf="@+id/updateTextView2" />
+
+    <ImageView
+        android:id="@+id/iClearReminder2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="23dp"
+        android:src="@drawable/ic_clear"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/updateReminder"
+        app:layout_constraintTop_toBottomOf="@+id/updateTime" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
