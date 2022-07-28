@@ -22,8 +22,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
      **/
 
     private val repository : TodoRepository
-    // TODO - WHEN I COME BACK TOMORROW, I WILL ALSO MAKE USE OF THIS TOOD FROM THE VIEW MODEL TO PERSIST MY VIEWS INSTEAD OF THE NORMAL TODO.
-    val todo = Todo()
+    var date = ""
 
     init {
         // having access to our TodoDao from our database

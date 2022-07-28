@@ -27,7 +27,6 @@ import com.bignerdranch.android.to_dolist.fragments.dialogs.TimePickerFragment
 import com.bignerdranch.android.to_dolist.model.Todo
 import com.bignerdranch.android.to_dolist.utils.*
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 const val DIALOG_DATE = "DialogDate"
@@ -36,9 +35,6 @@ const val SIMPLE_DATE_FORMAT = "MMM, d yyyy"
 const val SIMPLE_TIME_FORMAT = "H:mm a"
 
 class AddFragment : Fragment() {
-
-    // TODO - WHEN I COME BACK, THE FIRST THING I WILL DO IS TRY TO FIX THE SCROLLING BUG THAT DISALLOWS ME FROM SCROLLING THROUGH MY ADD_FRAGMENT AND ALSO POSSIBLY ADD-
-    // TODO   AN ORIENTATION RESOURCE FOR ADD_FRAGMENT IN LANDSCAPE MODE AND THEN CONTINUE FIXING THE ISSUE OF PERSISTING FIELDS WITH VIEW MODEL.
 
     private lateinit var todoViewModel : TodoViewModel
     private var _binding : FragmentAddBinding? = null
@@ -172,7 +168,7 @@ class AddFragment : Fragment() {
         notificationManger.createNotificationChannel(channel)
     }
 
-    // function to update DateTime
+    // function to update DateTimes
     private fun updateDateTime() {
         binding.iClearReminder.visibility = View.VISIBLE
         binding.btnReminder.text = DateUtils.getRelativeDateTimeString(context, todo.reminder.time, DateUtils.DAY_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0)
