@@ -36,11 +36,16 @@ const val SIMPLE_TIME_FORMAT = "H:mm a"
 
 class AddFragment : Fragment() {
 
+    // TODO - WHEN I COME BACK TOMORROW, I WILL TRY AND FIX THIS ANDROID-VIEW-MODEL BUG THAT DISALLOWS ME FROM RETAINING THE SELECTED DATE AND TIME DURING DEVICE ORIENTATION.
+
     private lateinit var todoViewModel : TodoViewModel
     private var _binding : FragmentAddBinding? = null
     private val binding get() = _binding!!
     private lateinit var todo : Todo
     private var setDateTime : Long = 0
+
+    private val dateLocales = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
+    private val timeLocales = SimpleDateFormat(SIMPLE_TIME_FORMAT, Locale.getDefault())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,6 +86,7 @@ class AddFragment : Fragment() {
                 val result = bundle.getSerializable("bundleKey") as Date
                 // passing the result of the user selected date directly to the _Todo class instead. Will do the same for also the time.
                 todo.date = result
+                todoViewModel.editTextDate = dateLocales.format(todo.date)
                 updateDate()
             }
             DatePickerFragment().show(this@AddFragment.childFragmentManager, DIALOG_DATE)
@@ -176,13 +182,11 @@ class AddFragment : Fragment() {
 
     // function to update Date
     private fun updateDate() {
-        val dateLocales = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
-        binding.edDate.text = dateLocales.format(todo.date)
+        binding.edDate.text = todoViewModel.editTextDate
     }
 
     // function to update Time
     private fun updateTime() {
-        val timeLocales = SimpleDateFormat(SIMPLE_TIME_FORMAT, Locale.getDefault())
         binding.edTime.text = timeLocales.format(todo.time)
     }
 

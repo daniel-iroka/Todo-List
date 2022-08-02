@@ -6,7 +6,6 @@ import com.bignerdranch.android.to_dolist.data.TodoDatabase
 import com.bignerdranch.android.to_dolist.model.Todo
 import com.bignerdranch.android.to_dolist.repository.TodoRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
@@ -14,15 +13,17 @@ import kotlinx.coroutines.launch
 
 /** Our AndroidViewModel. This AndroidViewModel holds reference to our Application context. **/
 
+
 class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
     /**
-     *  NOTE! : "Context" are needed to instantiate a database that is why we are using an AndroidViewModel in this case because it holds reference to an
+     *  NOTE! : "Context" is needed to instantiate a database that is why we are using an AndroidViewModel in this case because it holds reference to an
      *  Application context. And if I remember correctly, it will start as the "Application" starts.
      **/
 
     private val repository : TodoRepository
-    var date = ""
+    var editTextDate = ""
+
 
     init {
         // having access to our TodoDao from our database
