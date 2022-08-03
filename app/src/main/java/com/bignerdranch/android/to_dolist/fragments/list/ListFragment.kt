@@ -83,7 +83,6 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
         }
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId)  {
             R.id.sort_by_name -> {

@@ -10,13 +10,16 @@ import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.text.TextUtils
 import android.text.format.DateUtils
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bignerdranch.android.to_dolist.*
@@ -33,10 +36,10 @@ const val DIALOG_DATE = "DialogDate"
 const val DIALOG_TIME = "DialogTime"
 const val SIMPLE_DATE_FORMAT = "MMM, d yyyy"
 const val SIMPLE_TIME_FORMAT = "H:mm a"
+const val DATE = "Date"
+private const val TAG = "AddFragment"
 
 class AddFragment : Fragment() {
-
-    // TODO - WHEN I COME BACK TOMORROW, I WILL TRY AND FIX THIS ANDROID-VIEW-MODEL BUG THAT DISALLOWS ME FROM RETAINING THE SELECTED DATE AND TIME DURING DEVICE ORIENTATION.
 
     private lateinit var todoViewModel : TodoViewModel
     private var _binding : FragmentAddBinding? = null
@@ -47,12 +50,16 @@ class AddFragment : Fragment() {
     private val dateLocales = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
     private val timeLocales = SimpleDateFormat(SIMPLE_TIME_FORMAT, Locale.getDefault())
 
+    private var retrievedDate = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         todo = Todo()
 
         createNotificationsChannel()
     }
+
+    // TODO - WHEN I COME BACK, I WILL USE THE ORIENTATION METHOD IN THE SCREEN AS I HAVE NO FREAKIN CHOICE BUT GOD DEY SHA.
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,6 +86,23 @@ class AddFragment : Fragment() {
             binding.edTime.text = ""
         }
 
+        todoViewModel.editTextDate.observe(viewLifecycleOwner) { date ->
+            retrievedDate = date
+        }
+
+        // this will clear our reminder selection
+        binding.iClearReminder.apply {
+            setOnClickListener {
+                binding.btnReminder.setText(R.string.set_reminder)
+                visibility = View.INVISIBLE
+            }
+        }
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         // showing our datePickerDialog
         binding.edDate.setOnClickListener {
 
@@ -86,7 +110,7 @@ class AddFragment : Fragment() {
                 val result = bundle.getSerializable("bundleKey") as Date
                 // passing the result of the user selected date directly to the _Todo class instead. Will do the same for also the time.
                 todo.date = result
-                todoViewModel.editTextDate = dateLocales.format(todo.date)
+                todoViewModel.updateText(dateLocales.format(result))
                 updateDate()
             }
             DatePickerFragment().show(this@AddFragment.childFragmentManager, DIALOG_DATE)
@@ -127,15 +151,6 @@ class AddFragment : Fragment() {
                 }, startHour, startMinute, false).show()
             }, startYear, startMonth, startDay).show()
         }
-
-        // this will clear our reminder selection
-        binding.iClearReminder.apply {
-            setOnClickListener {
-                binding.btnReminder.setText(R.string.set_reminder)
-                visibility = View.INVISIBLE
-            }
-        }
-        return binding.root
     }
 
     private fun scheduleNotification() {
@@ -182,7 +197,8 @@ class AddFragment : Fragment() {
 
     // function to update Date
     private fun updateDate() {
-        binding.edDate.text = todoViewModel.editTextDate
+        binding.edDate.text = retrievedDate
+        Log.i(TAG, "Our date was actually retrieved. Here it is $retrievedDate")
     }
 
     // function to update Time
