@@ -14,6 +14,7 @@
 
         <!-- Customize your theme here. -->
         <!-- Our customs themes. -->
+        <item name="colorAccent">@color/holo_light_blue_dark</item>
         <item name="android:itemTextAppearance">@style/customMenuItemsText</item>
         <item name="actionOverflowMenuStyle">@style/customPopupOverflowBackground</item>
         <item name="android:dialogTheme">@style/AppTheme.DialogTheme</item>
@@ -27,16 +28,15 @@
         <item name="android:colorAccent">@color/holo_light_blue_dark</item>
     </style>
 
-
     <!-- Custom style for text and background in our menu_item -->
     <style name="customMenuItemsText" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
-        <item name="fontFamily">sans-serif-light</item>
+        <item name="fontFamily">sans-serif-thin</item>
+        <item name="color">@color/black</item>
     </style>
 
     <style name="customPopupOverflowBackground" parent="@style/Widget.MaterialComponents.PopupMenu.Overflow">
         <item name="android:popupBackground">@drawable/popup_background</item>
     </style>
-
 
     <!-- Custom style for text in our Action/ToolBar. -->
     <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@android:style/TextAppearance">

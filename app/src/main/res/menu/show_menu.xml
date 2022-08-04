@@ -3,13 +3,13 @@
 
     <item
         android:id="@+id/itEditTask"
-        android:title="Edit Task "
+        android:title="@string/edit_task"
         android:icon="@drawable/ic_edit"
         android:iconTint="@color/android_default_color" />
 
     <item
         android:id="@+id/itDeleteTask"
-        android:title="Delete Task "
+        android:title="@string/delete_task"
         android:icon="@drawable/ic_delete"
         android:iconTint="@color/android_default_color"/>
 </menu>

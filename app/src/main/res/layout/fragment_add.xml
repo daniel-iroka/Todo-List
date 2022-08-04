@@ -122,7 +122,7 @@
             android:background="@drawable/custom_reminder"
             android:drawablePadding="3dp"
             android:padding="8dp"
-            android:text="Set reminder"
+            android:text="@string/tv_set_reminder"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:textStyle="bold"

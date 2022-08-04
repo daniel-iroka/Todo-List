@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/updateDeleteTask"
-        android:title="Delete"
+        android:title="@string/delete"
         android:icon="@drawable/ic_update_delete"
         app:showAsAction="always" />
 </menu>

@@ -106,6 +106,10 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
                 deleteAllTasks()
                 true
             }
+            R.id.about -> {
+                findNavController().navigate(R.id.action_listFragment_to_aboutFragment)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -130,7 +134,6 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
         val builder = AlertDialog.Builder(requireContext())
         // Our todos that have been marked completed by the checkBox
         val finishedTodos = todosList.filter { it.completed }
-
         builder.setPositiveButton("Yes") {_,_->
             finishedTodos.forEach { todos ->
                 mTodoViewModel.deleteCompletedTasks(todos.id.toLong())

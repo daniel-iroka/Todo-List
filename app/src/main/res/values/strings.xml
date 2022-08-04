@@ -21,4 +21,11 @@
     <string name="sort_by_date_text">Sort by date created</string>
     <string name="hide_completed">Hide Completed</string>
     <string name="set_reminder">Set reminder</string>
+    <string name="today_at_12_00">Today at 12:00</string>
+    <string name="created">Created:</string>
+    <string name="comma">,</string>
+    <string name="tv_set_reminder">Set reminder</string>
+    <string name="delete">Delete</string>
+    <string name="edit_task">Edit Task</string>
+    <string name="delete_task">Delete Task</string>
 </resources>

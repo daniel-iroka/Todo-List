@@ -12,10 +12,8 @@ import java.util.*
 class DatePickerFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
         val dateListener  = DatePickerDialog.OnDateSetListener {
                 _: DatePicker, year : Int, month : Int, dayOfMonth : Int ->
-
 
             val resultDate : Date = GregorianCalendar(year, month, dayOfMonth).time
 
@@ -28,7 +26,6 @@ class DatePickerFragment : DialogFragment() {
         }
 
         val calender = Calendar.getInstance()
-
         val initialYear = calender.get(Calendar.YEAR)
         val initialMonth = calender.get(Calendar.MONTH)
         val initialDay = calender.get(Calendar.DAY_OF_MONTH)
@@ -42,5 +39,4 @@ class DatePickerFragment : DialogFragment() {
             initialDay,
         )
     }
-
 }

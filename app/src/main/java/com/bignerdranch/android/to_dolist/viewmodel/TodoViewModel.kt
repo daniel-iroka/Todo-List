@@ -13,9 +13,8 @@ import kotlinx.coroutines.launch
 
 /** Our AndroidViewModel. This AndroidViewModel holds reference to our Application context. **/
 
-const val EDIT_TEXT_KEY = "EditTextKey"
 
-class TodoViewModel(application: Application, saveState : SavedStateHandle) : AndroidViewModel(application) {
+class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
     /**
      *  NOTE! : "Context" is needed to instantiate a database that is why we are using an AndroidViewModel in this case because it holds reference to an
@@ -23,11 +22,6 @@ class TodoViewModel(application: Application, saveState : SavedStateHandle) : An
      **/
 
     private val repository : TodoRepository
-    val editTextDate = saveState.getLiveData<String>(EDIT_TEXT_KEY)
-
-    fun updateText(query : String) {
-        editTextDate.value = query
-    }
 
     init {
         // having access to our TodoDao from our database
