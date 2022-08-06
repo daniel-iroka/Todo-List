@@ -11,8 +11,6 @@ import com.bignerdranch.android.to_dolist.R
 
 class AboutFragment : Fragment() {
 
-    // TODO - WHEN I COME BACK, I WILL IMPLEMENT THE JETPACK DATA STORE TO RETAIN THE STATE OF THE SORTED LISTS AFTER PROCESS DEATH OF OUR ACTIVITY
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

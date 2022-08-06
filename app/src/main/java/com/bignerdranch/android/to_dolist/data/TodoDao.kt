@@ -2,7 +2,6 @@ package com.bignerdranch.android.to_dolist.data
 
 import androidx.room.*
 import com.bignerdranch.android.to_dolist.model.Todo
-import com.bignerdranch.android.to_dolist.viewmodel.SortOrder
 import kotlinx.coroutines.flow.Flow
 
 /**

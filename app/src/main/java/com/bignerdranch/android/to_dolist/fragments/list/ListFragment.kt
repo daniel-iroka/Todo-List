@@ -9,15 +9,18 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.to_dolist.databinding.FragmentListBinding
 import com.bignerdranch.android.to_dolist.R
-import com.bignerdranch.android.to_dolist.viewmodel.SortOrder
+import com.bignerdranch.android.to_dolist.data.SortOrder
 import com.bignerdranch.android.to_dolist.viewmodel.TodoViewModel
 import com.bignerdranch.android.to_dolist.model.Todo
 import com.bignerdranch.android.to_dolist.utils.onQueryTextChanged
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 private const val TAG = "ListFragment"
 
@@ -72,6 +75,7 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
         mTodoViewModel.deleteTask(todo)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.fragment_list, menu)
 
@@ -81,21 +85,28 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
         searchView.onQueryTextChanged { querySearch ->
             mTodoViewModel.searchQuery.value = querySearch
         }
+
+        // we want the state of the hideCompleted to be the same with the one in our dataStore when the app starts and not when
+        // it is clicked
+        viewLifecycleOwner.lifecycleScope.launch {
+            menu.findItem(R.id.action_hide_completed_tasks).isChecked = mTodoViewModel.preferencesFlow.first().hideCompleted
+        }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId)  {
             R.id.sort_by_name -> {
-                mTodoViewModel.sortOrder.value = SortOrder.BY_NAME
+                mTodoViewModel.onSortOrderSelected(SortOrder.BY_NAME)
                 true
             }
             R.id.sort_by_date -> {
-                mTodoViewModel.sortOrder.value = SortOrder.BY_DATE
+                mTodoViewModel.onSortOrderSelected(SortOrder.BY_DATE)
                 true
             }
             R.id.action_hide_completed_tasks -> {
                 item.isChecked = !item.isChecked
-                mTodoViewModel.hideCompleted.value = item.isChecked
+                mTodoViewModel.onHideCompletedClick(item.isChecked)
                 true
             }
             R.id.del_selected_tasks -> {

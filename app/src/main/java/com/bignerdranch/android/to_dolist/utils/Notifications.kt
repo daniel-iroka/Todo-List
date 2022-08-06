@@ -10,7 +10,6 @@ import com.bignerdranch.android.to_dolist.R
 const val NOTIFICATION_ID = 1
 const val CHANNEL_ID = "Channel1"
 const val TITLE_EXTRA = "titleExtra"
-const val MESSAGE_EXTRA = "messageExtra"
 
 class Notifications : BroadcastReceiver() {
 
@@ -19,7 +18,6 @@ class Notifications : BroadcastReceiver() {
         val notification  = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notifications_icon)
             .setContentTitle(intent.getStringExtra(TITLE_EXTRA))
-            .setContentText(MESSAGE_EXTRA)
             .build()
 
         // Registering our channel with the system

@@ -2,6 +2,8 @@ package com.bignerdranch.android.to_dolist.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.bignerdranch.android.to_dolist.data.PreferencesManager
+import com.bignerdranch.android.to_dolist.data.SortOrder
 import com.bignerdranch.android.to_dolist.data.TodoDatabase
 import com.bignerdranch.android.to_dolist.model.Todo
 import com.bignerdranch.android.to_dolist.repository.TodoRepository
@@ -22,6 +24,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
      **/
 
     private val repository : TodoRepository
+    private val preferencesManager = PreferencesManager(application)
 
     init {
         // having access to our TodoDao from our database
@@ -30,8 +33,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     val searchQuery = MutableStateFlow("")
-    val sortOrder = MutableStateFlow(SortOrder.BY_DATE)   // adding BY_DATE to make the lists sorted by date as default
-    val hideCompleted = MutableStateFlow(false)
+    val preferencesFlow = preferencesManager.preferencesFlow
 
     /**
      *  The combine function here is a an object in the flow library that is used too combine the most recent values of a flow, so if one value changes it will
@@ -39,52 +41,54 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
      */
     private val tasksFlow = combine(
         searchQuery,
-        sortOrder,
-        hideCompleted
-    ) { query, sortOrder, hideCompleted -> // LAMBDA
-        Triple(query, sortOrder, hideCompleted)
+        preferencesFlow,
+    ) { query, filterPreferences -> // LAMBDA
+        Pair(query, filterPreferences)
         // flatMapLatest gets triggered when any of this flows changes and then passes it to the query to be executed.
-    }.flatMapLatest { (query, sortOrder, hideCompleted) ->
-        repository.getAllTasks(query, sortOrder, hideCompleted)
+    }. flatMapLatest { (query, filterPreferences) ->
+        repository.getAllTasks(query, filterPreferences.sortOrder, filterPreferences.hideCompleted)
     }
+
+    fun onSortOrderSelected(sortOrder: SortOrder) =
+        viewModelScope.launch {
+            preferencesManager.updateSortOrder(sortOrder)
+        }
+
+    fun onHideCompletedClick(hideCompleted : Boolean) =
+        viewModelScope.launch {
+            preferencesManager.updateHideCompleted(hideCompleted)
+        }
 
     val tasks = tasksFlow.asLiveData()
 
     // All functions using coroutines objects indicates that whatever is in it should run in a background thread
-    fun addTodo(todo : Todo) {
+    fun addTodo(todo : Todo) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.addTodo(todo)
         }
-    }
 
-    fun deleteCompletedTasks(idList: Long) {
+    fun deleteCompletedTasks(idList: Long) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.delCompletedTasks(idList)
         }
-    }
 
-    fun deleteAllTasks() {
+    fun deleteAllTasks() =
         viewModelScope.launch(Dispatchers.IO) {
             repository.delAllTasks()
         }
-    }
 
-    fun deleteTask(todo : Todo) {
+    fun deleteTask(todo : Todo) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.delTask(todo)
         }
-    }
 
-    fun updateTask(todo : Todo) {
+    fun updateTask(todo : Todo) =
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateTask(todo)
         }
-    }
 
-    fun onTaskCheckedChanged(todo : Todo, isChecked : Boolean) {
+    fun onTaskCheckedChanged(todo : Todo, isChecked : Boolean) =
         viewModelScope.launch {
             repository.updateTask(todo.copy(completed = isChecked))
         }
-    }
 }
-enum class SortOrder { BY_DATE, BY_NAME }

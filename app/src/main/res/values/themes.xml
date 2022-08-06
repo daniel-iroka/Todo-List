@@ -31,7 +31,6 @@
     <!-- Custom style for text and background in our menu_item -->
     <style name="customMenuItemsText" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
         <item name="fontFamily">sans-serif-thin</item>
-        <item name="color">@color/black</item>
     </style>
 
     <style name="customPopupOverflowBackground" parent="@style/Widget.MaterialComponents.PopupMenu.Overflow">

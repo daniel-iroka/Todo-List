@@ -1,6 +1,6 @@
 package com.bignerdranch.android.to_dolist.repository
 
-import com.bignerdranch.android.to_dolist.viewmodel.SortOrder
+import com.bignerdranch.android.to_dolist.data.SortOrder
 import com.bignerdranch.android.to_dolist.data.TodoDao
 import com.bignerdranch.android.to_dolist.model.Todo
 

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
@@ -28,6 +29,8 @@ import java.util.*
 
 /** Our UpdateFragment. This is where we will allow the Users to be able update or edit an already existing Task. **/
 
+private const val TAG = "UpdateFragment"
+
 class UpdateFragment : Fragment() {
 
     private val args by navArgs<UpdateFragmentArgs>()
@@ -38,6 +41,9 @@ class UpdateFragment : Fragment() {
     private lateinit var todoViewModel : TodoViewModel
     private lateinit var todo : Todo
     private var setDateTime : Long = 0
+
+
+    // TODO - WHEN I COME BACK, I WILL TRY AND FIX THIS BUG THEN MOVE TO FINISHING UP THE NOTIFICATION MANAGER
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,13 +74,18 @@ class UpdateFragment : Fragment() {
         if (args.currentTask.important) {
             binding.updateReminder.text = DateUtils.getRelativeDateTimeString(context, args.currentTask.reminder.time, DateUtils.DAY_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0)
             binding.iClearReminder2.visibility = View.VISIBLE
+            setDateTime = args.currentTask.reminder.time
+            todo.important = true
         }
 
         // will update our current _Todo
         binding.updateCheckYes.setOnClickListener {
             updateTodoInDatabase()
-
-            scheduleNotification()
+            if (setDateTime > 1 && todo.important) {
+                updateDateTime()
+                scheduleNotification()
+            }
+            Log.d(TAG, "onCreateView: $setDateTime")
         }
 
         // Our clear search buttons
@@ -147,6 +158,7 @@ class UpdateFragment : Fragment() {
         inflater.inflate(R.menu.fragment_update, menu)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.updateDeleteTask) {
             deleteTask()
@@ -169,10 +181,8 @@ class UpdateFragment : Fragment() {
 
     private fun scheduleNotification() {
         val title = binding.updateTaskTitle.text.toString()
-        val message = binding.updateReminder.text.toString()
         val intent = Intent(requireContext(), Notifications::class.java).apply {
             putExtra(TITLE_EXTRA, title)
-            putExtra(MESSAGE_EXTRA, message)
         }
 
         val pendingIntent = PendingIntent.getBroadcast(

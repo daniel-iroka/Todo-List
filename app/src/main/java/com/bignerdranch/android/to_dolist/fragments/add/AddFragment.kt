@@ -12,6 +12,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.text.format.DateUtils
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -34,6 +35,8 @@ const val DIALOG_TIME = "DialogTime"
 const val SIMPLE_DATE_FORMAT = "MMM, d yyyy"
 const val SIMPLE_TIME_FORMAT = "H:mm a"
 
+private const val TAG = "AddFragment"
+
 class AddFragment : Fragment() {
 
     private lateinit var todoViewModel : TodoViewModel
@@ -41,9 +44,6 @@ class AddFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var todo : Todo
     private var setDateTime : Long = 0
-
-    private val dateLocales = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
-    private val timeLocales = SimpleDateFormat(SIMPLE_TIME_FORMAT, Locale.getDefault())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,8 +64,10 @@ class AddFragment : Fragment() {
         // will insert our database when clicked
         binding.abCheckYes.setOnClickListener {
             insertTodoInDatabase()
-
-            scheduleNotification()
+            // A check to ensure that the scheduleNotification() function will only be called when the user has selected a reminder
+            if (setDateTime > 1) {
+                scheduleNotification()
+            }
         }
 
         // Our clear search buttons
@@ -76,19 +78,6 @@ class AddFragment : Fragment() {
         binding.iClearTime.setOnClickListener {
             binding.edTime.text = ""
         }
-
-        // this will clear our reminder selection
-        binding.iClearReminder.apply {
-            setOnClickListener {
-                binding.btnReminder.setText(R.string.set_reminder)
-                visibility = View.INVISIBLE
-            }
-        }
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         // showing our datePickerDialog
         binding.edDate.setOnClickListener {
@@ -137,12 +126,20 @@ class AddFragment : Fragment() {
                 }, startHour, startMinute, false).show()
             }, startYear, startMonth, startDay).show()
         }
+
+        // this will clear our reminder selection
+        binding.iClearReminder.apply {
+            setOnClickListener {
+                binding.btnReminder.setText(R.string.set_reminder)
+                visibility = View.INVISIBLE
+            }
+        }
+        return binding.root
     }
 
     private fun scheduleNotification() {
         val title = binding.edTaskTitle.text.toString()
-//        val message = binding.btnReminder.text.toString()
-        val intent = Intent(requireContext(), Notifications::class.java).apply {
+        val intent = Intent(requireContext().applicationContext , Notifications::class.java).apply {
             putExtra(TITLE_EXTRA, title)
         }
 
@@ -159,6 +156,7 @@ class AddFragment : Fragment() {
             setDateTime,
             pendingIntent
         )
+        Log.d(TAG, "scheduleNotification: $setDateTime" )
     }
 
     // We create a Notifications channel and register it to our system. We must do this before post our Notifications.
@@ -182,11 +180,13 @@ class AddFragment : Fragment() {
 
     // function to update Date
     private fun updateDate() {
+        val dateLocales =SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
         binding.edDate.text = dateLocales.format(todo.date)
     }
 
     // function to update Time
     private fun updateTime() {
+        val timeLocales = SimpleDateFormat(SIMPLE_TIME_FORMAT, Locale.getDefault())
         binding.edTime.text = timeLocales.format(todo.time)
     }
 
@@ -214,7 +214,7 @@ class AddFragment : Fragment() {
     private fun inputCheck(title : String, date: String, time: String, reminder : String, important : Boolean = false) : Boolean {
 
         // will return false if fields in TextUtils are empty and true if not
-        return !(TextUtils.isEmpty(title) || TextUtils.isEmpty(date) || time.isEmpty() && reminder != "Set reminder" && important)
+        return !(TextUtils.isEmpty(title) || TextUtils.isEmpty(date) || time.isEmpty() && reminder != "Set reminder" && important )
     }
 
     override fun onDestroy() {
