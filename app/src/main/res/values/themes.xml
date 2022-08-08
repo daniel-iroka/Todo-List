@@ -14,12 +14,12 @@
 
         <!-- Customize your theme here. -->
         <!-- Our customs themes. -->
-        <item name="colorAccent">@color/holo_light_blue_dark</item>
         <item name="android:itemTextAppearance">@style/customMenuItemsText</item>
         <item name="actionOverflowMenuStyle">@style/customPopupOverflowBackground</item>
         <item name="android:dialogTheme">@style/AppTheme.DialogTheme</item>
         <item name="android:datePickerDialogTheme">@style/AppTheme.DialogTheme</item>
         <item name="android:timePickerDialogTheme">@style/AppTheme.DialogTheme</item>
+        <item name="colorAccent">@color/holo_light_blue_dark</item>
     </style>
 
     <!-- Custom style for our Dialogs. Date dialog to be specific. -->
@@ -30,7 +30,7 @@
 
     <!-- Custom style for text and background in our menu_item -->
     <style name="customMenuItemsText" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
-        <item name="fontFamily">sans-serif-thin</item>
+        <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
     <style name="customPopupOverflowBackground" parent="@style/Widget.MaterialComponents.PopupMenu.Overflow">

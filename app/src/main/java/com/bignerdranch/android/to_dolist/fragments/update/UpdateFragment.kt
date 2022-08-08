@@ -29,7 +29,6 @@ import java.util.*
 
 /** Our UpdateFragment. This is where we will allow the Users to be able update or edit an already existing Task. **/
 
-private const val TAG = "UpdateFragment"
 
 class UpdateFragment : Fragment() {
 
@@ -41,10 +40,7 @@ class UpdateFragment : Fragment() {
     private lateinit var todoViewModel : TodoViewModel
     private lateinit var todo : Todo
     private var setDateTime : Long = 0
-
-
-    // TODO - WHEN I COME BACK, I WILL TRY AND FIX THIS BUG THEN MOVE TO FINISHING UP THE NOTIFICATION MANAGER
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         todo = Todo()
@@ -74,18 +70,14 @@ class UpdateFragment : Fragment() {
         if (args.currentTask.important) {
             binding.updateReminder.text = DateUtils.getRelativeDateTimeString(context, args.currentTask.reminder.time, DateUtils.DAY_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0)
             binding.iClearReminder2.visibility = View.VISIBLE
-            setDateTime = args.currentTask.reminder.time
-            todo.important = true
         }
 
         // will update our current _Todo
         binding.updateCheckYes.setOnClickListener {
             updateTodoInDatabase()
-            if (setDateTime > 1 && todo.important) {
-                updateDateTime()
+            if (setDateTime > 1) {
                 scheduleNotification()
             }
-            Log.d(TAG, "onCreateView: $setDateTime")
         }
 
         // Our clear search buttons
@@ -102,7 +94,7 @@ class UpdateFragment : Fragment() {
 
             childFragmentManager.setFragmentResultListener("requestKey", viewLifecycleOwner) {_, bundle ->
                 val result = bundle.getSerializable("bundleKey") as Date
-                todo.date = result
+                args.currentTask.date = result
                 updateDate()
             }
             DatePickerFragment().show(this@UpdateFragment.childFragmentManager, DIALOG_DATE)
@@ -113,7 +105,7 @@ class UpdateFragment : Fragment() {
 
             childFragmentManager.setFragmentResultListener("tRequestKey", viewLifecycleOwner) {_, bundle ->
                 val result = bundle.getSerializable("tBundleKey") as Date
-                todo.time = result
+                args.currentTask.time = result
                 updateTime()
             }
             TimePickerFragment().show(this@UpdateFragment.childFragmentManager, DIALOG_TIME)
@@ -136,8 +128,8 @@ class UpdateFragment : Fragment() {
                     // This 'time' will be solely for being displayed in our Set Reminder textView
                     val setDateTimeForTextView = pickedDateTime.timeInMillis
                     setDateTime = pickedDateTime.timeInMillis
-                    todo.reminder = Date(setDateTimeForTextView)
-                    todo.important = true
+                    args.currentTask.reminder = Date(setDateTimeForTextView)
+                    args.currentTask.important = true
                     updateDateTime()
 
                 }, startHour, startMinute, false).show()
@@ -216,17 +208,17 @@ class UpdateFragment : Fragment() {
     // function to update DateTime
     private fun updateDateTime() {
         binding.iClearReminder2.visibility = View.VISIBLE
-        binding.updateReminder.text = DateUtils.getRelativeDateTimeString(context, todo.reminder.time, DateUtils.DAY_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0)
+        binding.updateReminder.text = DateUtils.getRelativeDateTimeString(context, args.currentTask.reminder.time, DateUtils.DAY_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0)
     }
 
     private fun updateDate() {
         val dateLocales = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
-        binding.updateDate.text = dateLocales.format(todo.date)
+        binding.updateDate.text = dateLocales.format(args.currentTask.date)
     }
 
     private fun updateTime() {
         val timeLocales = SimpleDateFormat(SIMPLE_TIME_FORMAT, Locale.getDefault())
-        binding.updateTime.text = timeLocales.format(todo.time)
+        binding.updateTime.text = timeLocales.format(args.currentTask.time)
     }
 
     private fun updateTodoInDatabase() {
@@ -236,7 +228,7 @@ class UpdateFragment : Fragment() {
         val reminder = binding.updateReminder.text.toString()
 
         if (inputCheck(title, date, time, reminder)) {
-            val updatedTodo = Todo(args.currentTask.id, title, todo.date, todo.time, todo.reminder, todo.important)
+            val updatedTodo = Todo(args.currentTask.id, title, args.currentTask.date, args.currentTask.time, args.currentTask.reminder, args.currentTask.important)
             todoViewModel.updateTask(updatedTodo)
 
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
@@ -247,7 +239,7 @@ class UpdateFragment : Fragment() {
     }
 
     private fun inputCheck(title : String, date: String, time: String, reminder : String, important : Boolean = false) : Boolean {
-        return !(TextUtils.isEmpty(title) || TextUtils.isEmpty(date) || time.isEmpty() && reminder != "Set reminder" && important)
+        return !(TextUtils.isEmpty(title) || TextUtils.isEmpty(date) || time.isEmpty() || reminder != "Set reminder" && important)
     }
 
     override fun onDestroy() {

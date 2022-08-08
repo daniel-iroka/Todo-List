@@ -63,11 +63,11 @@ class AddFragment : Fragment() {
 
         // will insert our database when clicked
         binding.abCheckYes.setOnClickListener {
-            insertTodoInDatabase()
             // A check to ensure that the scheduleNotification() function will only be called when the user has selected a reminder
             if (setDateTime > 1) {
                 scheduleNotification()
             }
+            insertTodoInDatabase()
         }
 
         // Our clear search buttons
@@ -132,6 +132,8 @@ class AddFragment : Fragment() {
             setOnClickListener {
                 binding.btnReminder.setText(R.string.set_reminder)
                 visibility = View.INVISIBLE
+                setDateTime = 0
+                todo.important = false
             }
         }
         return binding.root
@@ -196,9 +198,10 @@ class AddFragment : Fragment() {
         val date  = binding.edDate.text.toString()
         val time = binding.edTime.text.toString()
         val reminder = binding.btnReminder.text.toString()
+        val booleanCheck = inputCheck(title, date, time, reminder)
 
         if (inputCheck(title, date, time, reminder)) {
-            val todo = Todo(0, title, todo.date, todo.time, todo.reminder, todo.important)
+            val todo = Todo(0, title, todo.date, todo.time, Date(setDateTime), todo.important)
             todoViewModel.addTodo(todo)
             // This will make a toast saying Successfully added task if we add a task
             Toast.makeText(requireContext(), R.string.task_add_toast, Toast.LENGTH_LONG).show()
@@ -207,15 +210,18 @@ class AddFragment : Fragment() {
         } else {
             Toast.makeText(requireContext(), R.string.no_task_add_toast, Toast.LENGTH_LONG).show()
         }
+        Log.d(TAG, "insertTodoInDatabase: ${todo.important}")
+        Log.d(TAG, "insertTodoInDatabase: $booleanCheck")
     }
 
     // This function will help us check if the texts are empty and then proceed to add them to the database
     // so that we do not add empty tasks to our database
-    private fun inputCheck(title : String, date: String, time: String, reminder : String, important : Boolean = false) : Boolean {
+    private fun inputCheck(title : String, date: String, time: String, reminder : String, important: Boolean = false) : Boolean {
 
         // will return false if fields in TextUtils are empty and true if not
-        return !(TextUtils.isEmpty(title) || TextUtils.isEmpty(date) || time.isEmpty() && reminder != "Set reminder" && important )
+        return !(TextUtils.isEmpty(title) || TextUtils.isEmpty(date) || time.isEmpty() || reminder != "Set reminder" && important)
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

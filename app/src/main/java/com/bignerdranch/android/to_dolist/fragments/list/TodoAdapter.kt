@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -62,11 +63,11 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                 tvTaskTime.text = timeLocales.format(todo.time)
                 cbTask.isChecked = todo.completed
                 tvTaskTitle.paint.isStrikeThruText = todo.completed
+                tvResultsReminder.isVisible = todo.important
 
                 // Will only show the resultsReminder if important is true
                 if (todo.important) {
                     tvResultsReminder.text = DateUtils.getRelativeDateTimeString(_context, todo.reminder.time, DateUtils.DAY_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0)
-                    tvResultsReminder.visibility = View.VISIBLE
                 }
 
                 // Implementing our PopupMenus to Edit and Delete a Task
