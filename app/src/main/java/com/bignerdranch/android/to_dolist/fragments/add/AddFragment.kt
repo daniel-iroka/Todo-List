@@ -19,6 +19,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import com.bignerdranch.android.to_dolist.*
 import com.bignerdranch.android.to_dolist.viewmodel.TodoViewModel
@@ -38,6 +39,8 @@ const val SIMPLE_TIME_FORMAT = "H:mm a"
 private const val TAG = "AddFragment"
 
 class AddFragment : Fragment() {
+
+    // TODO - WHEN I COME BACK, I WILL TRY AND IMPLEMENT PROPERLY THE SENDING OF AN INTENT TO BROADCAST RECEIVER.
 
     private lateinit var todoViewModel : TodoViewModel
     private var _binding : FragmentAddBinding? = null
@@ -144,6 +147,11 @@ class AddFragment : Fragment() {
         val intent = Intent(requireContext().applicationContext , Notifications::class.java).apply {
             putExtra(TITLE_EXTRA, title)
         }
+
+        val activityIntent = Intent(requireContext().applicationContext, MainActivity::class.java).apply {
+            flags = PendingIntent.FLAG_CANCEL_CURRENT
+        }
+        LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(activityIntent)
 
         val pendingIntent = PendingIntent.getBroadcast(
             requireContext().applicationContext,
