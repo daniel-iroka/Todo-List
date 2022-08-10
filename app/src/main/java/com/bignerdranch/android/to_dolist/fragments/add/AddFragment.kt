@@ -146,11 +146,6 @@ class AddFragment : Fragment() {
             putExtra(TITLE_EXTRA, title)
         }
 
-        val activityIntent = Intent(requireContext().applicationContext, MainActivity::class.java).apply {
-            flags = PendingIntent.FLAG_CANCEL_CURRENT
-        }
-        LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(activityIntent)
-
         val pendingIntent = PendingIntent.getBroadcast(
             requireContext().applicationContext,
             NOTIFICATION_ID,

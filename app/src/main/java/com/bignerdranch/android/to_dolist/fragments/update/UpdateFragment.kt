@@ -141,6 +141,8 @@ class UpdateFragment : Fragment() {
             setOnClickListener {
                 binding.updateReminder.setText(R.string.set_reminder)
                 visibility = View.INVISIBLE
+                setDateTime = 0
+                args.currentTask.important = false
             }
         }
         return binding.root
