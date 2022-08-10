@@ -40,8 +40,6 @@ private const val TAG = "AddFragment"
 
 class AddFragment : Fragment() {
 
-    // TODO - WHEN I COME BACK, I WILL TRY AND IMPLEMENT PROPERLY THE SENDING OF AN INTENT TO BROADCAST RECEIVER.
-
     private lateinit var todoViewModel : TodoViewModel
     private var _binding : FragmentAddBinding? = null
     private val binding get() = _binding!!

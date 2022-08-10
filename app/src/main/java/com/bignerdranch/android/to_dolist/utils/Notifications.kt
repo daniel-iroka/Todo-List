@@ -16,12 +16,19 @@ const val TITLE_EXTRA = "titleExtra"
 
 class Notifications : BroadcastReceiver() {
 
+    //  TODO - WHEN I COME BACK, I WILL TRY AND ADD SOUND TO THE NOTIFICATION
 
     override fun onReceive(context: Context, intent: Intent) {
+
+        val activityIntent = Intent(context, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent = PendingIntent.getActivity(context, 0, activityIntent, PendingIntent.FLAG_IMMUTABLE)
 
         val notification  = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notifications_icon)
             .setContentTitle(intent.getStringExtra(TITLE_EXTRA))
+            .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .build()
 
