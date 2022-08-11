@@ -16,8 +16,6 @@ const val TITLE_EXTRA = "titleExtra"
 
 class Notifications : BroadcastReceiver() {
 
-    //  TODO - WHEN I COME BACK, I WILL TRY AND ADD SOUND TO THE NOTIFICATION
-
     override fun onReceive(context: Context, intent: Intent) {
 
         val activityIntent = Intent(context, MainActivity::class.java).apply {

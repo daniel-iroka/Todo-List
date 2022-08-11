@@ -11,6 +11,8 @@ import com.bignerdranch.android.to_dolist.R
 
 class AboutFragment : Fragment() {
 
+    // TODO - WHEN I COME BACK, THIS WILL PROBABLY BE THE LAST THING BUT I WILL SET THE PROPER IMAGE IN THE ABOUT FRAGMENT
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

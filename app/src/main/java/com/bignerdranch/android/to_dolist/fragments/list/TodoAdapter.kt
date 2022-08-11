@@ -2,7 +2,11 @@ package com.bignerdranch.android.to_dolist.fragments.list
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.Drawable
+import android.text.SpannableString
+import android.text.Spanned
 import android.text.format.DateUtils
+import android.text.style.DrawableMarginSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +27,8 @@ import java.util.*
 
 
 class TodoAdapter(private val _context : Context, private val listener : OnItemClickListener): ListAdapter<Todo, TodoAdapter.TodoViewHolder>(DiffCallBack) {
+
+    // TODO - WHEN I COME BACK, I WILL TRY THE IMPLEMENTING OF THE CHANGING TEXT COLORS BASED ON THE STATE OF THE ALARM.
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         // this can be done in an inline variable and I may experiment on it later.
@@ -68,6 +74,7 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                 // Will only show the resultsReminder if important is true
                 if (todo.important) {
                     tvResultsReminder.text = DateUtils.getRelativeDateTimeString(_context, todo.reminder.time, DateUtils.DAY_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0)
+
                 }
 
                 // Implementing our PopupMenus to Edit and Delete a Task
