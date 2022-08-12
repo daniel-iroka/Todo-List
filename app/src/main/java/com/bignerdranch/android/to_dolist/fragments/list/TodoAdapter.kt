@@ -2,6 +2,7 @@ package com.bignerdranch.android.to_dolist.fragments.list
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.text.SpannableString
 import android.text.Spanned
@@ -12,6 +13,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
@@ -75,6 +78,12 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                 if (todo.important) {
                     tvResultsReminder.text = DateUtils.getRelativeDateTimeString(_context, todo.reminder.time, DateUtils.DAY_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0)
 
+                    val date = Date()
+                    val drawable : Drawable? = ContextCompat.getDrawable(_context, R.drawable.ic_alarm_reminder)
+                    if (todo.reminder.time < date.time) {
+                        tvResultsReminder.setTextColor(ContextCompat.getColor(_context, R.color.red))
+                        drawable.w
+                    }
                 }
 
                 // Implementing our PopupMenus to Edit and Delete a Task
