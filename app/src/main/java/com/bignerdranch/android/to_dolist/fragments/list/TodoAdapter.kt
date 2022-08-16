@@ -1,7 +1,10 @@
 package com.bignerdranch.android.to_dolist.fragments.list
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.text.SpannableString
@@ -13,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
@@ -25,13 +29,38 @@ import com.bignerdranch.android.to_dolist.databinding.CustomRowBinding
 import com.bignerdranch.android.to_dolist.fragments.add.SIMPLE_DATE_FORMAT
 import com.bignerdranch.android.to_dolist.fragments.add.SIMPLE_TIME_FORMAT
 import com.bignerdranch.android.to_dolist.model.Todo
+import com.bignerdranch.android.to_dolist.utils.NOTIFICATION_ID
+import com.bignerdranch.android.to_dolist.utils.Notifications
+import com.bignerdranch.android.to_dolist.utils.TITLE_EXTRA
 import java.text.SimpleDateFormat
 import java.util.*
 
+data class AlarmCheck(var alarmCheck : Boolean)
 
 class TodoAdapter(private val _context : Context, private val listener : OnItemClickListener): ListAdapter<Todo, TodoAdapter.TodoViewHolder>(DiffCallBack) {
+    private var _todo = Todo()
 
-    // TODO - WHEN I COME BACK, I WILL TRY THE IMPLEMENTING OF THE CHANGING TEXT COLORS BASED ON THE STATE OF THE ALARM.
+    private fun scheduleAlarm() {
+
+        val title = _todo.title
+        val intent = Intent(_context.applicationContext , Notifications::class.java).apply {
+            putExtra(TITLE_EXTRA, title)
+        }
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            _context.applicationContext,
+            NOTIFICATION_ID,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val alarmManager = _context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.setAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            _todo.reminder.time,
+            pendingIntent
+        )
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         // this can be done in an inline variable and I may experiment on it later.
@@ -58,12 +87,14 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                         val todo = getItem(position)
                         listener.onCheckBoxClick(todo, cbTask.isChecked)
                     }
+
                 }
             }
         }
 
         @SuppressLint("DiscouragedPrivateApi")
         fun bind(todo : Todo) {
+            _todo = todo
             val dateLocales = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
             val timeLocales = SimpleDateFormat(SIMPLE_TIME_FORMAT, Locale.getDefault())
             binding.apply {
@@ -74,15 +105,20 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                 tvTaskTitle.paint.isStrikeThruText = todo.completed
                 tvResultsReminder.isVisible = todo.important
 
+                if (tvResultsReminder.isVisible) {
+                    scheduleAlarm()
+                }
+
                 // Will only show the resultsReminder if important is true
                 if (todo.important) {
                     tvResultsReminder.text = DateUtils.getRelativeDateTimeString(_context, todo.reminder.time, DateUtils.DAY_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0)
+
+                    scheduleAlarm()
 
                     val date = Date()
                     val drawable : Drawable? = ContextCompat.getDrawable(_context, R.drawable.ic_alarm_reminder)
                     if (todo.reminder.time < date.time) {
                         tvResultsReminder.setTextColor(ContextCompat.getColor(_context, R.color.red))
-                        drawable.w
                     }
                 }
 
@@ -141,4 +177,5 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
         override fun areContentsTheSame(oldItem: Todo, newItem: Todo) =
             oldItem == newItem
     }
+
 }

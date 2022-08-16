@@ -141,25 +141,7 @@ class AddFragment : Fragment() {
     }
 
     private fun scheduleNotification() {
-        val title = binding.edTaskTitle.text.toString()
-        val intent = Intent(requireContext().applicationContext , Notifications::class.java).apply {
-            putExtra(TITLE_EXTRA, title)
-        }
 
-        val pendingIntent = PendingIntent.getBroadcast(
-            requireContext().applicationContext,
-            NOTIFICATION_ID,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-
-        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.setAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP,
-            setDateTime,
-            pendingIntent
-        )
-        Log.d(TAG, "scheduleNotification: $setDateTime" )
     }
 
     // We create a Notifications channel and register it to our system. We must do this before post our Notifications.
@@ -202,7 +184,7 @@ class AddFragment : Fragment() {
         val booleanCheck = inputCheck(title, date, time, reminder)
 
         if (inputCheck(title, date, time, reminder)) {
-            val todo = Todo(0, title, todo.date, todo.time, Date(setDateTime), todo.important)
+            val todo = Todo(0, title, todo.date, todo.time, Date(setDateTime), todo.important, triggered = todo.triggered)
             todoViewModel.addTodo(todo)
             // This will make a toast saying Successfully added task if we add a task
             Toast.makeText(requireContext(), R.string.task_add_toast, Toast.LENGTH_LONG).show()
