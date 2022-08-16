@@ -142,6 +142,27 @@ class AddFragment : Fragment() {
 
     private fun scheduleNotification() {
 
+        val title = binding.edTaskTitle.text.toString()
+        val message = "Tap to Open ToDo-List"
+        val intent = Intent(requireContext().applicationContext , Notifications::class.java).apply {
+            putExtra(TITLE_EXTRA, title)
+            putExtra(MESSAGE_EXTRA, message)
+        }
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            requireContext().applicationContext,
+            NOTIFICATION_ID,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val alarmManager = requireContext().applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.setAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            setDateTime,
+            pendingIntent
+        )
+
     }
 
     // We create a Notifications channel and register it to our system. We must do this before post our Notifications.

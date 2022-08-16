@@ -12,6 +12,7 @@ import com.bignerdranch.android.to_dolist.R
 const val NOTIFICATION_ID = 1
 const val CHANNEL_ID = "Channel1"
 const val TITLE_EXTRA = "titleExtra"
+const val MESSAGE_EXTRA = "Tap to open ToDo-List"
 
 class Notifications : BroadcastReceiver() {
 
@@ -25,6 +26,7 @@ class Notifications : BroadcastReceiver() {
         val notification  = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_custom_notification)
             .setContentTitle(intent.getStringExtra(TITLE_EXTRA))
+            .setContentText(intent.getStringExtra(MESSAGE_EXTRA))
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .build()

@@ -35,32 +35,11 @@ import com.bignerdranch.android.to_dolist.utils.TITLE_EXTRA
 import java.text.SimpleDateFormat
 import java.util.*
 
-data class AlarmCheck(var alarmCheck : Boolean)
 
 class TodoAdapter(private val _context : Context, private val listener : OnItemClickListener): ListAdapter<Todo, TodoAdapter.TodoViewHolder>(DiffCallBack) {
     private var _todo = Todo()
 
-    private fun scheduleAlarm() {
-
-        val title = _todo.title
-        val intent = Intent(_context.applicationContext , Notifications::class.java).apply {
-            putExtra(TITLE_EXTRA, title)
-        }
-
-        val pendingIntent = PendingIntent.getBroadcast(
-            _context.applicationContext,
-            NOTIFICATION_ID,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-
-        val alarmManager = _context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.setAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP,
-            _todo.reminder.time,
-            pendingIntent
-        )
-    }
+    // TODO - WHEN I COME BACK, I WILL ADD OR SHOW AN IMAGE TO INDICATE THAT WE HAVE AN EMPTY TASK WHEN YOU NEWLY OPEN THE APP
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         // this can be done in an inline variable and I may experiment on it later.
@@ -105,15 +84,9 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                 tvTaskTitle.paint.isStrikeThruText = todo.completed
                 tvResultsReminder.isVisible = todo.important
 
-                if (tvResultsReminder.isVisible) {
-                    scheduleAlarm()
-                }
-
                 // Will only show the resultsReminder if important is true
                 if (todo.important) {
                     tvResultsReminder.text = DateUtils.getRelativeDateTimeString(_context, todo.reminder.time, DateUtils.DAY_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0)
-
-                    scheduleAlarm()
 
                     val date = Date()
                     val drawable : Drawable? = ContextCompat.getDrawable(_context, R.drawable.ic_alarm_reminder)
