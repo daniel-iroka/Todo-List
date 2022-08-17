@@ -10,7 +10,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="130dp"
+        android:layout_marginBottom="125dp"
         android:fontFamily="sans-serif-light"
         android:text="1.1"
         android:textSize="24sp"
@@ -24,22 +24,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
+        android:fontFamily="sans-serif-light"
         android:text="To-Do List"
+        android:textColor="@color/black"
         android:textSize="42sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        android:fontFamily="sans-serif-light"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:src="@drawable/ic_check_yes"
+        android:layout_width="190dp"
+        android:layout_height="190dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/icon_background"
+        android:backgroundTint="@color/holo_light_blue_dark"
+        android:padding="12dp"
+        android:src="@drawable/png_task"
         app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

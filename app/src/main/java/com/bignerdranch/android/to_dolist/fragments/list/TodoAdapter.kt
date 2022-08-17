@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.text.SpannableString
 import android.text.Spanned
@@ -39,7 +40,8 @@ import java.util.*
 class TodoAdapter(private val _context : Context, private val listener : OnItemClickListener): ListAdapter<Todo, TodoAdapter.TodoViewHolder>(DiffCallBack) {
     private var _todo = Todo()
 
-    // TODO - WHEN I COME BACK, I WILL ADD OR SHOW AN IMAGE TO INDICATE THAT WE HAVE AN EMPTY TASK WHEN YOU NEWLY OPEN THE APP
+    // TODO - WHEN I COME BACK, I WILL ADD OR SHOW AN IMAGE TO INDICATE THAT WE HAVE AN EMPTY TASK WHEN YOU NEWLY OPEN THE APP.
+    // TODO - WHEN I COME BACK, I WILL TRY AND SEE IF I CAN CHANGE THE ORDER OF THE TASKS WHEN IT HAS TURNED RED MAKING IT NORMAL
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         // this can be done in an inline variable and I may experiment on it later.
@@ -66,7 +68,6 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                         val todo = getItem(position)
                         listener.onCheckBoxClick(todo, cbTask.isChecked)
                     }
-
                 }
             }
         }
@@ -87,12 +88,12 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                 // Will only show the resultsReminder if important is true
                 if (todo.important) {
                     tvResultsReminder.text = DateUtils.getRelativeDateTimeString(_context, todo.reminder.time, DateUtils.DAY_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0)
+                }
 
-                    val date = Date()
-                    val drawable : Drawable? = ContextCompat.getDrawable(_context, R.drawable.ic_alarm_reminder)
-                    if (todo.reminder.time < date.time) {
-                        tvResultsReminder.setTextColor(ContextCompat.getColor(_context, R.color.red))
-                    }
+                val date = Date()
+                if (todo.reminder.time < date.time) {
+                    tvResultsReminder.setTextColor(ContextCompat.getColor(_context, R.color.red))
+                    reminderIcon.setColorFilter(_context.resources.getColor(R.color.red))
                 }
 
                 // Implementing our PopupMenus to Edit and Delete a Task

@@ -12,7 +12,7 @@ import com.bignerdranch.android.to_dolist.R
 const val NOTIFICATION_ID = 1
 const val CHANNEL_ID = "Channel1"
 const val TITLE_EXTRA = "titleExtra"
-const val MESSAGE_EXTRA = "Tap to open ToDo-List"
+const val MESSAGE_EXTRA = "message"
 
 class Notifications : BroadcastReceiver() {
 

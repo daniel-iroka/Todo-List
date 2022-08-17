@@ -175,8 +175,10 @@ class UpdateFragment : Fragment() {
 
     private fun scheduleNotification() {
         val title = binding.updateTaskTitle.text.toString()
+        val message = "Tap to Open ToDo-List"
         val intent = Intent(requireContext(), Notifications::class.java).apply {
             putExtra(TITLE_EXTRA, title)
+            putExtra(MESSAGE_EXTRA, message)
         }
 
         val pendingIntent = PendingIntent.getBroadcast(

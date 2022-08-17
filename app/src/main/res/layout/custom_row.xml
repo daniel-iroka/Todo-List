@@ -98,20 +98,30 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/holo_light_blue_dark" />
 
+    <ImageView
+        android:id="@+id/reminderIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="2dp"
+        android:src="@drawable/ic_alarm_reminder"
+        app:layout_constraintEnd_toStartOf="@+id/tvResultsReminder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
     <TextView
         android:id="@+id/tvResultsReminder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="43dp"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="6dp"
+        android:drawablePadding="2dp"
         android:text="@string/today_at_12_00"
         android:textColor="@color/sea_blue"
         android:textSize="12sp"
         android:textStyle="italic"
-        android:drawablePadding="2dp"
-        app:drawableTint="@color/sea_blue"
-        app:drawableLeftCompat="@drawable/ic_alarm_reminder"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/reminderIcon"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
@@ -127,4 +137,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvResultsReminder"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
