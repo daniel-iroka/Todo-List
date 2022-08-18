@@ -29,7 +29,7 @@
         android:layout_marginTop="18dp"
         android:backgroundTint="@color/holo_light_blue_dark"
         android:ems="10"
-        android:fontFamily="sans-serif-light"
+        android:fontFamily="sans-serif-thin"
         android:hint="@string/ed_your_task"
         android:inputType="textPersonName"
         android:minHeight="48dp"

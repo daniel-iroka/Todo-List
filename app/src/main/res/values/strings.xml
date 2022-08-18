@@ -28,4 +28,6 @@
     <string name="delete">Delete</string>
     <string name="edit_task">Edit Task</string>
     <string name="delete_task">Delete Task</string>
+    <string name="no_tasks">No Tasks</string>
+    <string name="no_tasks_content_description">No Tasks</string>
 </resources>

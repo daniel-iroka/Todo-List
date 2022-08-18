@@ -24,7 +24,7 @@ class Notifications : BroadcastReceiver() {
         val pendingIntent = PendingIntent.getActivity(context, 0, activityIntent, PendingIntent.FLAG_IMMUTABLE)
 
         val notification  = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_custom_notification)
+            .setSmallIcon(R.drawable.ic_notification_icon)
             .setContentTitle(intent.getStringExtra(TITLE_EXTRA))
             .setContentText(intent.getStringExtra(MESSAGE_EXTRA))
             .setContentIntent(pendingIntent)

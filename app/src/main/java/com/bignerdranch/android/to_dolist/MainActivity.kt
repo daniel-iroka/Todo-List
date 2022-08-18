@@ -6,7 +6,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.bignerdranch.android.to_dolist.databinding.ActivityMainBinding
 
-// Our MainActivity
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
 
@@ -17,7 +16,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupActionBarWithNavController(findNavController(R.id.fragmentContainerView))
-
     }
 
     // This function will enable us to be able to use the Default back arrow button in our nav_graph action bar

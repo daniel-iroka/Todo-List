@@ -1,25 +1,13 @@
 package com.bignerdranch.android.to_dolist.fragments.list
 
 import android.annotation.SuppressLint
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
-import android.content.res.Resources
-import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.text.SpannableString
-import android.text.Spanned
 import android.text.format.DateUtils
-import android.text.style.DrawableMarginSpan
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
@@ -30,18 +18,11 @@ import com.bignerdranch.android.to_dolist.databinding.CustomRowBinding
 import com.bignerdranch.android.to_dolist.fragments.add.SIMPLE_DATE_FORMAT
 import com.bignerdranch.android.to_dolist.fragments.add.SIMPLE_TIME_FORMAT
 import com.bignerdranch.android.to_dolist.model.Todo
-import com.bignerdranch.android.to_dolist.utils.NOTIFICATION_ID
-import com.bignerdranch.android.to_dolist.utils.Notifications
-import com.bignerdranch.android.to_dolist.utils.TITLE_EXTRA
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class TodoAdapter(private val _context : Context, private val listener : OnItemClickListener): ListAdapter<Todo, TodoAdapter.TodoViewHolder>(DiffCallBack) {
-    private var _todo = Todo()
-
-    // TODO - WHEN I COME BACK, I WILL ADD OR SHOW AN IMAGE TO INDICATE THAT WE HAVE AN EMPTY TASK WHEN YOU NEWLY OPEN THE APP.
-    // TODO - WHEN I COME BACK, I WILL TRY AND SEE IF I CAN CHANGE THE ORDER OF THE TASKS WHEN IT HAS TURNED RED MAKING IT NORMAL
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         // this can be done in an inline variable and I may experiment on it later.
@@ -74,7 +55,6 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
 
         @SuppressLint("DiscouragedPrivateApi")
         fun bind(todo : Todo) {
-            _todo = todo
             val dateLocales = SimpleDateFormat(SIMPLE_DATE_FORMAT, Locale.getDefault())
             val timeLocales = SimpleDateFormat(SIMPLE_TIME_FORMAT, Locale.getDefault())
             binding.apply {
@@ -84,19 +64,21 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
                 cbTask.isChecked = todo.completed
                 tvTaskTitle.paint.isStrikeThruText = todo.completed
                 tvResultsReminder.isVisible = todo.important
+                reminderIcon.isVisible = todo.important
 
-                // Will only show the resultsReminder if important is true
+                // Will only show the resultsReminder if important is true.
                 if (todo.important) {
                     tvResultsReminder.text = DateUtils.getRelativeDateTimeString(_context, todo.reminder.time, DateUtils.DAY_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0)
                 }
 
+                // will change the color of the text if the time is Overdue.
                 val date = Date()
                 if (todo.reminder.time < date.time) {
                     tvResultsReminder.setTextColor(ContextCompat.getColor(_context, R.color.red))
                     reminderIcon.setColorFilter(_context.resources.getColor(R.color.red))
                 }
 
-                // Implementing our PopupMenus to Edit and Delete a Task
+                // Implementing our PopupMenus to Edit and Delete a Task.
                 iMenus.setOnClickListener { view ->
 
                     val popupMenus = PopupMenu(_context, view)
@@ -151,5 +133,4 @@ class TodoAdapter(private val _context : Context, private val listener : OnItemC
         override fun areContentsTheSame(oldItem: Todo, newItem: Todo) =
             oldItem == newItem
     }
-
 }

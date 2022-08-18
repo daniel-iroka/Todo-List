@@ -19,7 +19,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import com.bignerdranch.android.to_dolist.*
 import com.bignerdranch.android.to_dolist.viewmodel.TodoViewModel
@@ -162,7 +161,6 @@ class AddFragment : Fragment() {
             setDateTime,
             pendingIntent
         )
-
     }
 
     // We create a Notifications channel and register it to our system. We must do this before post our Notifications.
@@ -225,7 +223,6 @@ class AddFragment : Fragment() {
         // will return false if fields in TextUtils are empty and true if not
         return !(TextUtils.isEmpty(title) || TextUtils.isEmpty(date) || time.isEmpty() || reminder != "Set reminder" && important)
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

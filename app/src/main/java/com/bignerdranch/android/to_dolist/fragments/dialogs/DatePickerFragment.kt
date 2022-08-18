@@ -20,7 +20,6 @@ class DatePickerFragment : DialogFragment() {
             val result = Bundle().apply{
                 putSerializable("bundleKey", resultDate)
             }
-
             // we use parentFragmentManager because our AddFragment is hosting this fragment
             parentFragmentManager.setFragmentResult("requestKey", result)
         }

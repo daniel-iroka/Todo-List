@@ -14,6 +14,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/ic_cancel.xml" value="0.203" />
         <entry key="app/src/main/res/drawable/ic_check_yes.xml" value="0.1895" />
+        <entry key="app/src/main/res/drawable/ic_clear.xml" value="0.201" />
         <entry key="app/src/main/res/drawable/ic_custom_notification_important.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/ic_delete.xml" value="0.201" />
         <entry key="app/src/main/res/drawable/ic_edit.xml" value="0.1895" />
@@ -33,7 +34,7 @@
         <entry key="app/src/main/res/layout/custom_row.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_add.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_list.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_list.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_update.xml" value="0.25" />
         <entry key="app/src/main/res/menu/fragment_list.xml" value="0.33" />
         <entry key="app/src/main/res/menu/fragment_update.xml" value="0.19427083333333334" />

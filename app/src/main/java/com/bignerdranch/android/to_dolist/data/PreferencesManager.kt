@@ -24,7 +24,6 @@ data class FilterPreferences(val sortOrder: SortOrder, val hideCompleted : Boole
 
 @Singleton
 class PreferencesManager @Inject constructor(context : Context) {
-
     private val dataStore = context.dataStore
 
     val preferencesFlow = dataStore.data  // retrieving our data from our dataStore
