@@ -22,8 +22,8 @@ The ToDo-List App is an App that can help Users organize and keep track of their
 ### Developed With
 
 -[Fragments](https://developer.android.com/guide/fragments) - The fragments represents a portion of our App's UI.
-
 -[RecyclerView.Adapter](https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter) - Adapters provide a binding from an app-specific data set to views that are displayed within a RecyclerView.
+
 -[Room](https://developer.android.com/training/data-storage/room) - Room Database used for storing data.
 -[Notifications](https://developer.android.com/guide/topics/ui/notifiers/notifications) - A notification is a message that Android displays outside your app's UI to provide the user with reminders.
 -[AlarmManager](https://developer.android.com/reference/android/app/AlarmManager) - This is a class that provides access to alarm system services.
