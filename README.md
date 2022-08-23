@@ -20,7 +20,6 @@ The ToDo-List App is an App that can help Users organize and keep track of their
 - Tasks can be easily searched for, sorted and hidden.
 
 ### Developed With
-
 -[Fragments](https://developer.android.com/guide/fragments) - The fragments represents a portion of our App's UI.
 -[RecyclerView.Adapter](https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter) - Adapters provide a binding from an app-specific data set to views that are displayed within a RecyclerView.
 
