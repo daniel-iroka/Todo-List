@@ -12,6 +12,9 @@ The ToDo-List App is an App that can help Users organize and keep track of their
 
 <img src="ThirdPicture.jpg" width=400> <img src="FourthPicture.jpg" width=400>
 
+## Architecture
+- The Architecture used in this Project is the [MVC Architecture](https://www.freecodecamp.org/news/the-model-view-controller-pattern-mvc-architecture-and-frameworks-explained/)
+
 ## About
 
 - This App allows for the Simple creation of Tasks.
