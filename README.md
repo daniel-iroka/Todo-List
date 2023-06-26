@@ -4,7 +4,7 @@
 
 # Description
 
-The ToDo-List App is an App that can help Users organize and keep track of their daily Tasks and Goals. There is also the option to add Reminders for specific Tasks that the User wishes to accomplish.
+The ToDo-List App is an App that can help Users organize and keep track of their daily Tasks and Goals. There is also the option to add Reminders for specific Tasks that the User wishes to accomplish. This Project also demonstrates the use of some of the core libraries in Android such as LiveData, Jetpack DataStore, viewBinding and so on.
 
 # Screenshots
 
