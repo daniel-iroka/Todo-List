@@ -1,6 +1,6 @@
 # Todo List
 
-**Todo List** is an App that does not lets Users keep records of tasks they wish to accomplish.
+**Todo List** is an App that lets Users keep records of tasks they wish to accomplish.
 
 # Description
 
