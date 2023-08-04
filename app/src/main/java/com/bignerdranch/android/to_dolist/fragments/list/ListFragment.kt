@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -32,7 +31,6 @@ class ListFragment : Fragment(), TodoAdapter.OnItemClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter : TodoAdapter
     private var todosList = emptyList<Todo>()
-    private var todo = listOf<Todo>()
 
     // TODO - THIS ISN'T ACTUALLY A TODO. I AM DONE WITH THIS PROJECT AND HOPE NOT TO COME HERE LOL. BUT BEFORE I MAY COME BACK HERE TO DOUBLE CHECK AND INSPECT BEFORE PUBLISHING IT. ADIOS
 
